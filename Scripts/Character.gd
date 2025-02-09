@@ -1,0 +1,82 @@
+extends CharacterBody3D
+
+@onready var neck := $Neck
+@onready var camera := $Neck/SpringArm/Camera
+@onready var left_foot_audio := $LeftFootAudio
+@onready var right_foot_audio := $RightFootAudio
+
+const SPEED = 5.0
+const JUMP_VELOCITY = 4.5
+var mouse_sensitivity = 0.2
+var footstep_timer = 0.0
+var is_left_foot = true
+
+const FOOTSTEP_INTERVAL = 0.4 # Time between footsteps
+
+# Add 3 footstep sounds for each foot
+var footstep_sounds = [preload("res://Sounds//Steps_dirt-001.ogg"), preload("res://Sounds//Steps_dirt-002.ogg"), preload("res://Sounds//Steps_dirt-006.ogg")]
+
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	mouse_sensitivity = 0.005
+	await get_tree().create_timer(4).timeout
+	$Animations.play("ZoomInConvo")
+	await get_tree().create_timer(1).timeout
+	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potatoe")
+	await DialogueManager.dialogue_ended
+	$Animations.play("ZoomOutConvo")
+	mouse_sensitivity = 0.2
+
+func _physics_process(delta: float) -> void:
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	if Input.is_action_pressed("ESC"):
+		get_tree().quit()
+
+	var input_dir := Input.get_vector("Left", "Right", "Forwards", "Back")
+	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if direction:
+		velocity.x = direction.x * SPEED
+		velocity.z = direction.z * SPEED
+		
+		# Handle footstep timing and alternation
+		footstep_timer += delta
+		if footstep_timer >= FOOTSTEP_INTERVAL:
+			footstep_timer = 0
+			play_footstep_sound()
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
+
+	move_and_slide()
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		self.rotate_y(deg_to_rad(event.relative.x * mouse_sensitivity * -1))
+		
+		var camera_rot = neck.rotation_degrees
+		var rotation_to_apply_on_x_axis = (-event.relative.y * mouse_sensitivity);
+		
+		if (camera_rot.x + rotation_to_apply_on_x_axis < -90):
+			camera_rot.x = -90
+		elif (camera_rot.x + rotation_to_apply_on_x_axis > 70):
+			camera_rot.x = 70
+		else:
+			camera_rot.x += rotation_to_apply_on_x_axis;
+			neck.rotation_degrees = camera_rot
+
+func play_footstep_sound():
+	# Alternate between left and right foot
+	if is_left_foot:
+		left_foot_audio.stream = footstep_sounds[randi() % 3] # Randomly select a sound
+		left_foot_audio.play()
+	else:
+		right_foot_audio.stream = footstep_sounds[randi() % 3] # Randomly select a sound
+		right_foot_audio.play()
+
+	is_left_foot = !is_left_foot # Alternate foot
+
+
+func _on_look_behind_screen_entered() -> void:
+	pass # Replace with function body.

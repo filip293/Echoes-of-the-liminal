@@ -1,0 +1,16 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://cnywv4krnfw1g"]
+
+[ext_resource type="Texture2D" uid="uid://b1asmbtigbhks" path="res://PSX_NIGHTSKY.hdr" id="1_85ki6"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dxedd"]
+panorama = ExtResource("1_85ki6")
+
+[sub_resource type="Sky" id="Sky_pi4wg"]
+sky_material = SubResource("PanoramaSkyMaterial_dxedd")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_pi4wg")
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0853
+volumetric_fog_emission = Color(0.288518, 0.288518, 0.288518, 1)

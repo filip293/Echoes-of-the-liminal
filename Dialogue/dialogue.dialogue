@@ -1,0 +1,27 @@
+~ Potatoe
+[center]John: [center]Hey, Mr. Potatoman, do you think I’m a good husband?
+[center]Mr. Potatoman: [center]Yeah, John, I think any woman would be lucky to be with you!
+
+[center]John: [center]Then why did she kick me out again?
+[center]Mr. Potatoman: [center]Probably because you came home smelling like a distillery and tried to serenade her with a spaghetti spoon.
+
+[center]John: [center]Fair point… but now I’m stuck in the middle of this creepy forest. Why am I even heading to the cabins?
+[center]Mr. Potatoman: [center]You said something about proving your love. Or maybe it was finding a “magic pizza slice.” You weren’t exactly clear.
+
+[center]John: [center]Right! If I show her I can survive out here, maybe she’ll see I’m serious and take me back. Where are these cabins anyway?
+[center]Mr. Potatoman: [center]Oh, they’re just behind me. You’ll see signs on the trees.
+
+[center]John: [center]Okay, thanks, buddy. You’re always looking out for me.
+[center]Mr. Potatoman: [center]Speaking of looking out... do you hear that behind you?[/center]
+=> END
+
+~ Look_Behind
+
+[center]John: [center]I can't see anything.
+
+=> END
+
+~ Potatoe_gone
+[center]John: [center]Wait… what? Mr. Potatoman… NOOOOOOOOOOOOOOOOOOOOOOOOOOOOO! [wait=1]
+[center]John: [center]Oh well.
+=> END
