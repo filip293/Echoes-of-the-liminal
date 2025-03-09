@@ -1,4 +1,8 @@
-~ Potatoe
+~ Potato_Hey
+[center]John: [center]Hey...[next=auto]
+=> END
+
+~ Potato
 [center]John: [center]Hey, Mr. Potatoman, do you think I’m a good husband?
 [center]Mr. Potatoman: [center]Yeah, John, I think any woman would be lucky to be with you!
 
@@ -21,7 +25,7 @@
 
 => END
 
-~ Potatoe_gone
+~ Potato_gone
 [center]John: [center]Wait… what? Mr. Potatoman… NOOOOOOOOOOOOOOOOOOOOOOOOOOOOO! [wait=1]
 [center]John: [center]Oh well.
 => END

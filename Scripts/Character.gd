@@ -10,6 +10,7 @@ const JUMP_VELOCITY = 4.5
 var mouse_sensitivity = 0.2
 var footstep_timer = 0.0
 var is_left_foot = true
+var can_move = false
 
 const FOOTSTEP_INTERVAL = 0.4 # Time between footsteps
 
@@ -20,11 +21,16 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	mouse_sensitivity = 0.005
 	await get_tree().create_timer(4).timeout
-	$Animations.play("ZoomInConvo")
+	$Animations.play("Look_Up")
+	await get_tree().create_timer(0.3).timeout
+	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato_Hey")
+	await get_tree().create_timer(5).timeout
+	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato")
 	await get_tree().create_timer(1).timeout
-	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potatoe")
+	$Animations.play("ZoomInConvo")
 	await DialogueManager.dialogue_ended
 	$Animations.play("ZoomOutConvo")
+	can_move = true
 	mouse_sensitivity = 0.2
 
 func _physics_process(delta: float) -> void:
@@ -36,7 +42,7 @@ func _physics_process(delta: float) -> void:
 
 	var input_dir := Input.get_vector("Left", "Right", "Forwards", "Back")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
+	if direction and can_move:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 		
@@ -67,15 +73,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			neck.rotation_degrees = camera_rot
 
 func play_footstep_sound():
-	# Alternate between left and right foot
-	if is_left_foot:
-		left_foot_audio.stream = footstep_sounds[randi() % 3] # Randomly select a sound
-		left_foot_audio.play()
-	else:
-		right_foot_audio.stream = footstep_sounds[randi() % 3] # Randomly select a sound
-		right_foot_audio.play()
+	if can_move:
+		if is_left_foot:
+			left_foot_audio.stream = footstep_sounds[randi() % 3] # Randomly select a sound
+			left_foot_audio.play()
+		else:
+			right_foot_audio.stream = footstep_sounds[randi() % 3] # Randomly select a sound
+			right_foot_audio.play()
 
-	is_left_foot = !is_left_foot # Alternate foot
+		is_left_foot = !is_left_foot # Alternate foot
 
 
 func _on_look_behind_screen_entered() -> void:
