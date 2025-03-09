@@ -5,7 +5,7 @@ extends CharacterBody3D
 @onready var left_foot_audio := $LeftFootAudio
 @onready var right_foot_audio := $RightFootAudio
 
-const SPEED = 3.0
+const SPEED = 10
 const JUMP_VELOCITY = 4.5
 var mouse_sensitivity = 0.2
 var footstep_timer = 0.0
@@ -13,7 +13,7 @@ var is_left_foot = true
 var can_move = false
 var Look_Brhind = false
 
-const FOOTSTEP_INTERVAL = 0.6 # Time between footsteps
+const FOOTSTEP_INTERVAL = 1.8 / SPEED
 
 # Add 3 footstep sounds for each foot
 var footstep_sounds = [preload("res://Sounds//Steps_dirt-001.ogg"), preload("res://Sounds//Steps_dirt-002.ogg"), preload("res://Sounds//Steps_dirt-006.ogg")]
@@ -46,7 +46,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 		
-		# Handle footstep timing and alternation
 		footstep_timer += delta
 		if footstep_timer >= FOOTSTEP_INTERVAL:
 			footstep_timer = 0
