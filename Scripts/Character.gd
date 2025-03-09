@@ -5,14 +5,14 @@ extends CharacterBody3D
 @onready var left_foot_audio := $LeftFootAudio
 @onready var right_foot_audio := $RightFootAudio
 
-const SPEED = 5.0
+const SPEED = 3.0
 const JUMP_VELOCITY = 4.5
 var mouse_sensitivity = 0.2
 var footstep_timer = 0.0
 var is_left_foot = true
 var can_move = false
 
-const FOOTSTEP_INTERVAL = 0.4 # Time between footsteps
+const FOOTSTEP_INTERVAL = 0.6 # Time between footsteps
 
 # Add 3 footstep sounds for each foot
 var footstep_sounds = [preload("res://Sounds//Steps_dirt-001.ogg"), preload("res://Sounds//Steps_dirt-002.ogg"), preload("res://Sounds//Steps_dirt-006.ogg")]
