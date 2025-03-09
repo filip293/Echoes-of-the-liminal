@@ -11,7 +11,7 @@ var mouse_sensitivity = 0.2
 var footstep_timer = 0.0
 var is_left_foot = true
 var can_move = false
-var Look_Brhind = false
+var Look_Behind = false
 
 const FOOTSTEP_INTERVAL = 0.6 # Time between footsteps
 
