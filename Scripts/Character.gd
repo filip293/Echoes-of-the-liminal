@@ -89,10 +89,10 @@ func _on_look_behind_screen_entered() -> void:
 		$"../Sitting/Skeleton3D".queue_free()
 	await get_tree().create_timer(1).timeout
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Look_Behind")
-	Look_Brhind = true
+	Look_Behind = true
 
 func _on_look_at_potato_screen_entered() -> void:
-	if Look_Brhind == true:
+	if Look_Behind == true:
 		$"../Sitting/LookAtPotato".queue_free()
 		await get_tree().create_timer(1).timeout
 		DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato_gone")
