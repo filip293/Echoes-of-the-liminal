@@ -11,6 +11,7 @@ var mouse_sensitivity = 0.2
 var footstep_timer = 0.0
 var is_left_foot = true
 var can_move = false
+var Look_Brhind = false
 
 const FOOTSTEP_INTERVAL = 0.6 # Time between footsteps
 
@@ -84,7 +85,16 @@ func play_footstep_sound():
 
 
 func _on_look_behind_screen_entered() -> void:
-	$"../LookBehind".queue_free()
+	if $"../Sitting/LookBehind" != null:
+		$"../Sitting/LookBehind".queue_free()
+		$"../Sitting/Skeleton3D".queue_free()
 	await get_tree().create_timer(1).timeout
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Look_Behind")
-	can_move = true
+	Look_Brhind = true
+
+func _on_look_at_potato_screen_entered() -> void:
+	if Look_Brhind == true:
+		$"../Sitting/LookAtPotato".queue_free()
+		await get_tree().create_timer(1).timeout
+		DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato_gone")
+		can_move = true

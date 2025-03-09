@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=4 uid="uid://dk7ylr657026h"]
 
-[ext_resource type="Texture2D" uid="uid://cg3in8b5dhutq" path="res://glb/house3_tex3.png" id="1_orl72"]
+[ext_resource type="Texture2D" uid="uid://cg3in8b5dhutq" path="res://Houses/house3_tex3.png" id="1_orl72"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aaqdv"]
 resource_name = "house3"

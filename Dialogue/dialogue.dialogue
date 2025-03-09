@@ -26,6 +26,6 @@
 => END
 
 ~ Potato_gone
-[center]John: [center]Wait… what? Mr. Potatoman… NOOOOOOOOOOOOOOOOOOOOOOOOOOOOO! [wait=1]
+[center]John: [center][shake rate=10 level=5]Wait… what? Mr. Potatoman… NOOOOOOOOOOOOOOOOOOOOOOOOOOOOO![/shake][wait=1]
 [center]John: [center]Oh well.
 => END
