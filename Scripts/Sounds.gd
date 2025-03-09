@@ -12,3 +12,7 @@ func _process(delta: float) -> void:
 		$".".play()
 	if $"../../../CharacterBody3D/Ambiance".is_playing() == false:
 		$"../../../CharacterBody3D/Ambiance".play()
+	if $"../../../CharacterBody3D/Ambiance2".is_playing() == false:
+		$"../../../CharacterBody3D/Ambiance2".play()
+	if $"../../../CharacterBody3D/Ambiance3".is_playing() == false:
+		$"../../../CharacterBody3D/Ambiance3".play()

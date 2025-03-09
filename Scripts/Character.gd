@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @onready var neck := $Neck
-@onready var camera := $Neck/SpringArm/Camera
+@onready var camera := $Neck/Camera
 @onready var left_foot_audio := $LeftFootAudio
 @onready var right_foot_audio := $RightFootAudio
 
@@ -30,7 +30,6 @@ func _ready():
 	$Animations.play("ZoomInConvo")
 	await DialogueManager.dialogue_ended
 	$Animations.play("ZoomOutConvo")
-	can_move = true
 	mouse_sensitivity = 0.2
 
 func _physics_process(delta: float) -> void:
@@ -85,4 +84,7 @@ func play_footstep_sound():
 
 
 func _on_look_behind_screen_entered() -> void:
-	pass # Replace with function body.
+	$"../LookBehind".queue_free()
+	await get_tree().create_timer(1).timeout
+	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Look_Behind")
+	can_move = true
