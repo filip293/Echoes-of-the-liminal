@@ -5,7 +5,7 @@ extends CharacterBody3D
 @onready var left_foot_audio := $LeftFootAudio
 @onready var right_foot_audio := $RightFootAudio
 
-const SPEED = 10
+const SPEED = 4
 var mouse_sensitivity = 0.2
 var footstep_timer = 0.0
 var is_left_foot = true
