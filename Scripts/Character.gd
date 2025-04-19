@@ -11,6 +11,7 @@ var footstep_timer = 0.0
 var is_left_foot = true
 var can_move = false
 var Look_Behind = false
+var playerinarea = false
 
 const FOOTSTEP_INTERVAL = 1.8 / SPEED
 
@@ -81,7 +82,6 @@ func play_footstep_sound():
 
 		is_left_foot = !is_left_foot # Alternate foot
 
-
 func _on_look_behind_screen_entered() -> void:
 	if $"../Sitting/LookBehind" != null:
 		$"../Sitting/LookBehind".queue_free()
@@ -96,3 +96,11 @@ func _on_look_at_potato_screen_entered() -> void:
 		await get_tree().create_timer(1).timeout
 		DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato_gone")
 		can_move = true
+		await get_tree().create_timer(8).timeout
+		Globals.beginningcutsceneended = true
+		
+func _on_static_body_3d_body_entered(_body: CharacterBody3D) -> void:
+	playerinarea = true
+	$TempBranchBreak.play()
+	await $TempBranchBreak.finished
+	$TempBranchBreak.queue_free()

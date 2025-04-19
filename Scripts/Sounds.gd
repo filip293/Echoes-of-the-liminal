@@ -8,11 +8,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if $".".is_playing() == false:
+	if !$".".is_playing():
 		$".".play()
-	if $"../../../CharacterBody3D/Ambiance".is_playing() == false:
-		$"../../../CharacterBody3D/Ambiance".play()
-	if $"../../../CharacterBody3D/Ambiance2".is_playing() == false:
-		$"../../../CharacterBody3D/Ambiance2".play()
-	if $"../../../CharacterBody3D/Ambiance3".is_playing() == false:
-		$"../../../CharacterBody3D/Ambiance3".play()
+	if Globals.beginningcutsceneended:
+		if !$"../../../Ground/Ambiance".is_playing():
+			$"../../../Ground/Ambiance".play()
+			$"../../../Ground/Ambiance2".play()
+			$"../../../Ground/Ambiance3".play()
