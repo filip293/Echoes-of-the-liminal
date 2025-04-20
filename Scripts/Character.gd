@@ -89,6 +89,7 @@ func _on_look_behind_screen_entered() -> void:
 	await get_tree().create_timer(1).timeout
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Look_Behind")
 	Look_Behind = true
+	Globals.potatoSwing = false
 
 func _on_look_at_potato_screen_entered() -> void:
 	if Look_Behind == true:
@@ -99,8 +100,9 @@ func _on_look_at_potato_screen_entered() -> void:
 		await get_tree().create_timer(8).timeout
 		Globals.beginningcutsceneended = true
 		
-func _on_static_body_3d_body_entered(_body: CharacterBody3D) -> void:
-	playerinarea = true
-	$TempBranchBreak.play()
-	await $TempBranchBreak.finished
-	$TempBranchBreak.queue_free()
+func _on_static_body_3d_body_entered(body: Node) -> void:
+	if body is CharacterBody3D and body.name == "CharacterBody3D":
+		playerinarea = true
+		$TempBranchBreak.play()
+		await $TempBranchBreak.finished
+		$TempBranchBreak.queue_free()
