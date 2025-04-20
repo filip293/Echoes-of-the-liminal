@@ -101,7 +101,7 @@ func _on_look_at_potato_screen_entered() -> void:
 		Globals.beginningcutsceneended = true
 		
 func _on_static_body_3d_body_entered(body: Node) -> void:
-	if body is CharacterBody3D and body.name == "CharacterBody3D":
+	if body is CharacterBody3D and body.name == "CharacterBody3D" and $TempBranchBreak != null:
 		playerinarea = true
 		$TempBranchBreak.play()
 		await $TempBranchBreak.finished
