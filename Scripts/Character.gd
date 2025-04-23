@@ -4,14 +4,19 @@ extends CharacterBody3D
 @onready var camera := $Neck/Camera
 @onready var left_foot_audio := $LeftFootAudio
 @onready var right_foot_audio := $RightFootAudio
+@onready var mnst_lf_audio := $MonsterSteps/LeftFootAudio
+@onready var mnst_rf_audio := $MonsterSteps/RightFootAudio
 
 const SPEED = 4
 var mouse_sensitivity = 0.2
 var footstep_timer = 0.0
-var is_left_foot = true
+var sec_footstep_timer = 0.0
+var is_left_foot = false
 var can_move = false
 var Look_Behind = false
 var playerinarea = false
+var monsterfollowing = false
+var stoppedfollowing = false
 
 const FOOTSTEP_INTERVAL = 1.8 / SPEED
 
@@ -33,8 +38,22 @@ func _ready():
 	$Animations.play("ZoomOutConvo")
 	mouse_sensitivity = 0.2
 
+func _process(delta: float) -> void:
+	if monsterfollowing and velocity.x == 0.0 and velocity.z == 0.0:
+		sec_footstep_timer = 0
+		
+	if monsterfollowing and (velocity.x != 0.0 or velocity.z != 0.0):
+		sec_footstep_timer += delta
+		if sec_footstep_timer >= FOOTSTEP_INTERVAL + 0.78:
+			sec_footstep_timer = 0
+			play_monster_following_footsteps()
+			
+	elif stoppedfollowing:
+		if $MonsterSteps != null:
+			$MonsterSteps.queue_free()
+		
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
+	if not is_on_floor(): # ????? What does this do? The player can't fly?
 		velocity += get_gravity() * delta
 
 	if Input.is_action_pressed("ESC"):
@@ -71,6 +90,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			camera_rot.x += rotation_to_apply_on_x_axis;
 			neck.rotation_degrees = camera_rot
 
+func play_monster_following_footsteps():
+	if is_left_foot:
+		mnst_lf_audio.stream = footstep_sounds[randi() % 3] # Randomly select a sound
+		mnst_lf_audio.play()
+	else:
+		mnst_rf_audio.stream = footstep_sounds[randi() % 3] # Randomly select a sound
+		mnst_rf_audio.play()
+		
 func play_footstep_sound():
 	if can_move:
 		if is_left_foot:
@@ -106,3 +133,13 @@ func _on_static_body_3d_body_entered(body: Node) -> void:
 		$TempBranchBreak.play()
 		await $TempBranchBreak.finished
 		$TempBranchBreak.queue_free()
+		await get_tree().create_timer(2).timeout
+		monsterfollowing = true
+	
+func _cancel_follow(body: Node3D) -> void:
+	if body is CharacterBody3D and body.name == "CharacterBody3D" and monsterfollowing:
+		monsterfollowing = false
+		await get_tree().create_timer(1).timeout
+		stoppedfollowing = true
+		if $"../StaticBody3D" != null:
+			$"../StaticBody3D".queue_free()
