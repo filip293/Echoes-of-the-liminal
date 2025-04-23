@@ -16,7 +16,6 @@ var can_move = false
 var Look_Behind = false
 var playerinarea = false
 var monsterfollowing = false
-var stoppedfollowing = false
 
 const FOOTSTEP_INTERVAL = 1.8 / SPEED
 
@@ -47,10 +46,6 @@ func _process(delta: float) -> void:
 		if sec_footstep_timer >= FOOTSTEP_INTERVAL + 0.78:
 			sec_footstep_timer = 0
 			play_monster_following_footsteps()
-			
-	elif stoppedfollowing:
-		if $MonsterSteps != null:
-			$MonsterSteps.queue_free()
 		
 func _physics_process(delta: float) -> void:
 	if not is_on_floor(): # ????? What does this do? The player can't fly?
@@ -140,6 +135,7 @@ func _cancel_follow(body: Node3D) -> void:
 	if body is CharacterBody3D and body.name == "CharacterBody3D" and monsterfollowing:
 		monsterfollowing = false
 		await get_tree().create_timer(1).timeout
-		stoppedfollowing = true
 		if $"../StaticBody3D" != null:
 			$"../StaticBody3D".queue_free()
+		if $MonsterSteps != null:
+			$MonsterSteps.queue_free()
