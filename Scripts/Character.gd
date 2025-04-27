@@ -6,8 +6,8 @@ extends CharacterBody3D
 @onready var right_foot_audio := $RightFootAudio
 @onready var mnst_lf_audio := $MonsterSteps/LeftFootAudio
 @onready var mnst_rf_audio := $MonsterSteps/RightFootAudio
-
-const SPEED = 4
+@onready var playeranimation := $Adventurer/AnimationPlayer
+const SPEED = 2
 var mouse_sensitivity = 0.2
 var footstep_timer = 0.0
 var sec_footstep_timer = 0.0
@@ -16,6 +16,7 @@ var can_move = false
 var Look_Behind = false
 var playerinarea = false
 var monsterfollowing = false
+var walking = true
 
 const FOOTSTEP_INTERVAL = 1.8 / SPEED
 
@@ -46,6 +47,12 @@ func _process(delta: float) -> void:
 		if sec_footstep_timer >= FOOTSTEP_INTERVAL + 0.78:
 			sec_footstep_timer = 0
 			play_monster_following_footsteps()
+	
+	if !walking:
+		playeranimation.play("CharacterArmature|Idle")
+	
+	if walking:
+		playeranimation.play("CharacterArmature|Walk")
 		
 func _physics_process(delta: float) -> void:
 	if not is_on_floor(): # ????? What does this do? The player can't fly?
@@ -57,6 +64,7 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("Left", "Right", "Forwards", "Back")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction and can_move:
+		walking = true
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 		
@@ -67,7 +75,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+		walking = false
+		
 	move_and_slide()
 	
 func _unhandled_input(event: InputEvent) -> void:
