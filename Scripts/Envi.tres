@@ -11,8 +11,8 @@ sky_material = SubResource("PanoramaSkyMaterial_dxedd")
 [resource]
 background_mode = 2
 sky = SubResource("Sky_pi4wg")
-ambient_light_sky_contribution = 0.5
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.15
-volumetric_fog_emission = Color(0.20871, 0.20871, 0.20871, 1)
+volumetric_fog_emission = Color(0.237539, 0.237539, 0.237539, 1)
 volumetric_fog_emission_energy = 0.2
+volumetric_fog_sky_affect = 0.99
