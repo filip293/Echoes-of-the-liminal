@@ -36,7 +36,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/godot_3d_auto_collision_generator/plugin.cfg", "res://addons/post_processing/plugin.cfg", "res://addons/proton_scatter/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/post_processing/plugin.cfg", "res://addons/proton_scatter/plugin.cfg")
 
 [input]
 
