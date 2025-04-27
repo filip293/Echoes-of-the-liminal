@@ -134,6 +134,10 @@ func _on_static_body_3d_body_entered(body: Node) -> void:
 func _cancel_follow(body: Node3D) -> void:
 	if body is CharacterBody3D and body.name == "CharacterBody3D" and monsterfollowing:
 		monsterfollowing = false
+		Globals.entered_village = true
+		$/root/Node3D/Ground/Ambiance.stop()
+		$/root/Node3D/Ground/Ambiance2.stop()
+		$/root/Node3D/Ground/Ambiance3.stop()
 		await get_tree().create_timer(1).timeout
 		if $"../StaticBody3D" != null:
 			$"../StaticBody3D".queue_free()

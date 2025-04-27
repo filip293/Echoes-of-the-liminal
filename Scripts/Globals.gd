@@ -2,6 +2,7 @@ extends Node
 
 var collectedbellparts: int = 0
 var beginningcutsceneended: bool = false
+var entered_village = false
 
 var potatoSwing = true
 
