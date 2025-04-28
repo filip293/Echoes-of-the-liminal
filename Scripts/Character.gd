@@ -6,7 +6,7 @@ extends CharacterBody3D
 @onready var right_foot_audio := $RightFootAudio
 @onready var mnst_lf_audio := $MonsterSteps/LeftFootAudio
 @onready var mnst_rf_audio := $MonsterSteps/RightFootAudio
-const SPEED = 2
+const SPEED = 10
 const SPRINT_MULTIPLIER = 1.5
 var mouse_sensitivity = 0.2
 var footstep_timer = 0.0
@@ -17,6 +17,8 @@ var Look_Behind = false
 var playerinarea = false
 var monsterfollowing = false
 var walking = true
+
+var village_entered = false
 
 const FOOTSTEP_INTERVAL = 1.8 / SPEED
 
@@ -151,3 +153,11 @@ func _cancel_follow(body: Node3D) -> void:
 			$"../StaticBody3D".queue_free()
 		if $MonsterSteps != null:
 			$MonsterSteps.queue_free()
+
+
+func _Village_enter(body: Node3D) -> void:
+	print("1")
+	if body is CharacterBody3D and body.name == "CharacterBody3D" and village_entered == false:
+		DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "InVillage")
+		village_entered = true
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
