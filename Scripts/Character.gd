@@ -6,8 +6,7 @@ extends CharacterBody3D
 @onready var right_foot_audio := $RightFootAudio
 @onready var mnst_lf_audio := $MonsterSteps/LeftFootAudio
 @onready var mnst_rf_audio := $MonsterSteps/RightFootAudio
-@onready var playeranimation := $Adventurer/AnimationPlayer
-const SPEED = 2
+const SPEED = 10
 var mouse_sensitivity = 0.2
 var footstep_timer = 0.0
 var sec_footstep_timer = 0.0
@@ -47,12 +46,6 @@ func _process(delta: float) -> void:
 		if sec_footstep_timer >= FOOTSTEP_INTERVAL + 0.78:
 			sec_footstep_timer = 0
 			play_monster_following_footsteps()
-	
-	if !walking:
-		playeranimation.play("CharacterArmature|Idle")
-	
-	if walking:
-		playeranimation.play("CharacterArmature|Walk")
 		
 func _physics_process(delta: float) -> void:
 	if not is_on_floor(): # ????? What does this do? The player can't fly?
