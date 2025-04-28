@@ -6,7 +6,8 @@ extends CharacterBody3D
 @onready var right_foot_audio := $RightFootAudio
 @onready var mnst_lf_audio := $MonsterSteps/LeftFootAudio
 @onready var mnst_rf_audio := $MonsterSteps/RightFootAudio
-const SPEED = 10
+const SPEED = 2
+const SPRINT_MULTIPLIER = 1.5
 var mouse_sensitivity = 0.2
 var footstep_timer = 0.0
 var sec_footstep_timer = 0.0
@@ -58,11 +59,16 @@ func _physics_process(delta: float) -> void:
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction and can_move:
 		walking = true
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		var current_speed = SPEED
+		if Input.is_action_pressed("Sprint"):
+			current_speed *= SPRINT_MULTIPLIER
+		velocity.x = direction.x * current_speed
+		velocity.z = direction.z * current_speed
 		
 		footstep_timer += delta
-		if footstep_timer >= FOOTSTEP_INTERVAL:
+		
+		var footstep_inter = FOOTSTEP_INTERVAL * (SPEED / current_speed)
+		if footstep_timer >= footstep_inter:
 			footstep_timer = 0
 			play_footstep_sound()
 	else:
