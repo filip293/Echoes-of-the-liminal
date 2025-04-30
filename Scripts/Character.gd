@@ -6,7 +6,7 @@ extends CharacterBody3D
 @onready var right_foot_audio := $RightFootAudio
 @onready var mnst_lf_audio := $MonsterSteps/LeftFootAudio
 @onready var mnst_rf_audio := $MonsterSteps/RightFootAudio
-const SPEED = 10
+const SPEED = 2
 const SPRINT_MULTIPLIER = 1.5
 var mouse_sensitivity = 0.2
 var footstep_timer = 0.0
@@ -22,8 +22,19 @@ var village_entered = false
 
 const FOOTSTEP_INTERVAL = 1.8 / SPEED
 
-# Add 3 footstep sounds for each foot
-var footstep_sounds = [preload("res://Sounds//Steps_dirt-001.ogg"), preload("res://Sounds//Steps_dirt-002.ogg"), preload("res://Sounds//Steps_dirt-006.ogg")]
+var dirt_footstep_sounds = [
+	preload("res://Sounds/Steps_dirt-001.ogg"),
+	preload("res://Sounds/Steps_dirt-002.ogg"),
+	preload("res://Sounds/Steps_dirt-006.ogg")
+]
+
+var wood_footstep_sounds = [
+	preload("res://Sounds/Steps_wood-1.ogg"),
+	preload("res://Sounds/Steps_wood-2.ogg"),
+	preload("res://Sounds/Steps_wood-3.ogg")
+]
+
+var footstep_sounds = dirt_footstep_sounds
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -161,3 +172,11 @@ func _Village_enter(body: Node3D) -> void:
 		DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "InVillage")
 		village_entered = true
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _House_Entered(body: Node3D) -> void:
+	if body is CharacterBody3D and body.name == "CharacterBody3D":
+		footstep_sounds = wood_footstep_sounds
+
+func _House_Exited(body: Node3D) -> void:
+	if body is CharacterBody3D and body.name == "CharacterBody3D":
+		footstep_sounds = dirt_footstep_sounds
