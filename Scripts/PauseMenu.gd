@@ -2,16 +2,17 @@ extends Node2D
 
 @onready var pause_menu = $PauseMenu
 @onready var wrapper: CanvasLayer = $PauseMenuWrapper
-@onready var sensitivity_slider = $PauseMenuWrapper/ColorRect/Sensetivity
-@onready var volume_slider = $PauseMenuWrapper/ColorRect/Volume
-@onready var gamma_slider = $PauseMenuWrapper/ColorRect/Gamma
-@onready var quit_button = $PauseMenuWrapper/ColorRect/Gamma
+@onready var sensitivity_slider = $PauseMenuWrapper/Settings/Sensetivity
+@onready var volume_slider = $PauseMenuWrapper/Settings/Volume
+@onready var gamma_slider = $PauseMenuWrapper/Settings/Gamma
+@onready var quit_button = $PauseMenuWrapper/Settings/Quit
+@onready var post_effect = $"../PostProcess"
 
 var menu_open = false
 
 func _ready():
-	
-	wrapper.visible = false
+	post_effect.configuration.StrenghtCA = 2.0
+	wrapper.visible = true 
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _process(delta):
@@ -20,13 +21,11 @@ func _process(delta):
 
 func toggle_pause_menu():
 	if menu_open:
-		pause_menu.play("close")
-		wrapper.visible = false
+		pause_menu.play_backwards("menu")
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		get_tree().paused = false
 	else:
-		pause_menu.play("open")
-		wrapper.visible = true
+		pause_menu.play("menu")
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		get_tree().paused = true
 	menu_open = !menu_open
@@ -43,3 +42,7 @@ func _on_gamma_changed(value):
 
 func _on_quit_pressed():
 	get_tree().quit()
+
+func _on_return_pressed() -> void:
+	if menu_open:
+		toggle_pause_menu()
