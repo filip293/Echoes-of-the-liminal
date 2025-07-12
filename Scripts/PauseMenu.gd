@@ -14,7 +14,7 @@ extends Node2D
 
 var menu_open = false
 var settingsfile = "user://settings.cfg"
-var settings = {
+var defaultsettings = {
 	"CA_ENABLED" : true,
 	"PIX_ENABLED" : true,
 	"VSYNC_ENABLED" : true,
@@ -43,6 +43,16 @@ func _ready():
 		elif data["VSYNC_ENABLED"] == false:
 			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 			vsync_check.button_pressed = false
+	
+	elif !FileAccess.file_exists(settingsfile):
+		var firstsave = FileAccess.open(settingsfile, FileAccess.WRITE)
+		firstsave.store_var(defaultsettings)
+		ca_check.button_pressed = defaultsettings["CA_ENABLED"]
+		pix_check.button_pressed = defaultsettings["PIX_ENABLED"]
+		vsync_check.button_pressed = defaultsettings["VSYNC_ENABLED"]
+		gamma_slider.value = defaultsettings["BRIGHTNESS"]
+		volume_slider.value = defaultsettings["AUDIO_VOLUME"]
+		sensitivity_slider.value = defaultsettings["PLAYER_SENSITIVITY"]
 	wrapper.visible = true 
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -59,6 +69,15 @@ func toggle_pause_menu():
 		pause_menu.play_backwards("menu")
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		get_tree().paused = false
+		var to_save = {
+			"CA_ENABLED" : ca_check.button_pressed,
+			"PIX_ENABLED" : pix_check.button_pressed,
+			"VSYNC_ENABLED" : vsync_check.button_pressed,
+			"BRIGHTNESS" : gamma_slider.value,
+			"PLAYER_SENSITIVITY" : sensitivity_slider.value,
+			"AUDIO_VOLUME" : volume_slider.value
+		}
+		savedata(to_save)
 	else:
 		pause_menu.play("menu")
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -75,6 +94,15 @@ func _on_gamma_changed(value):
 	player_cam.environment.tonemap_exposure = value
 
 func _on_quit_pressed():
+	var to_save = {
+			"CA_ENABLED" : ca_check.button_pressed,
+			"PIX_ENABLED" : pix_check.button_pressed,
+			"VSYNC_ENABLED" : vsync_check.button_pressed,
+			"BRIGHTNESS" : gamma_slider.value,
+			"PLAYER_SENSITIVITY" : sensitivity_slider.value,
+			"AUDIO_VOLUME" : volume_slider.value
+		}
+	savedata(to_save)
 	get_tree().quit()
 
 func _on_return_pressed() -> void:
