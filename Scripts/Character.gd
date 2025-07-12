@@ -16,6 +16,7 @@ var Look_Behind = false
 var playerinarea = false
 var monsterfollowing = false
 var walking = true
+var can_move_cam = false
 
 var village_entered = false
 
@@ -38,6 +39,7 @@ var footstep_sounds = dirt_footstep_sounds
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Globals.mouse_sensitivity = 0.005
+	can_move_cam = false
 	await get_tree().create_timer(4).timeout
 	$Animations.play("Look_Up")
 	await get_tree().create_timer(0.3).timeout
@@ -48,6 +50,7 @@ func _ready():
 	$Animations.play("ZoomInConvo")
 	await DialogueManager.dialogue_ended
 	$Animations.play("ZoomOutConvo")
+	can_move_cam = true
 	Globals.mouse_sensitivity = 0.2
 
 func _process(delta: float) -> void:
@@ -61,9 +64,6 @@ func _process(delta: float) -> void:
 			play_monster_following_footsteps()
 		
 func _physics_process(delta: float) -> void:
-	if not is_on_floor(): # ????? What does this do? The player can't fly?
-		velocity += get_gravity() * delta
-
 	var input_dir := Input.get_vector("Left", "Right", "Forwards", "Back")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction and can_move:
@@ -88,7 +88,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and can_move_cam == true:
 		self.rotate_y(deg_to_rad(event.relative.x * Globals.mouse_sensitivity * -1))
 		
 		var camera_rot = neck.rotation_degrees
