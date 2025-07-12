@@ -23,10 +23,12 @@ func toggle_pause_menu():
 		pause_menu.play("close")
 		wrapper.visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		get_tree().paused = false
 	else:
 		pause_menu.play("open")
 		wrapper.visible = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		get_tree().paused = true
 	menu_open = !menu_open
 
 func _on_sensitivity_changed(value):
