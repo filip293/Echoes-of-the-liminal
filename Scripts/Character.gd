@@ -40,13 +40,13 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Globals.mouse_sensitivity = 0.005
 	can_move_cam = false
-	await get_tree().create_timer(4).timeout
+	await Globals.calltime(4)
 	$Animations.play("Look_Up")
-	await get_tree().create_timer(0.3).timeout
+	await Globals.calltime(0.3)
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato_Hey")
-	await get_tree().create_timer(5).timeout
+	await Globals.calltime(5)
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato")
-	await get_tree().create_timer(1).timeout
+	await Globals.calltime(1)
 	$Animations.play("ZoomInConvo")
 	await DialogueManager.dialogue_ended
 	$Animations.play("ZoomOutConvo")
@@ -125,7 +125,7 @@ func _on_look_behind_screen_entered() -> void:
 	if $"../Sitting/LookBehind" != null:
 		$"../Sitting/LookBehind".queue_free()
 		$"../Sitting/Skeleton3D".queue_free()
-	await get_tree().create_timer(1).timeout
+	await Globals.calltime(1)
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Look_Behind")
 	Look_Behind = true
 	Globals.potatoSwing = false
@@ -133,10 +133,10 @@ func _on_look_behind_screen_entered() -> void:
 func _on_look_at_potato_screen_entered() -> void:
 	if Look_Behind == true:
 		$"../Sitting/LookAtPotato".queue_free()
-		await get_tree().create_timer(1).timeout
+		await Globals.calltime(1)
 		DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato_gone")
 		can_move = true
-		await get_tree().create_timer(8).timeout
+		await Globals.calltime(8)
 		Globals.beginningcutsceneended = true
 		
 func _on_static_body_3d_body_entered(body: Node) -> void:
@@ -145,7 +145,7 @@ func _on_static_body_3d_body_entered(body: Node) -> void:
 		$TempBranchBreak.play()
 		await $TempBranchBreak.finished
 		$TempBranchBreak.queue_free()
-		await get_tree().create_timer(2).timeout
+		await Globals.calltime(2)
 		monsterfollowing = true
 	
 func _cancel_follow(body: Node3D) -> void:
@@ -155,7 +155,7 @@ func _cancel_follow(body: Node3D) -> void:
 		$/root/Node3D/Ground/Ambiance.stop()
 		$/root/Node3D/Ground/Ambiance2.stop()
 		$/root/Node3D/Ground/Ambiance3.stop()
-		await get_tree().create_timer(1).timeout
+		await Globals.calltime(1)
 		if $"../StaticBody3D" != null:
 			$"../StaticBody3D".queue_free()
 		if $MonsterSteps != null:

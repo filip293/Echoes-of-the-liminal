@@ -1,5 +1,7 @@
 extends Node
 
+@onready var BaseTime = $/root/Node3D/BaseTime
+signal timeend
 var collectedbellparts: int = 0
 var beginningcutsceneended: bool = false
 var entered_village = false
@@ -7,5 +9,8 @@ var mouse_sensitivity = 0.2
 
 var potatoSwing = true
 
-func temptime(TimeNeeded) -> void: #DUMB SHIT
-	await get_tree().create_timer(TimeNeeded, false).timeout 
+func calltime(time) -> void:
+	BaseTime.set_wait_time(time)
+	BaseTime.start()
+	await BaseTime.timeout
+	timeend.emit()
