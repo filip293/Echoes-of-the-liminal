@@ -10,13 +10,14 @@ extends Node2D
 @onready var ca_check = $"PauseMenuWrapper/Settings/Chromatic Abberation"
 @onready var pix_check = $"PauseMenuWrapper/Settings/Pixelation"
 @onready var vsync_check = $"PauseMenuWrapper/Settings/V-Sync"
+@onready var player_cam = $"../CharacterBody3D/Neck/Camera"
 
 var menu_open = false
 
 func _ready():
 	ca_check.button_pressed = post_effect.configuration.ChromaticAberration
 	pix_check.button_pressed = post_effect.configuration.Pixelate
-	gamma_slider.value = post_effect.configuration.ColorCorrectionBrightness
+	gamma_slider.value = 1.0
 	sensitivity_slider.value = Globals.mouse_sensitivity
 	volume_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
 	if DisplayServer.VSYNC_ENABLED:
@@ -49,7 +50,7 @@ func _on_volume_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(value))
 
 func _on_gamma_changed(value):
-	post_effect.configuration.ColorCorrectionBrightness = value
+	player_cam.environment.tonemap_exposure = value
 
 func _on_quit_pressed():
 	get_tree().quit()
