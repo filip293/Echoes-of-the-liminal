@@ -8,7 +8,6 @@ extends CharacterBody3D
 @onready var mnst_rf_audio := $MonsterSteps/RightFootAudio
 const SPEED = 2
 const SPRINT_MULTIPLIER = 1.5
-var mouse_sensitivity = 0.2
 var footstep_timer = 0.0
 var sec_footstep_timer = 0.0
 var is_left_foot = false
@@ -38,7 +37,7 @@ var footstep_sounds = dirt_footstep_sounds
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	mouse_sensitivity = 0.005
+	Globals.mouse_sensitivity = 0.005
 	await get_tree().create_timer(4).timeout
 	$Animations.play("Look_Up")
 	await get_tree().create_timer(0.3).timeout
@@ -49,7 +48,7 @@ func _ready():
 	$Animations.play("ZoomInConvo")
 	await DialogueManager.dialogue_ended
 	$Animations.play("ZoomOutConvo")
-	mouse_sensitivity = 0.2
+	Globals.mouse_sensitivity = 0.2
 
 func _process(delta: float) -> void:
 	if monsterfollowing and velocity.x == 0.0 and velocity.z == 0.0:
@@ -64,9 +63,6 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if not is_on_floor(): # ????? What does this do? The player can't fly?
 		velocity += get_gravity() * delta
-
-	if Input.is_action_pressed("ESC"):
-		get_tree().quit()
 
 	var input_dir := Input.get_vector("Left", "Right", "Forwards", "Back")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -93,10 +89,10 @@ func _physics_process(delta: float) -> void:
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		self.rotate_y(deg_to_rad(event.relative.x * mouse_sensitivity * -1))
+		self.rotate_y(deg_to_rad(event.relative.x * Globals.mouse_sensitivity * -1))
 		
 		var camera_rot = neck.rotation_degrees
-		var rotation_to_apply_on_x_axis = (-event.relative.y * mouse_sensitivity);
+		var rotation_to_apply_on_x_axis = (-event.relative.y * Globals.mouse_sensitivity);
 		
 		if (camera_rot.x + rotation_to_apply_on_x_axis < -90):
 			camera_rot.x = -90
