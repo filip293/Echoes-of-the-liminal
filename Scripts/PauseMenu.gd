@@ -13,21 +13,43 @@ extends Node2D
 @onready var player_cam = $"../CharacterBody3D/Neck/Camera"
 
 var menu_open = false
+var settingsfile = "user://settings.cfg"
+var settings = {
+	"CA_ENABLED" : true,
+	"PIX_ENABLED" : true,
+	"VSYNC_ENABLED" : true,
+	"BRIGHTNESS" : 1.0,
+	"PLAYER_SENSITIVITY" : 0.2,
+	"AUDIO_VOLUME" : 40
+}
 
 func _ready():
-	ca_check.button_pressed = post_effect.configuration.ChromaticAberration
-	pix_check.button_pressed = post_effect.configuration.Pixelate
-	gamma_slider.value = 1.0
-	sensitivity_slider.value = Globals.mouse_sensitivity
-	volume_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
-	if DisplayServer.VSYNC_ENABLED:
-		vsync_check.button_pressed = true
-	elif DisplayServer.VSYNC_DISABLED: 
-		vsync_check.button_pressed = false
-	post_effect.configuration.StrenghtCA = 2.0
+	if FileAccess.file_exists(settingsfile):
+		var loadedsettings = FileAccess.open(settingsfile, FileAccess.READ)
+		var data = loadedsettings.get_var()
+		post_effect.configuration.ChromaticAberration = data["CA_ENABLED"]
+		ca_check.button_pressed = post_effect.configuration.ChromaticAberration
+		post_effect.configuration.Pixelate = data["PIX_ENABLED"]
+		pix_check.button_pressed = post_effect.configuration.Pixelate
+		player_cam.environment.tonemap_exposure = data["BRIGHTNESS"]
+		gamma_slider.value = player_cam.environment.tonemap_exposure
+		Globals.mouse_sensitivity = data["PLAYER_SENSITIVITY"]
+		sensitivity_slider.value = Globals.mouse_sensitivity
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(data["AUDIO_VOLUME"]))
+		volume_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
+		if data["VSYNC_ENABLED"] == true:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+			vsync_check.button_pressed = true
+		elif data["VSYNC_ENABLED"] == false:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+			vsync_check.button_pressed = false
 	wrapper.visible = true 
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+func savedata(newdata):
+	var settings = FileAccess.open(settingsfile, FileAccess.WRITE)
+	settings.store_var(newdata)
+	
 func _process(delta):
 	if Input.is_action_just_pressed("ESC"):
 		toggle_pause_menu()
@@ -58,6 +80,15 @@ func _on_quit_pressed():
 func _on_return_pressed() -> void:
 	if menu_open:
 		toggle_pause_menu()
+		var to_save = {
+			"CA_ENABLED" : ca_check.button_pressed,
+			"PIX_ENABLED" : pix_check.button_pressed,
+			"VSYNC_ENABLED" : vsync_check.button_pressed,
+			"BRIGHTNESS" : gamma_slider.value,
+			"PLAYER_SENSITIVITY" : sensitivity_slider.value,
+			"AUDIO_VOLUME" : volume_slider.value
+		}
+		savedata(to_save)
 
 func _on_v_sync_toggled(toggled_on: bool) -> void:
 	if toggled_on:
