@@ -13,7 +13,8 @@ config_version=5
 config/name="Echoes of the Liminal"
 run/main_scene="res://Scripts/Echoes of the Liminal.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+config/icon="uid://ddcmasre7agox"
 
 [autoload]
 
@@ -30,6 +31,7 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=4
 window/size/resizable=false
+window/vsync/vsync_mode=2
 
 [editor]
 
@@ -39,6 +41,24 @@ version_control/autoload_on_startup=true
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/post_processing/plugin.cfg", "res://addons/proton_scatter/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://Collisions/": "gray",
+"res://Dialogue/": "teal",
+"res://Fonts/": "gray",
+"res://Houses/": "gray",
+"res://Models/": "pink",
+"res://PSX_ForestGround_Tex/": "gray",
+"res://Player/": "pink",
+"res://PotatoMan/": "gray",
+"res://Scripts/": "yellow",
+"res://Sounds/": "orange",
+"res://Survive/": "gray",
+"res://Trees/": "gray",
+"res://addons/": "gray"
+}
 
 [input]
 
