@@ -11,12 +11,10 @@ const SPRINT_MULTIPLIER = 1.5
 var footstep_timer = 0.0
 var sec_footstep_timer = 0.0
 var is_left_foot = false
-var can_move = false
 var Look_Behind = false
 var playerinarea = false
 var monsterfollowing = false
 var walking = true
-var can_move_cam = false
 
 var village_entered = false
 
@@ -39,7 +37,7 @@ var footstep_sounds = dirt_footstep_sounds
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Globals.mouse_sensitivity = 0.005
-	can_move_cam = false
+	Globals.cameramoveallow = false
 	await Globals.calltime(4)
 	$Animations.play("Look_Up")
 	await Globals.calltime(0.3)
@@ -50,7 +48,7 @@ func _ready():
 	$Animations.play("ZoomInConvo")
 	await DialogueManager.dialogue_ended
 	$Animations.play("ZoomOutConvo")
-	can_move_cam = true
+	Globals.cameramoveallow = true
 	Globals.mouse_sensitivity = 0.2
 
 func _process(delta: float) -> void:
@@ -66,7 +64,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("Left", "Right", "Forwards", "Back")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction and can_move:
+	if direction and Globals.playermoveallow:
 		walking = true
 		var current_speed = SPEED
 		if Input.is_action_pressed("Sprint"):
@@ -88,7 +86,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and can_move_cam == true:
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and Globals.cameramoveallow == true:
 		self.rotate_y(deg_to_rad(event.relative.x * Globals.mouse_sensitivity * -1))
 		
 		var camera_rot = neck.rotation_degrees
@@ -111,7 +109,7 @@ func play_monster_following_footsteps():
 		mnst_rf_audio.play()
 		
 func play_footstep_sound():
-	if can_move:
+	if Globals.playermoveallow:
 		if is_left_foot:
 			left_foot_audio.stream = footstep_sounds[randi() % 3] # Randomly select a sound
 			left_foot_audio.play()
@@ -135,7 +133,7 @@ func _on_look_at_potato_screen_entered() -> void:
 		$"../Sitting/LookAtPotato".queue_free()
 		await Globals.calltime(1)
 		DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato_gone")
-		can_move = true
+		Globals.playermoveallow = true
 		await Globals.calltime(8)
 		Globals.beginningcutsceneended = true
 		
@@ -151,7 +149,6 @@ func _on_static_body_3d_body_entered(body: Node) -> void:
 func _cancel_follow(body: Node3D) -> void:
 	if body is CharacterBody3D and body.name == "CharacterBody3D" and monsterfollowing:
 		monsterfollowing = false
-		Globals.entered_village = true
 		$/root/Node3D/Ground/Ambiance.stop()
 		$/root/Node3D/Ground/Ambiance2.stop()
 		$/root/Node3D/Ground/Ambiance3.stop()
@@ -163,11 +160,13 @@ func _cancel_follow(body: Node3D) -> void:
 
 
 func _Village_enter(body: Node3D) -> void:
-	print("1")
-	if body is CharacterBody3D and body.name == "CharacterBody3D" and village_entered == false:
+	if body is CharacterBody3D and body.name == "CharacterBody3D" and !Globals.scenes["Village"]:
+		await Globals.sc1corEND
 		DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "InVillage")
-		village_entered = true
+		Globals.scenes["Village"] = true
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		Globals.playermoveallow = true
+		Globals.cameramoveallow = true
 
 func _House_Entered(body: Node3D) -> void:
 	if body is CharacterBody3D and body.name == "CharacterBody3D":

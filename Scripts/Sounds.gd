@@ -10,7 +10,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !$".".is_playing():
 		$".".play()
-	if Globals.beginningcutsceneended and Globals.entered_village == false:
+	if Globals.beginningcutsceneended and !Globals.scenes["Village"]:
 		if !$"../../../Ground/Ambiance".is_playing():
 			$"../../../Ground/Ambiance".play()
 			$"../../../Ground/Ambiance2".play()
