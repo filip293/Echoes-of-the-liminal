@@ -30,6 +30,10 @@ func _ready():
 		post_effect.configuration.ChromaticAberration = data["CA_ENABLED"]
 		ca_check.button_pressed = post_effect.configuration.ChromaticAberration
 		post_effect.configuration.Pixelate = data["PIX_ENABLED"]
+		if data["PIX_ENABLED"]:
+			post_effect.configuration.GrainPower = 45.0
+		elif !data["PIX_ENABLED"]:
+			post_effect.configuration.GrainPower = 60.0
 		pix_check.button_pressed = post_effect.configuration.Pixelate
 		player_cam.environment.tonemap_exposure = data["BRIGHTNESS"]
 		gamma_slider.value = player_cam.environment.tonemap_exposure
