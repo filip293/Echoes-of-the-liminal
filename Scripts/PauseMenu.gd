@@ -133,5 +133,7 @@ func _on_chromatic_abberation_toggled(toggled_on: bool) -> void:
 func _on_pixelation_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		post_effect.configuration.Pixelate = true
+		post_effect.configuration.GrainPower = 45.0
 	else:
+		post_effect.configuration.GrainPower = 60.0
 		post_effect.configuration.Pixelate = false
