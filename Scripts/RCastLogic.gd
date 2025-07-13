@@ -7,7 +7,7 @@ func _physics_process(delta: float) -> void:
 		var collider = get_collider()
 		if collider and collider.has_method('whoami'):
 			var idex = collider.whoami()
-			label.text = "[E] Interact with: " + idex
+			label.text = "[E] To interact"
 			
 			#FOR DOOR IN CABIN 7
 			if idex == "Open" and Input.is_action_just_pressed("Interact"):
@@ -26,6 +26,8 @@ func _physics_process(delta: float) -> void:
 				var tween = create_tween()
 				tween.tween_property(door, "rotation", target_rotation, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 				$"../../../../Houses/house12/house1/house1_door1/StaticBody3D/DoorOpen".play()
+				$"../../../../Houses/house12/house1/house1_door1/StaticBody3D/CollisionShape3D".disabled = true
+				$"../../../../Houses/house12/house1/house1_door1/TempStay/TempReplace".disabled = false
 
 			
 			
