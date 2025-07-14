@@ -30,6 +30,5 @@ func _physics_process(delta: float) -> void:
 				$"../../../../Houses/house12/house1/house1_door1/TempStay/TempReplace".disabled = false
 
 			
-			
 	else:
 		label.text = ""

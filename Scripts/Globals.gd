@@ -2,6 +2,7 @@ extends Node
 
 @onready var BaseTime = $/root/Node3D/BaseTime
 signal timeend
+signal movehead
 var playermoveallow: bool = false
 var cameramoveallow: bool = false
 var collectedbellparts: int = 0
