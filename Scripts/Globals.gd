@@ -7,6 +7,7 @@ var cameramoveallow: bool = false
 var collectedbellparts: int = 0
 var beginningcutsceneended: bool = false
 var mouse_sensitivity = 0.2
+var in_screen = false
 signal sc1corEND
 signal sc2corEND
 signal sc3corEND
@@ -28,3 +29,4 @@ func calltime(time) -> void:
 	BaseTime.start()
 	await BaseTime.timeout
 	timeend.emit()
+	

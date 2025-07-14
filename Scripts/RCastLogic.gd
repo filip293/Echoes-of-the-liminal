@@ -1,11 +1,23 @@
 extends RayCast3D
 
 @onready var label: RichTextLabel = $"../../../../InstViewport/InteractTextWrapper/InteractText"
+@onready var SpecialInterAnim = $"../../../../InstViewport/SpecialInteraction/Animations"
+@onready var SpecialItemTitle = $"../../../../InstViewport/SpecialInteraction/ITWrapper/ItemTitle"
+@onready var SpecialItemDesc = $"../../../../InstViewport/SpecialInteraction/IDWrapper/ItemDesc"
 
 func _physics_process(delta: float) -> void:
 	if is_colliding():
 		var collider = get_collider()
-		if collider and collider.has_method('whoami'):
+		#if collider and collider.special() and !Globals.in_screen:
+			#var it = collider.get_title()
+			#var id = collider.get_description()
+			#
+			#SpecialItemTitle.text = it
+			#SpecialItemDesc.text = id
+			#SpecialInterAnim.play("fade")
+			#
+			#
+		if collider and collider.has_method('whoami') and !collider.special():
 			var idex = collider.whoami()
 			label.text = "[E] To interact"
 			
