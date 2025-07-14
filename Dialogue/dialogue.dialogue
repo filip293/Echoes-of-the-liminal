@@ -33,11 +33,7 @@
 ~ InVillage
 [center]John: [center]Weird... not even a breeze.
 [center]John: [center]Hello? Anybody home...? Feels wrong.
-<<<<<<< HEAD
 do Globals.emit_signal("movehead")
-=======
-
->>>>>>> 188ef43c03bfbc2e745c1277e46ab8524dce5ff8
 [center]John: [center]Feels like everyone just... evaporated. Where'd they go?
 => END
 ~ SecondBellPart
