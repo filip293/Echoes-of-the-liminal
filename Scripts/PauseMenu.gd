@@ -71,7 +71,8 @@ func _process(delta):
 func toggle_pause_menu():
 	if menu_open:
 		pause_menu.play_backwards("menu")
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		if !Globals.on_special_object:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		get_tree().paused = false
 		var to_save = {
 			"CA_ENABLED" : ca_check.button_pressed,

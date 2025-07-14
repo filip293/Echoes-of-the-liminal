@@ -98,6 +98,8 @@ func handle_painting_interaction() -> void:
 						Globals.in_screen = true
 						painting_active = true
 						Globals.playermoveallow = false
+						Globals.cameramoveallow = false
+						Globals.on_special_object = true
 						Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 	# Return painting with E
@@ -116,6 +118,8 @@ func handle_painting_interaction() -> void:
 		Globals.in_screen = false
 		painting_active = false
 		Globals.playermoveallow = true
+		Globals.cameramoveallow = true
+		Globals.on_special_object = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 		# Re-enable collision after delay

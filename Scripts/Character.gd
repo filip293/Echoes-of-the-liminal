@@ -121,10 +121,13 @@ func play_footstep_sound():
 
 func _on_look_behind_screen_entered() -> void:
 	if $"../Sitting/LookBehind" != null:
+		Globals.cameramoveallow = false
 		$"../Sitting/LookBehind".queue_free()
 		$"../Sitting/Skeleton3D".queue_free()
 	await Globals.calltime(1)
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Look_Behind")
+	await DialogueManager.dialogue_ended
+	Globals.cameramoveallow = true
 	Look_Behind = true
 	Globals.potatoSwing = false
 
