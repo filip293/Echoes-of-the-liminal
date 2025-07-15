@@ -20,6 +20,7 @@ config/icon="uid://ddcmasre7agox"
 
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Globals="*res://Scripts/Globals.gd"
+VoicelineSystem="*res://Scripts/VoicelineSystem.gd"
 
 [dialogue_manager]
 
