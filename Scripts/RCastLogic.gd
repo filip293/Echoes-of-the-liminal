@@ -35,10 +35,9 @@ func _physics_process(delta: float) -> void:
 				if collider.has_method("get_interaction_node") and collider.has_method("get_offset"):
 					var item_node: Node3D = collider.get_interaction_node()
 					var offset: Vector3 = collider.get_offset()
-
-					print("Interacting with:", collider)
-					print("Moving node:", item_node)
-					print("Offset:", offset)
+					#print("Interacting with:", collider)
+					#print("Moving node:", item_node)
+					#print("Offset:", offset)
 
 					if item_node:
 						handle_item_interaction(item_node, offset)
@@ -75,10 +74,6 @@ func _physics_process(delta: float) -> void:
 		label.text = ""
 
 func handle_item_interaction(item: Node3D, offset: Vector3) -> void:
-	if item == null:
-		push_warning("Item passed to handle_item_interaction is null")
-		return
-
 	var path_str := str(item.get_path())
 
 	if !item_original_transforms.has(path_str):
@@ -103,8 +98,6 @@ func handle_item_interaction(item: Node3D, offset: Vector3) -> void:
 				new_position += cam_transform.basis.y * offset.y
 
 				var new_transform = Transform3D(new_basis, new_position)
-
-				print("Tweening item to:", new_transform.origin)
 
 				item_tween = create_tween()
 				item_tween.tween_property(item, "global_transform", new_transform, 1.0)\
