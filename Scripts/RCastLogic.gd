@@ -21,6 +21,7 @@ func _physics_process(delta: float) -> void:
 			SpecialInterAnim.play_backwards("fade")
 			handle_painting_interaction()
 			Globals.in_screen = false
+			Globals.showingcrosshair = true
 			
 	if is_colliding():
 		var lastcollider = get_collider()
@@ -37,6 +38,7 @@ func _physics_process(delta: float) -> void:
 				if collider.whoami() == "painting":
 					handle_painting_interaction()
 				Globals.in_screen = true
+				Globals.showingcrosshair = false
 					
 
 			

@@ -7,6 +7,7 @@ var playermoveallow: bool = false
 var cameramoveallow: bool = false
 var collectedbellparts: int = 0
 var beginningcutsceneended: bool = false
+var showingcrosshair: bool = true
 var mouse_sensitivity = 0.2
 var in_screen = false
 var on_special_object = false

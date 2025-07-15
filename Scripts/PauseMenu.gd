@@ -72,6 +72,7 @@ func _process(delta):
 func toggle_pause_menu():
 	if menu_open:
 		pause_menu.play_backwards("menu")
+		Globals.showingcrosshair = true
 		Input.set_mouse_mode(lastinputstate)
 		get_tree().paused = false
 		var to_save = {
@@ -86,6 +87,7 @@ func toggle_pause_menu():
 	else:
 		lastinputstate = Input.get_mouse_mode()
 		pause_menu.play("menu")
+		Globals.showingcrosshair = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		get_tree().paused = true
 	menu_open = !menu_open
