@@ -124,12 +124,14 @@ func _on_look_behind_screen_entered() -> void:
 		Globals.cameramoveallow = false
 		$"../Sitting/LookBehind".queue_free()
 		$"../Sitting/Skeleton3D".queue_free()
+		Globals.potatoSwing = false
+		$/root/Node3D/Sitting/AnimationPlayer.stop()
 	await Globals.calltime(1)
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Look_Behind")
 	await DialogueManager.dialogue_ended
 	Globals.cameramoveallow = true
 	Look_Behind = true
-	Globals.potatoSwing = false
+	
 
 func _on_look_at_potato_screen_entered() -> void:
 	if Look_Behind == true:
