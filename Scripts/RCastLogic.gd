@@ -16,20 +16,30 @@ func _ready() -> void:
 	painting_original_rotation = painting.rotation_degrees
 
 func _physics_process(delta: float) -> void:
-	handle_painting_interaction()
-	
-	
+	if painting_active and Globals.in_screen:
+		if Input.is_action_just_pressed("Interact"):
+			SpecialInterAnim.play_backwards("fade")
+			handle_painting_interaction()
+			Globals.in_screen = false
+			
 	if is_colliding():
+		var lastcollider = get_collider()
 		var collider = get_collider()
-		#if collider and collider.special() and !Globals.in_screen:
-			#var it = collider.get_title()
-			#var id = collider.get_description()
-			#
-			#SpecialItemTitle.text = it
-			#SpecialItemDesc.text = id
-			#SpecialInterAnim.play("fade")
-			#
-			#
+		if collider and collider.specialcheck():
+			label.text = "[E] Examine " + collider.whoami()
+			
+			if Input.is_action_just_pressed("Interact"):
+				var it = collider.get_title()
+				var id = collider.get_description()
+				SpecialItemTitle.text = it
+				SpecialItemDesc.text = id
+				SpecialInterAnim.play("fade")
+				if collider.whoami() == "painting":
+					handle_painting_interaction()
+				Globals.in_screen = true
+					
+
+			
 		if collider and collider.has_method('whoami') and !collider.special:
 			var idex = collider.whoami()
 			label.text = "[E] To interact"
@@ -59,51 +69,44 @@ func _physics_process(delta: float) -> void:
 		label.text = ""
 		
 func handle_painting_interaction() -> void:
-	if is_colliding():
-		var collider = get_collider()
+	if !painting_active:
+		var player = get_tree().get_root().get_node("Node3D/CharacterBody3D")
+		if player:
+			var camera = player.get_node_or_null("Neck/Camera")
+			if camera:
+				var cam_transform = camera.global_transform
 
-		if collider == painting and collider.has_method("specialcheck") and collider.specialcheck():
-			label.text = "[E] Examine painting"
+				# Clone camera rotation and apply painting scale
+				var new_basis = Basis(cam_transform.basis)
+				new_basis = new_basis.scaled(painting.global_transform.basis.get_scale())
 
-			if Input.is_action_just_pressed("Interact") and !painting_active:
-				var player = get_tree().get_root().get_node("Node3D/CharacterBody3D")
-				if player:
-					var camera = player.get_node_or_null("Neck/Camera")
-					if camera:
-						var cam_transform = camera.global_transform
+				# Finer positioning adjustments
+				var offset = -cam_transform.basis.z * 0.42   # closer
+				offset += -cam_transform.basis.x * 0.18      # more to the left
+				offset += cam_transform.basis.y * 0.015       # slightly higher
+				var new_position = cam_transform.origin + offset
 
-						# Clone camera rotation and apply painting scale
-						var new_basis = Basis(cam_transform.basis)
-						new_basis = new_basis.scaled(painting.global_transform.basis.get_scale())
+				# Apply new transform
+				var new_transform = Transform3D(new_basis, new_position)
 
-						# Finer positioning adjustments
-						var offset = -cam_transform.basis.z * 0.42   # closer
-						offset += -cam_transform.basis.x * 0.18      # more to the left
-						offset += cam_transform.basis.y * 0.02       # slightly higher
-						var new_position = cam_transform.origin + offset
+				# Tween into view
+				painting_tween = create_tween()
+				painting_tween.tween_property(painting, "global_transform", new_transform, 1.0)\
+					.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-						# Apply new transform
-						var new_transform = Transform3D(new_basis, new_position)
+				# Disable collisions
+				var collider_shape = painting.get_node_or_null("CollisionShape3D")
+				if collider_shape:
+					collider_shape.disabled = true
 
-						# Tween into view
-						painting_tween = create_tween()
-						painting_tween.tween_property(painting, "global_transform", new_transform, 1.0)\
-							.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
-						# Disable collisions
-						var collider_shape = painting.get_node_or_null("CollisionShape3D")
-						if collider_shape:
-							collider_shape.disabled = true
-
-						Globals.in_screen = true
-						painting_active = true
-						Globals.playermoveallow = false
-						Globals.cameramoveallow = false
-						Globals.on_special_object = true
-						Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+				Globals.in_screen = true
+				painting_active = true
+				Globals.playermoveallow = false
+				Globals.cameramoveallow = false
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 	# Return painting with E
-	elif painting_active and Input.is_action_just_pressed("Interact"):
+	elif painting_active:
 		var original_basis = Basis().rotated(Vector3(1, 0, 0), deg_to_rad(painting_original_rotation.x))
 		original_basis = original_basis.rotated(Vector3(0, 1, 0), deg_to_rad(painting_original_rotation.y))
 		original_basis = original_basis.rotated(Vector3(0, 0, 1), deg_to_rad(painting_original_rotation.z))
@@ -119,7 +122,6 @@ func handle_painting_interaction() -> void:
 		painting_active = false
 		Globals.playermoveallow = true
 		Globals.cameramoveallow = true
-		Globals.on_special_object = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 		# Re-enable collision after delay
@@ -127,5 +129,3 @@ func handle_painting_interaction() -> void:
 		var collider_shape = painting.get_node_or_null("CollisionShape3D")
 		if collider_shape:
 			collider_shape.disabled = false
-	else:
-		label.text = ""

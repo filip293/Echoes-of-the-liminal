@@ -12,6 +12,7 @@ extends Node2D
 @onready var vsync_check = $"PauseMenuWrapper/Settings/V-Sync"
 @onready var player_cam = $"../CharacterBody3D/Neck/Camera"
 
+var lastinputstate
 var menu_open = false
 var settingsfile = "user://settings.cfg"
 var defaultsettings = {
@@ -71,8 +72,7 @@ func _process(delta):
 func toggle_pause_menu():
 	if menu_open:
 		pause_menu.play_backwards("menu")
-		if !Globals.on_special_object:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		Input.set_mouse_mode(lastinputstate)
 		get_tree().paused = false
 		var to_save = {
 			"CA_ENABLED" : ca_check.button_pressed,
@@ -84,6 +84,7 @@ func toggle_pause_menu():
 		}
 		savedata(to_save)
 	else:
+		lastinputstate = Input.get_mouse_mode()
 		pause_menu.play("menu")
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		get_tree().paused = true

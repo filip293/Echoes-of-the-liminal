@@ -7,7 +7,7 @@ extends CharacterBody3D
 @onready var mnst_lf_audio := $MonsterSteps/LeftFootAudio
 @onready var mnst_rf_audio := $MonsterSteps/RightFootAudio
 const SPEED = 2
-const SPRINT_MULTIPLIER = 1.5
+const SPRINT_MULTIPLIER = 10
 var footstep_timer = 0.0
 var sec_footstep_timer = 0.0
 var is_left_foot = false
