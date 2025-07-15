@@ -1,32 +1,45 @@
 ~ Potato_Hey
+do VoicelineSystem.playvoiceline("John")
 [center]John: [center]Hey...[next=auto]
 => END
 
 ~ Potato
+do VoicelineSystem.playvoiceline("John")
 [center]John: [center]Hey, Mr. Potatoman, do you think I’m a good husband?
+do VoicelineSystem.playvoiceline("Potato")
 [center]Mr. Potatoman: [center]Yeah, John, I think any woman would be lucky to be with you!
 
+do VoicelineSystem.playvoiceline("John")
 [center]John: [center]Then why did she kick me out again?
+do VoicelineSystem.playvoiceline("Potato")
 [center]Mr. Potatoman: [center]Probably because you came home smelling like a distillery and tried to serenade her with a spaghetti spoon.
 
+do VoicelineSystem.playvoiceline("John")
 [center]John: [center]Fair point… but now I’m stuck in the middle of this creepy forest. Why am I even heading to the cabins?
+do VoicelineSystem.playvoiceline("Potato")
 [center]Mr. Potatoman: [center]You said something about proving your love. Or maybe it was finding a “magic pizza slice.” You weren’t exactly clear.
 
+do VoicelineSystem.playvoiceline("John")
 [center]John: [center]Right! If I show her I can survive out here, maybe she’ll see I’m serious and take me back. Where are these cabins anyway?
+do VoicelineSystem.playvoiceline("Potato")
 [center]Mr. Potatoman: [center]Oh, they’re just behind me. You’ll see signs on the trees.
 
+do VoicelineSystem.playvoiceline("John")
 [center]John: [center]Okay, thanks, buddy. You’re always looking out for me.
+do VoicelineSystem.playvoiceline("Potato")
 [center]Mr. Potatoman: [center]Speaking of looking out... do you hear that behind you?[/center]
 => END
 
 ~ Look_Behind
-
+do VoicelineSystem.playvoiceline("John")
 [center]John: [center]I can't see anything.
 
 => END
 
 ~ Potato_gone
+do VoicelineSystem.playvoiceline("John")
 [center]John: [center][shake rate=10 level=5]Wait… what? Mr. Potatoman… NOOOOOOOOOOOOOOOOOOOOOOOOOOOOO![/shake][wait=1]
+do VoicelineSystem.playvoiceline("John")
 [center]John: [center]Oh well.
 => END
 
