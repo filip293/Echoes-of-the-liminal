@@ -4,7 +4,7 @@ extends StaticBody3D
 @export var special: bool = false
 @export var title: String = ""
 @export var description: String = ""
-@export var interaction_offset: Vector3 = Vector3(0.015, 0.18, 0.42)
+@export var interaction_offset: Vector3 = Vector3(0, 0, 0)
 
 func whoami():
 	return whoami_value
