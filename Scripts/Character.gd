@@ -39,9 +39,9 @@ func _ready():
 	Globals.mouse_sensitivity = 0.005
 	Globals.cameramoveallow = false
 	await Globals.calltime(4)
-	$Animations.play("Look_Up")
-	await Globals.calltime(0.3)
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato_Hey")
+	await Globals.calltime(1.2)
+	$Animations.play("Look_Up")
 	await Globals.calltime(5)
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato")
 	await Globals.calltime(1)

@@ -1,46 +1,47 @@
 ~ Potato_Hey
 do VoicelineSystem.playvoiceline("John")
+[next=1.7]
 [center]John: [center]Hey...[next=auto]
 => END
 
 ~ Potato
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center]Hey, Mr. Potatoman, do you think I’m a good husband?
+[center]John: [center][speed=0.3][wait=0.2]Hey, Mr. Potatoman[wait=1.0][speed=0.5], do you think I’m a good husband?
 do VoicelineSystem.playvoiceline("Potato")
-[center]Mr. Potatoman: [center]Yeah, John, I think any woman would be lucky to be with you!
+[center]Mr. Potatoman: [center][speed=0.3]Yeah, John[wait=0.5][speed=0.5], I think any woman would be lucky to be with you!
 
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center]Then why did she kick me out again?
+[center]John: [center][speed=0.4]Then why did she kick me out again?
 do VoicelineSystem.playvoiceline("Potato")
-[center]Mr. Potatoman: [center]Probably because you came home smelling like a distillery and tried to serenade her with a spaghetti spoon.
+[center]Mr. Potatoman: [center][speed=0.3]Probably because you came home smelling like [speed=0.35]a distillery and tried to serenade her with a spaghetti spoon.
 
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center]Fair point… but now I’m stuck in the middle of this creepy forest. Why am I even heading to the cabins?
+[center]John: [center][speed=0.3]Fair point… [wait=0.7][speed=0.4]but now I’m stuck in the middle of this creepy forest. [wait=1.0][speed=0.45]Why am I even heading to the cabins?
 do VoicelineSystem.playvoiceline("Potato")
-[center]Mr. Potatoman: [center]You said something about proving your love. Or maybe it was finding a “magic pizza slice.” You weren’t exactly clear.
+[center]Mr. Potatoman: [center][speed=0.4][wait=0.3]You said something about proving your love. [wait=0.2][speed=0.35]Or maybe it was finding a “magic pizza slice.” [wait=0.2][speed=0.4]You weren’t exactly clear.
 
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center]Right! If I show her I can survive out here, maybe she’ll see I’m serious and take me back. Where are these cabins anyway?
+[center]John: [center]Right! [speed=0.3][wait=1.0]If I show her I can survive out here[wait=0.2], maybe she’ll see I’m serious and take me back. [wait=0.3][speed=0.4]Where are these cabins anyway?
 do VoicelineSystem.playvoiceline("Potato")
-[center]Mr. Potatoman: [center]Oh, they’re just behind me. You’ll see signs on the trees.
+[center]Mr. Potatoman: [center][speed=0.4]Oh, they’re just behind me. [wait=0.2]You’ll see signs on the trees.
 
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center]Okay, thanks, buddy. You’re always looking out for me.
+[center]John: [center][speed=0.35]Okay, thanks, buddy. [wait=0.2][speed=0.4]You’re always looking out for me.
 do VoicelineSystem.playvoiceline("Potato")
-[center]Mr. Potatoman: [center]Speaking of looking out... do you hear that behind you?[/center]
+[center]Mr. Potatoman: [center][speed=0.45]Speaking of looking out[speed=0.7]... do you hear that behind you?[/center]
 => END
 
 ~ Look_Behind
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center]I can't see anything.
+[center]John: [center][wait=0.4][speed=0.4]I can't see anything.
 
 => END
 
 ~ Potato_gone
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center][shake rate=10 level=5]Wait… what? Mr. Potatoman… NOOOOOOOOOOOOOOOOOOOOOOOOOOOOO![/shake][wait=1]
+[center]John: [center][shake rate=10 level=5][speed=0.3][wait=0.2]Wait… [wait=0.6]what? [speed=0.12][wait=1.0]Mr. Potatoman… [wait=1.2][speed=0.3]NOOOOOOOOOOOOOOOOOOOOOOOOOOOOO![/shake][wait=1]
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center]Oh well.
+[center]John: [center][wait=1.5]Oh well.
 => END
 
 ~ InVillage
