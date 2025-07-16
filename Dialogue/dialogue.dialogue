@@ -13,10 +13,10 @@ do VoicelineSystem.playvoiceline("Potato")
 do VoicelineSystem.playvoiceline("John")
 [center]John: [center][speed=0.4]Then why did she kick me out again?
 do VoicelineSystem.playvoiceline("Potato")
-[center]Mr. Potatoman: [center][speed=0.3]Probably because you came home smelling like [speed=0.35]a distillery and tried to serenade her with a spaghetti spoon.
+[center]Mr. Potatoman: [center][speed=0.33]Probably because you came home smelling like [speed=0.37]a distillery and tried to serenade her with a spaghetti spoon.
 
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center][speed=0.3]Fair point… [wait=0.7][speed=0.4]but now I’m stuck in the middle of this creepy forest. [wait=1.0][speed=0.45]Why am I even heading to the cabins?
+[center]John: [center][speed=0.3]Fair point… [wait=0.7][speed=0.4]but now I’m stuck in the middle of this creepy forest. [wait=0.7][speed=0.45]Why am I even heading to the cabins?
 do VoicelineSystem.playvoiceline("Potato")
 [center]Mr. Potatoman: [center][speed=0.4][wait=0.3]You said something about proving your love. [wait=0.2][speed=0.35]Or maybe it was finding a “magic pizza slice.” [wait=0.2][speed=0.4]You weren’t exactly clear.
 
@@ -28,7 +28,7 @@ do VoicelineSystem.playvoiceline("Potato")
 do VoicelineSystem.playvoiceline("John")
 [center]John: [center][speed=0.35]Okay, thanks, buddy. [wait=0.2][speed=0.4]You’re always looking out for me.
 do VoicelineSystem.playvoiceline("Potato")
-[center]Mr. Potatoman: [center][speed=0.45]Speaking of looking out[speed=0.7]... do you hear that behind you?[/center]
+[center]Mr. Potatoman: [center][speed=0.45]Speaking of looking out[speed=0.8]... do you hear that behind you?[/center]
 => END
 
 ~ Look_Behind
