@@ -64,6 +64,9 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("Left", "Right", "Forwards", "Back")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
+	velocity.y -= delta * ProjectSettings.get_setting("physics/3d/default_gravity")
+
 	if direction and Globals.playermoveallow:
 		walking = true
 		var current_speed = SPEED
@@ -71,9 +74,8 @@ func _physics_process(delta: float) -> void:
 			current_speed *= SPRINT_MULTIPLIER
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed
-		
+
 		footstep_timer += delta
-		
 		var footstep_inter = FOOTSTEP_INTERVAL * (SPEED / current_speed)
 		if footstep_timer >= footstep_inter:
 			footstep_timer = 0
@@ -82,8 +84,9 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		walking = false
-		
+
 	move_and_slide()
+
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and Globals.cameramoveallow == true:
