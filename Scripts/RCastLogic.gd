@@ -72,7 +72,8 @@ func _physics_process(delta: float) -> void:
 				$"../../../../Houses/house12/house1/house1_door1/TempStay/TempReplace".disabled = false
 				
 			if idex == "Lantern" and Input.is_action_just_pressed("Interact"):
-				pass
+				$"../../../../Houses/house12/house1/house1_door1".rotation_degrees = Vector3(0, 0, 0)
+				$"../../../../Houses/house12/house1/house1_door1/DoorShut".play()
 				
 	else:
 		label.text = ""
