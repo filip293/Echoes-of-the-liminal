@@ -70,6 +70,10 @@ func _physics_process(delta: float) -> void:
 				$"../../../../Houses/house12/house1/house1_door1/StaticBody3D/DoorOpen".play()
 				$"../../../../Houses/house12/house1/house1_door1/StaticBody3D/CollisionShape3D".disabled = true
 				$"../../../../Houses/house12/house1/house1_door1/TempStay/TempReplace".disabled = false
+				
+			if idex == "Lantern" and Input.is_action_just_pressed("Interact"):
+				pass
+				
 	else:
 		label.text = ""
 
