@@ -11,9 +11,12 @@ var showingcrosshair: bool = true
 var mouse_sensitivity = 0.2
 var in_screen = false
 var on_special_object = false
+var startedgame = false
+signal gamestart
 signal sc1corEND
 signal sc2corEND
 signal sc3corEND
+signal settingsloaded
 
 var scenes = {
 	"Village" : false,

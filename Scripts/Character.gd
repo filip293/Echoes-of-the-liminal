@@ -35,6 +35,7 @@ var wood_footstep_sounds = [
 var footstep_sounds = dirt_footstep_sounds
 
 func _ready():
+	await Globals.gamestart
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Globals.mouse_sensitivity = 0.005
 	Globals.cameramoveallow = false
