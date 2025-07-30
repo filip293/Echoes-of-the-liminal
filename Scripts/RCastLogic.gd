@@ -72,9 +72,36 @@ func _physics_process(delta: float) -> void:
 				$"../../../../Houses/house12/house1/house1_door1/TempStay/TempReplace".disabled = false
 				
 			if idex == "Lantern" and Input.is_action_just_pressed("Interact"):
+				var lantern: Node3D = $"../../../../Lantern"
+				var player = get_tree().get_root().get_node("Node3D/CharacterBody3D")
+				var lantern_body = player.get_node("LanternBody")
+
+				Globals.playermoveallow = false
 				$"../../../../Houses/house12/house1/house1_door1".rotation_degrees = Vector3(0, 0, 0)
 				$"../../../../Houses/house12/house1/house1_door1/DoorShut".play()
-				$"../../../LanternLight".visible = true
+				
+				$"../../../../Lantern/CollisionShape3D".disabled = true
+
+				var offset = Vector3(0, 0.2, 0)
+				var target_transform = Transform3D(
+					lantern_body.global_transform.basis,
+					lantern_body.global_transform.origin + offset
+				)
+
+				var tween := create_tween()
+				tween.tween_property(lantern, "global_transform", target_transform, 1.0)\
+					.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+				tween.connect("finished", func():
+					lantern.queue_free()
+					$"../../../LanternBody".visible = true
+					$"../../../LanternLight".visible = true
+				)
+				
+				Globals.playermoveallow = true
+				
+				
+
 				
 	else:
 		label.text = ""
