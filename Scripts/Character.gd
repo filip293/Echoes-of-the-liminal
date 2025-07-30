@@ -150,6 +150,8 @@ func _on_static_body_3d_body_entered(body: Node) -> void:
 	if body is CharacterBody3D and body.name == "CharacterBody3D" and $TempBranchBreak != null:
 		playerinarea = true
 		$TempBranchBreak.play()
+		$"../Fries".queue_free()
+		$"../Survival".queue_free()
 		await $TempBranchBreak.finished
 		$TempBranchBreak.queue_free()
 		await Globals.calltime(2)
