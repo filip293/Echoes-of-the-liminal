@@ -8,7 +8,7 @@ uniform vec4 fuzz_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
 
 // THE CHANGES ARE HERE:
 // 1. Made the default ball size much larger for a bigger, fuzzier effect.
-uniform float fuzz_ball_size : hint_range(0.1, 2.0) = 0.8;
+uniform float fuzz_ball_size : hint_range(0.1, 2.0) = 0.8; 
 // 2. Reduced density to give the larger balls more space and prevent ugly clumping.
 uniform float density : hint_range(0.1, 20.0) = 8.0;
 
@@ -19,14 +19,6 @@ uniform float distortion_strength : hint_range(0.0, 1.0) = 0.25;
 uniform float shell_thickness : hint_range(0.0, 0.5, 0.001) = 0.03;
 uniform float wobble_amount : hint_range(0.0, 0.2, 0.001) = 0.01;
 uniform float wobble_speed : hint_range(0.1, 10.0) = 2.5;
-
-// --- NEW UNIFORMS FOR CREEPY EFFECT ---
-// Controls how much of the effect is "eaten away" or dissolved.
-uniform float erosion_threshold : hint_range(0.0, 1.0) = 0.4;
-// Controls the sharpness of the dissolved edges.
-uniform float erosion_edge_sharpness : hint_range(1.0, 50.0) = 20.0;
-// Speed for the creepy color pulsation.
-uniform float pulse_speed : hint_range(0.1, 5.0) = 1.0;
 
 // A 'varying' is used to pass data from the vertex shader to the fragment shader.
 varying vec3 local_vertex_pos;
@@ -74,26 +66,13 @@ void fragment() {
         uv += distortion;
 
         vec2 worley_noise = worley(uv);
-        
+
         // This line creates the ball. A larger fuzz_ball_size makes the gradient
         // happen over a larger distance, resulting in a softer, fuzzier look.
         float ball = 1.0 - smoothstep(0.0, fuzz_ball_size, worley_noise.x);
 
-        // --- CREEPY EROSION EFFECT ---
-        // We generate a second noise value to control the erosion.
-        float erosion_noise = random(uv + vec2(12.34, 56.78)); // Use different offset for different noise
-        
-        // Use smoothstep to create a sharp transition based on the erosion threshold.
-        float erosion_mask = smoothstep(erosion_threshold, erosion_threshold + (1.0 / erosion_edge_sharpness), erosion_noise);
-
-        // --- CREEPY COLOR PULSATION ---
-        // Pulsate the alpha channel of the fuzz_color to make it throb.
-        vec4 final_color = fuzz_color;
-        final_color.a *= (0.75 + sin(TIME * pulse_speed) * 0.25);
-
-        ALBEDO = final_color.rgb;
-        // Modulate the original alpha with the erosion mask.
-        ALPHA = ball * final_color.a * erosion_mask;
+        ALBEDO = fuzz_color.rgb;
+        ALPHA = ball * fuzz_color.a;
 
         if (ALPHA < 0.01) {
             discard;
