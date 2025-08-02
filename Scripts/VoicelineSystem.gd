@@ -26,7 +26,7 @@ var potatoman_voicelines = [
 ]
 
 func _ready() -> void:
-	PotatoVoice.volume_db = -32
+	#PotatoVoice.volume_db = -32
 	PlayerVoice.volume_db = -67
 	
 func playvoiceline(chara):

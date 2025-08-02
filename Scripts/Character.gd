@@ -17,7 +17,6 @@ var monsterfollowing = false
 var walking = true
 
 var village_entered = false
-
 const FOOTSTEP_INTERVAL = 1.8 / SPEED
 
 var dirt_footstep_sounds = [
@@ -124,12 +123,12 @@ func play_footstep_sound():
 		is_left_foot = !is_left_foot # Alternate foot
 
 func _on_look_behind_screen_entered() -> void:
-	if $"../Sitting/LookBehind" != null:
-		Globals.cameramoveallow = false
-		$"../Sitting/LookBehind".queue_free()
-		$"../Sitting/Skeleton3D".queue_free()
-		Globals.potatoSwing = false
-		$/root/Node3D/Sitting/AnimationPlayer.stop()
+	#if $"../Sitting/LookBehind" != null:
+		#Globals.cameramoveallow = false
+		#$"../Sitting/LookBehind".queue_free()
+		#$"../Sitting/Skeleton3D".queue_free()
+		#Globals.potatoSwing = false
+		#$/root/Node3D/Sitting/AnimationPlayer.stop()
 	await Globals.calltime(1)
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Look_Behind")
 	await DialogueManager.dialogue_ended
@@ -137,14 +136,14 @@ func _on_look_behind_screen_entered() -> void:
 	Look_Behind = true
 	
 
-func _on_look_at_potato_screen_entered() -> void:
-	if Look_Behind == true:
-		$"../Sitting/LookAtPotato".queue_free()
-		await Globals.calltime(1)
-		DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato_gone")
-		Globals.playermoveallow = true
-		await Globals.calltime(8)
-		Globals.beginningcutsceneended = true
+#func _on_look_at_potato_screen_entered() -> void:
+	#if Look_Behind == true:
+		#$"../Sitting/LookAtPotato".queue_free()
+		#await Globals.calltime(1)
+		#DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato_gone")
+		#Globals.playermoveallow = true
+		#await Globals.calltime(8)
+		#Globals.beginningcutsceneended = true
 		
 func _on_static_body_3d_body_entered(body: Node) -> void:
 	if body is CharacterBody3D and body.name == "CharacterBody3D" and $TempBranchBreak != null:
