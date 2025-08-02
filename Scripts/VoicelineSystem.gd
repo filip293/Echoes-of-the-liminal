@@ -30,15 +30,15 @@ func _ready() -> void:
 	PlayerVoice.volume_db = -67
 	
 func playvoiceline(chara):
-	if PotatoVoice.is_playing() or PlayerVoice.is_playing():
-		PotatoVoice.stop()
-		PlayerVoice.stop()
+	#if PotatoVoice.is_playing() or PlayerVoice.is_playing():
+		#PotatoVoice.stop()
+		#PlayerVoice.stop()
 		
 	if chara == "John":
 		PlayerVoice.stream = john_voicelines[john_current_voiceline]
 		john_current_voiceline+=1
 		PlayerVoice.play()
-	elif chara == "Potato":
-		PotatoVoice.stream = potatoman_voicelines[potatoman_current_voiceline]
-		potatoman_current_voiceline+=1
-		PotatoVoice.play()
+	#elif chara == "Potato":
+		#PotatoVoice.stream = potatoman_voicelines[potatoman_current_voiceline]
+		#potatoman_current_voiceline+=1
+		#PotatoVoice.play()
