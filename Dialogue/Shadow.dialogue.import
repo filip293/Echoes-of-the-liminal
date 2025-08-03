@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bdmlthxhyy57k"
+path="res://.godot/imported/Shadow.dialogue-2f17679f5149f9a85bd64636c6ee1627.tres"
+
+[deps]
+
+source_file="res://Dialogue/Shadow.dialogue"
+dest_files=["res://.godot/imported/Shadow.dialogue-2f17679f5149f9a85bd64636c6ee1627.tres"]
+
+[params]
+
+defaults=true

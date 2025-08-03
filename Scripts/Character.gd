@@ -34,21 +34,32 @@ var wood_footstep_sounds = [
 var footstep_sounds = dirt_footstep_sounds
 
 func _ready():
+	$/root/Node3D/Houses/house12/house1/Flicker.play("Flicker")
+	$/root/Node3D/Houses/house12/house1/house1_door1/Sway.play("Sway")
+	
+	
+	
 	await Globals.gamestart
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Globals.mouse_sensitivity = 0.005
 	Globals.cameramoveallow = false
 	await Globals.calltime(4)
-	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato_Hey")
+	DialogueManager.show_dialogue_balloon(load("res://Dialogue/Shadow.dialogue"), "Shadow")
 	await Globals.calltime(1.2)
 	$Animations.play("Look_Up")
 	await Globals.calltime(5)
-	DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato")
+	#DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato")
+	$"../Shadow/AnimationPlayer".play("FazeIn")
 	await Globals.calltime(1)
-	$Animations.play("ZoomInConvo")
+	$/root/Node3D/Shadow/AnimationPlayer.play("Sitting")
 	await DialogueManager.dialogue_ended
-	$Animations.play("ZoomOutConvo")
+	$"../Survival/bonfire/Fire3".play("FireBig")
+	await Globals.calltime(1)
+	$"../Shadow".visible = false
+	await Globals.calltime(1)
+	Globals.playermoveallow = true
 	Globals.cameramoveallow = true
+	
 	Globals.mouse_sensitivity = 0.2
 
 func _process(delta: float) -> void:
@@ -149,7 +160,6 @@ func _on_static_body_3d_body_entered(body: Node) -> void:
 	if body is CharacterBody3D and body.name == "CharacterBody3D" and $TempBranchBreak != null:
 		playerinarea = true
 		$TempBranchBreak.play()
-		$"../Fries".queue_free()
 		$"../Survival".queue_free()
 		await $TempBranchBreak.finished
 		$TempBranchBreak.queue_free()

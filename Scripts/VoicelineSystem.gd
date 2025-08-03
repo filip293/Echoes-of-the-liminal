@@ -1,7 +1,7 @@
 extends Node
 
 @onready var PlayerVoice = $/root/Node3D/CharacterBody3D/Neck/Voice
-@onready var PotatoVoice = $/root/Node3D/Sitting/Voice
+#@onready var PotatoVoice = $/root/Node3D/Sitting/Voice
 var john_current_voiceline = 0
 var potatoman_current_voiceline = 0
 
