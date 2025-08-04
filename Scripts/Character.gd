@@ -36,9 +36,6 @@ var footstep_sounds = dirt_footstep_sounds
 func _ready():
 	$/root/Node3D/Houses/house12/house1/Flicker.play("Flicker")
 	$/root/Node3D/Houses/house12/house1/house1_door1/Sway.play("Sway")
-	
-	
-	
 	await Globals.gamestart
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Globals.mouse_sensitivity = 0.005
@@ -49,19 +46,22 @@ func _ready():
 	$Animations.play("Look_Up")
 	await Globals.calltime(5)
 	#DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Potato")
-	$"../Shadow/AnimationPlayer".play("FazeIn")
+	
 	await Globals.calltime(1)
 	$/root/Node3D/Shadow/AnimationPlayer.play("Sitting")
 	await DialogueManager.dialogue_ended
-	$"../Survival/bonfire/Fire3".play("FireBig")
-	await Globals.calltime(1)
-	$"../Shadow".visible = false
-	await Globals.calltime(1)
+	
 	Globals.playermoveallow = true
 	Globals.cameramoveallow = true
 	
 	Globals.mouse_sensitivity = 0.2
 
+func dissapearanim1() -> void:
+	$"../Survival/bonfire/Fire3".play("FireBig")
+	await Globals.calltime(1)
+	$"../Shadow".visible = false
+	await Globals.calltime(1)
+	
 func _process(delta: float) -> void:
 	if monsterfollowing and velocity.x == 0.0 and velocity.z == 0.0:
 		sec_footstep_timer = 0
