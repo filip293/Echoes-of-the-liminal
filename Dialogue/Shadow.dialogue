@@ -1,23 +1,26 @@
 ~ Shadow
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center][speed=0.3]I know you're not really here.[next=6]
+do wait(0.7)
+[center]John: [center][speed=0.37]I know you're not really here. [next=auto]
+do wait(3)
+
 
 do VoicelineSystem.playvoiceline("Shadow")
-[center]The Shadow: [center][speed=0.3]But you are, John. And that is what matters.
+[center]The Shadow: [center][speed=0.3]But you are, John. [speed=0.4]And that's what matters.
 
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center][speed=0.3]Why...? Why did she kick me out?
+[center]John: [center][speed=0.35]Why...? Why did she kick me out?
 
 do VoicelineSystem.playvoiceline("Shadow")
-[center]The Shadow: [center][speed=0.3]You drowned her in promises you couldn't keep. Now you have come to a place of echoes to find her voice again.
+[center]The Shadow: [center][speed=0.3]You drowned her in promises you couldn't keep. [wait=0.5]Now you have come to a place of echoes to find her voice again.
 
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center][speed=0.3]The cabins... will she be there? Can I fix this?
+[center]John: [center][speed=0.3]The cabins... [wait=0.2]will she be there? [wait=1.0]Can I fix this?
 
 do VoicelineSystem.playvoiceline("Shadow")
-[center]The Shadow: [center][speed=0.3]The cabins hold what you deserve. They are just through the trees.
+[center]The Shadow: [center][speed=0.25]The cabins hold what you deserve. They are just through the trees.
 do VoicelineSystem.playvoiceline("Shadow")
-[center]The Shadow: [center][speed=0.3]Follow the signs. But know this... the woods are listening to your regrets.
+[center]The Shadow: [center][speed=0.3]Follow the signs. [wait=0.5]But know this... [wait=0.2]the woods are listening to your regrets.
 
 do VoicelineSystem.playvoiceline("John")
 [center]John: [center][speed=0.3]My mind's playing tricks on me...

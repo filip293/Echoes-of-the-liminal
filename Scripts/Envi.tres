@@ -13,6 +13,7 @@ background_mode = 2
 background_energy_multiplier = 0.1
 sky = SubResource("Sky_pi4wg")
 sdfgi_use_occlusion = true
+sdfgi_bounce_feedback = 1.0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.15
 volumetric_fog_emission = Color(0.237539, 0.237539, 0.237539, 1)
