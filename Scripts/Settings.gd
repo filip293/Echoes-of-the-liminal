@@ -50,6 +50,7 @@ func toggle_settings_menu():
 		}
 		SaveSystem.savedata(to_save)
 	else:
+		importsettings()
 		wrapper.visible = true
 
 	menu_open = !menu_open

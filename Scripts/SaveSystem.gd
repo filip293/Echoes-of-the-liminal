@@ -18,6 +18,7 @@ func _ready():
 	if FileAccess.file_exists(settingsfile):
 		var loadedsettings = FileAccess.open(settingsfile, FileAccess.READ)
 		var data = loadedsettings.get_var()
+		print(data)
 		post_effect.configuration.ChromaticAberration = data["CA_ENABLED"]
 		post_effect.configuration.Pixelate = data["PIX_ENABLED"]
 		if data["PIX_ENABLED"]:
@@ -33,6 +34,9 @@ func _ready():
 			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	
 	elif !FileAccess.file_exists(settingsfile):
+		print("Failed to open settings.cfg")
+		print("Starting game with following settings:")
+		print(defaultsettings)
 		var firstsave = FileAccess.open(settingsfile, FileAccess.WRITE)
 		firstsave.store_var(defaultsettings)
 		loaddefaults()
@@ -47,6 +51,8 @@ func getcurrentsettings():
 
 func savedata(newdata):
 	var settings = FileAccess.open(settingsfile, FileAccess.WRITE)
+	print("Saving settings:")
+	print(newdata)
 	settings.store_var(newdata)
 
 func loaddefaults():
