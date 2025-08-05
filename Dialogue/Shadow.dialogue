@@ -18,9 +18,9 @@ do VoicelineSystem.playvoiceline("John")
 [center]John: [center][speed=0.3]The cabins... [wait=0.2]will she be there? [wait=1.0]Can I fix this?
 
 do VoicelineSystem.playvoiceline("Shadow")
-[center]The Shadow: [center][speed=0.25]The cabins hold what you deserve. They are just through the trees.
+[center]The Shadow: [center][speed=0.25]The cabins hold what you deserve. [speed=0.3]They are just through the trees.
 do VoicelineSystem.playvoiceline("Shadow")
-[center]The Shadow: [center][speed=0.3]Follow the signs. [wait=0.5]But know this... [wait=0.2]the woods are listening to your regrets.
+[center]The Shadow: [center][speed=0.3]Follow the signs. [wait=0.6]But know this... [wait=0.1]the woods are listening to your regrets.
 
 do VoicelineSystem.playvoiceline("John")
 [center]John: [center][speed=0.3]My mind's playing tricks on me...

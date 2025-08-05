@@ -35,7 +35,7 @@ var footstep_sounds = dirt_footstep_sounds
 
 func _ready():
 	$/root/Node3D/Houses/house12/house1/Flicker.play("Flicker")
-	$/root/Node3D/Houses/house12/house1/house1_door1/Sway.play("Sway")
+	$/root/Node3D/Houses/house42/house4/house1_door1/Sway.play("Sway")
 	
 	
 	
