@@ -1,6 +1,7 @@
 extends Node
 
 @onready var BaseTime = $/root/Node3D/BaseTime
+@onready var CharaScript = $/root/Node3D/CharacterBody3D
 signal timeend
 signal movehead
 var playermoveallow: bool = false
@@ -26,6 +27,12 @@ var scenes = {
 
 var potatoSwing = true
 
+func showshadow() -> void:
+	$"/root/Node3D/Shadow/AnimationPlayer".play("FazeIn")
+	
+func campanim() -> void:
+	CharaScript.dissapearanim1()
+	
 func emitend(num) -> void:
 	if num == 1:
 		sc1corEND.emit()

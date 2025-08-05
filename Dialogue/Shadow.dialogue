@@ -4,7 +4,8 @@ do wait(0.7)
 [center]John: [center][speed=0.37]I know you're not really here. [next=auto]
 do wait(3)
 
-
+do Globals.showshadow()
+do wait(0.7)
 do VoicelineSystem.playvoiceline("Shadow")
 [center]The Shadow: [center][speed=0.3]But you are, John. [speed=0.4]And that's what matters.
 
@@ -20,7 +21,14 @@ do VoicelineSystem.playvoiceline("John")
 do VoicelineSystem.playvoiceline("Shadow")
 [center]The Shadow: [center][speed=0.25]The cabins hold what you deserve. [speed=0.3]They are just through the trees.
 do VoicelineSystem.playvoiceline("Shadow")
+<<<<<<< HEAD
 [center]The Shadow: [center][speed=0.3]Follow the signs. [wait=0.6]But know this... [wait=0.1]the woods are listening to your regrets.
+=======
+[center]The Shadow: [center][speed=0.3]Follow the signs. [wait=0.6]But know this... [wait=0.3]the woods are listening to your regrets.
+do Globals.campanim()
+
+do wait(6.0)
+>>>>>>> 66e483ccde6eddefcf638fc1444539e766bd21bf
 
 do VoicelineSystem.playvoiceline("John")
 [center]John: [center][speed=0.3]My mind's playing tricks on me...
