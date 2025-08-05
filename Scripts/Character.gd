@@ -35,16 +35,11 @@ var footstep_sounds = dirt_footstep_sounds
 
 func _ready():
 	$/root/Node3D/Houses/house12/house1/Flicker.play("Flicker")
-<<<<<<< HEAD
 	$/root/Node3D/Houses/house42/house4/house1_door1/Sway.play("Sway")
 	
-	
-	
-=======
-	$/root/Node3D/Houses/house12/house1/house1_door1/Sway.play("Sway")
->>>>>>> 66e483ccde6eddefcf638fc1444539e766bd21bf
 	await Globals.gamestart
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	$"../InstViewport/InteractTextWrapper".visible = true
 	Globals.mouse_sensitivity = 0.005
 	Globals.cameramoveallow = false
 	await Globals.calltime(4)

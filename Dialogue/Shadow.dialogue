@@ -10,10 +10,10 @@ do VoicelineSystem.playvoiceline("Shadow")
 [center]The Shadow: [center][speed=0.3]But you are, John. [speed=0.4]And that's what matters.
 
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center][speed=0.35]Why...? Why did she kick me out?
+[center]John: [center][speed=0.40]Why...? Why did she kick me out?
 
 do VoicelineSystem.playvoiceline("Shadow")
-[center]The Shadow: [center][speed=0.3]You drowned her in promises you couldn't keep. [wait=0.5]Now you have come to a place of echoes to find her voice again.
+[center]The Shadow: [center][speed=0.3]You drowned her in promises you couldn't keep. [wait=0.7]Now you have come to a place of echoes to find her voice again.
 
 do VoicelineSystem.playvoiceline("John")
 [center]John: [center][speed=0.3]The cabins... [wait=0.2]will she be there? [wait=1.0]Can I fix this?
@@ -21,14 +21,10 @@ do VoicelineSystem.playvoiceline("John")
 do VoicelineSystem.playvoiceline("Shadow")
 [center]The Shadow: [center][speed=0.25]The cabins hold what you deserve. [speed=0.3]They are just through the trees.
 do VoicelineSystem.playvoiceline("Shadow")
-<<<<<<< HEAD
-[center]The Shadow: [center][speed=0.3]Follow the signs. [wait=0.6]But know this... [wait=0.1]the woods are listening to your regrets.
-=======
-[center]The Shadow: [center][speed=0.3]Follow the signs. [wait=0.6]But know this... [wait=0.3]the woods are listening to your regrets.
+[center]The Shadow: [center][speed=0.3]Follow the signs. [wait=0.6]But know this... the woods are listening to your regrets.
 do Globals.campanim()
 
 do wait(6.0)
->>>>>>> 66e483ccde6eddefcf638fc1444539e766bd21bf
 
 do VoicelineSystem.playvoiceline("John")
 [center]John: [center][speed=0.3]My mind's playing tricks on me...

@@ -35,9 +35,6 @@ func _physics_process(delta: float) -> void:
 				if collider.has_method("get_interaction_node") and collider.has_method("get_offset"):
 					var item_node: Node3D = collider.get_interaction_node()
 					var offset: Vector3 = collider.get_offset()
-					#print("Interacting with:", collider)
-					#print("Moving node:", item_node)
-					#print("Offset:", offset)
 
 					if item_node:
 						handle_item_interaction(item_node, offset)
@@ -51,10 +48,25 @@ func _physics_process(delta: float) -> void:
 			var idex = collider.whoami()
 			label.text = "[E] To interact"
 			
+			if idex == "Open Door" and Input.is_action_just_pressed("Interact"):
+				var door = collider
+				var current_rotation = door.rotation
+				var target_rotation = current_rotation + Vector3(0, deg_to_rad(110), 0)
+				var tween = create_tween()
+				tween.tween_property(door, "rotation", target_rotation, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+				var collision_shape = door.find_child("CollisionShape3D")
+				if collision_shape:
+					collision_shape.disabled = true
+
+				var door_sound = door.find_child("DoorOpen")
+				if door_sound:
+					door_sound.play()
+			
 			# Door interaction example
 			if idex == "Open" and Input.is_action_just_pressed("Interact"):
-				var sway_anim = $"../../../../Houses/house12/house1/house1_door1/Sway"
-				var door = $"../../../../Houses/house12/house1/house1_door1"
+				var sway_anim = $/root/Node3D/Houses/house42/house4/house1_door1/Sway
+				var door = $"../../../../Houses/house42/house4/house1_door1"
 				var time_pos = sway_anim.current_animation_position
 				var sway_anim_data = sway_anim.get_animation("Sway")
 				var track_idx = sway_anim_data.find_track("rotation", Animation.TYPE_VALUE)
@@ -62,14 +74,14 @@ func _physics_process(delta: float) -> void:
 				if track_idx != -1:
 					current_rotation = sway_anim_data.track_interpolate(track_idx, time_pos)
 				sway_anim.stop()
-				$"../../../../Houses/house12/house1/house1_door1/StaticBody3D/DoorCreak".queue_free()
+				$"../../../../Houses/house42/house4/house1_door1/StaticBody3D/DoorCreak".queue_free()
 				door.rotation = current_rotation
-				var target_rotation = current_rotation + Vector3(0, deg_to_rad(160), 0)
+				var target_rotation = current_rotation + Vector3(0, deg_to_rad(110), 0)
 				var tween = create_tween()
 				tween.tween_property(door, "rotation", target_rotation, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-				$"../../../../Houses/house12/house1/house1_door1/StaticBody3D/DoorOpen".play()
-				$"../../../../Houses/house12/house1/house1_door1/StaticBody3D/CollisionShape3D".disabled = true
-				$"../../../../Houses/house12/house1/house1_door1/TempStay/TempReplace".disabled = false
+				$"../../../../Houses/house42/house4/house1_door1/StaticBody3D/DoorOpen".play()
+				$"../../../../Houses/house42/house4/house1_door1/StaticBody3D/CollisionShape3D".disabled = true
+				$"../../../../Houses/house42/house4/house1_door1/TempStay/TempReplace".disabled = false
 				
 			if idex == "Lantern" and Input.is_action_just_pressed("Interact"):
 				var lantern: Node3D = $"../../../../Lantern"
@@ -77,8 +89,8 @@ func _physics_process(delta: float) -> void:
 				var lantern_body = player.get_node("LanternBody")
 
 				Globals.playermoveallow = false
-				$"../../../../Houses/house12/house1/house1_door1".rotation_degrees = Vector3(0, 0, 0)
-				$"../../../../Houses/house12/house1/house1_door1/DoorShut".play()
+				$"../../../../Houses/house12/house1/StaticBody3D2".rotation_degrees = Vector3(0, 0, 0)
+				$"../../../../Houses/house12/house1/StaticBody3D2/house1_door1/DoorShut".play()
 				
 				$"../../../../Lantern/CollisionShape3D".disabled = true
 
@@ -101,9 +113,6 @@ func _physics_process(delta: float) -> void:
 				)
 				
 				Globals.playermoveallow = true
-				
-				
-
 				
 	else:
 		label.text = ""
