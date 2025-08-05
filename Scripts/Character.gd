@@ -39,6 +39,7 @@ func _ready():
 	
 	await Globals.gamestart
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Globals.showingcrosshair = true
 	$"../InstViewport/InteractTextWrapper".visible = true
 	Globals.mouse_sensitivity = 0.005
 	Globals.cameramoveallow = false
