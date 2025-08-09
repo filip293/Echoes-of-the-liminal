@@ -89,10 +89,10 @@ func _physics_process(delta: float) -> void:
 				var lantern_body = player.get_node("LanternBody")
 
 				Globals.playermoveallow = false
-				$"../../../../Houses/house12/house1/StaticBody3D2".rotation_degrees = Vector3(0, 0, 0)
-				$"../../../../Houses/house12/house1/StaticBody3D2/house1_door1/DoorShut".play()
-				
-				$"../../../../Lantern/CollisionShape3D".disabled = true
+				#$"../../../../Houses/house12/house1/StaticBody3D2".rotation_degrees = Vector3(0, 0, 0)
+				#$"../../../../Houses/house12/house1/StaticBody3D2/house1_door1/DoorShut".play()
+				#
+				#$"../../../../Lantern/CollisionShape3D".disabled = true
 
 				var offset = Vector3(0, 0.2, 0)
 				var target_transform = Transform3D(
@@ -108,8 +108,8 @@ func _physics_process(delta: float) -> void:
 					lantern.queue_free()
 					$"../../../LanternBody".visible = true
 					$"../../../LanternLight".visible = true
-					$"../../../../Ground/TreeScatter".visible = false
-					$"../../../../DirectionalLight3D".visible = false
+					#$"../../../../Ground/TreeScatter".visible = false
+					#$"../../../../DirectionalLight3D".visible = false
 				)
 				
 				Globals.playermoveallow = true
