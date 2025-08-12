@@ -10,6 +10,11 @@ var john_voicelines = [
 	preload("res://Voicelines/John/J2.mp3"),
 	preload("res://Voicelines/John/J3.mp3"),
 	preload("res://Voicelines/John/J4.mp3"),
+	preload("res://Voicelines/John/JMONO-VILL_1.mp3"),
+	preload("res://Voicelines/John/JMONO-VILL_2.mp3"),
+	preload("res://Voicelines/John/JMONO1_1.mp3"),
+	preload("res://Voicelines/John/JMONO1_2.mp3"),
+	preload("res://Voicelines/John/JMONO1_3.mp3")
 ]
 
 var shadow_voicelines = [
