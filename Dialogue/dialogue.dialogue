@@ -49,7 +49,9 @@ do VoicelineSystem.playvoiceline("John")
 do Globals.emit_signal("movehead")
 [center]John: [center]Feels like everyone just... evaporated. Where'd they go?
 => END
-~ SecondBellPart
-=> END
-~ LastPart
+
+~ Beer
+[center]John: [center]Heh. Old friend. I promised her I'd stop... so many promises. 
+[center]John: [center]I remember that night... she found my stash. The look on her face... she wasn't angry, she was... broken. 
+[center]John: [center]That was the first time I saw her cry because of me.
 => END

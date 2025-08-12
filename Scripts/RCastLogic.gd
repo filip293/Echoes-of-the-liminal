@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 
 		if collider and collider.specialcheck():
 			label.text = "[E] Examine " + collider.whoami()
-
+			
 			if Input.is_action_just_pressed("Interact"):
 				var it = collider.get_title()
 				var id = collider.get_description()
@@ -43,6 +43,16 @@ func _physics_process(delta: float) -> void:
 
 				Globals.in_screen = true
 				Globals.showingcrosshair = false
+				
+				var idex = collider.whoami()
+				if idex == "Beer" and Input.is_action_just_pressed("Interact"):
+					await Globals.calltime(0.5)
+					DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Beer")
+					await DialogueManager.dialogue_ended
+					await Globals.calltime(1.5)
+					$"../../../../Houses/house42/house4/house1_door1/Sway".play("Slam")
+					await Globals.calltime(0.5)
+					$"../../../../Houses/house42/house4/house1_door1/StaticBody3D/CollisionShape3D".disabled = false
 
 		elif collider and collider.has_method('whoami') and !collider.special:
 			var idex = collider.whoami()
@@ -74,7 +84,8 @@ func _physics_process(delta: float) -> void:
 				if track_idx != -1:
 					current_rotation = sway_anim_data.track_interpolate(track_idx, time_pos)
 				sway_anim.stop()
-				$"../../../../Houses/house42/house4/house1_door1/StaticBody3D/DoorCreak".queue_free()
+				if $"../../../../Houses/house42/house4/house1_door1/StaticBody3D/DoorCreak" != null:
+					$"../../../../Houses/house42/house4/house1_door1/StaticBody3D/DoorCreak".queue_free()
 				door.rotation = current_rotation
 				var target_rotation = current_rotation + Vector3(0, deg_to_rad(110), 0)
 				var tween = create_tween()
@@ -105,7 +116,8 @@ func _physics_process(delta: float) -> void:
 					.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 				tween.connect("finished", func():
-					lantern.queue_free()
+					if lantern != null:
+						lantern.queue_free()
 					$"../../../LanternBody".visible = true
 					$"../../../LanternLight".visible = true
 					Globals.playermoveallow = true
