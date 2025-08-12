@@ -9,6 +9,7 @@ var item_original_transforms: Dictionary = {} # path -> {position, rotation}
 var active_item: Node3D = null
 var item_active: bool = false
 var item_tween: Tween = null
+var first = true
 
 func _physics_process(delta: float) -> void:
 	if item_active and Globals.in_screen:
@@ -45,7 +46,7 @@ func _physics_process(delta: float) -> void:
 				Globals.showingcrosshair = false
 				
 				var idex = collider.whoami()
-				if idex == "Beer" and Input.is_action_just_pressed("Interact"):
+				if idex == "Beer" and Input.is_action_just_pressed("Interact") and first:
 					await Globals.calltime(0.5)
 					DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Beer")
 					await DialogueManager.dialogue_ended
@@ -53,6 +54,8 @@ func _physics_process(delta: float) -> void:
 					$"../../../../Houses/house42/house4/house1_door1/Sway".play("Slam")
 					await Globals.calltime(0.5)
 					$"../../../../Houses/house42/house4/house1_door1/StaticBody3D/CollisionShape3D".disabled = false
+					$"../../../../Houses/house42/house4/house1_door1/Sway".queue_free()
+					first = false
 
 		elif collider and collider.has_method('whoami') and !collider.special:
 			var idex = collider.whoami()
