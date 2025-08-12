@@ -188,8 +188,6 @@ func _Village_enter(body: Node3D) -> void:
 		DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "InVillage")
 		Globals.scenes["Village"] = true
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		Globals.playermoveallow = true
-		Globals.cameramoveallow = true
 
 func _House_Entered(body: Node3D) -> void:
 	if body is CharacterBody3D and body.name == "CharacterBody3D":

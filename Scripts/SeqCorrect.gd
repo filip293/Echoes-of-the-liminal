@@ -41,3 +41,5 @@ func _on_move_head():
 	tween = create_tween()
 	tween.tween_property(self, "rotation_degrees", head_look_origin, 0.5).set_trans(Tween.TRANS_SINE)
 	await tween.finished
+	Globals.playermoveallow = true
+	Globals.cameramoveallow = true

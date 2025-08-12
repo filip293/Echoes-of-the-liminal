@@ -108,11 +108,10 @@ func _physics_process(delta: float) -> void:
 					lantern.queue_free()
 					$"../../../LanternBody".visible = true
 					$"../../../LanternLight".visible = true
+					Globals.playermoveallow = true
 					#$"../../../../Ground/TreeScatter".visible = false
 					#$"../../../../DirectionalLight3D".visible = false
 				)
-				
-				Globals.playermoveallow = true
 				
 	else:
 		label.text = ""
