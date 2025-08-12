@@ -22,6 +22,8 @@ do VoicelineSystem.playvoiceline("Shadow")
 [center]The Shadow: [center][speed=0.25]The cabins hold what you deserve. [speed=0.3]They are just through the trees.
 do VoicelineSystem.playvoiceline("Shadow")
 [center]The Shadow: [center][speed=0.3]Follow the signs. [wait=0.6]But know this... the woods are listening to your regrets.
+if VoicelineSystem.ShadowVoice.is_playing():
+	do VoicelineSystem.ShadowVoice.stop()
 do Globals.campanim()
 
 do wait(6.0)
