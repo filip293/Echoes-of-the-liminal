@@ -54,7 +54,8 @@ func _physics_process(delta: float) -> void:
 					$"../../../../Houses/house42/house4/house1_door1/Sway".play("Slam")
 					await Globals.calltime(0.5)
 					$"../../../../Houses/house42/house4/house1_door1/StaticBody3D/CollisionShape3D".disabled = false
-					$"../../../../Houses/house42/house4/house1_door1/Sway".queue_free()
+					await Globals.calltime(0.3)
+					$"../../../../Houses/house42/house4/house1_door1/DoorShut".queue_free()
 					first = false
 
 		elif collider and collider.has_method('whoami') and !collider.special:
