@@ -66,7 +66,6 @@ func _on_gamma_changed(value):
 
 func _on_defaults_pressed() -> void:
 	SaveSystem.loaddefaults()
-	await Globals.settingsloaded
 	importsettings()
 	
 func _on_save_pressed() -> void:
