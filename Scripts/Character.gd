@@ -26,6 +26,7 @@ var playerinarea = false
 var monsterfollowing = false
 var walking = true
 
+var internaloverride = false
 var village_entered = false
 const FOOTSTEP_INTERVAL = 1.8 / SPEED
 
@@ -48,6 +49,16 @@ var wood_footstep_sounds = [
 
 var footstep_sounds = dirt_footstep_sounds
 
+func take_control():
+	internaloverride = true
+	actual_velocity = Vector2.ZERO
+	target_velocity = Vector2.ZERO
+	
+func release_control():
+	camera_rotation_deg.y = rad_to_deg(self.global_rotation.y)
+	camera_rotation_deg.x = rad_to_deg(neck.global_rotation.x)
+	internaloverride = false
+	
 func _ready():
 	$/root/Node3D/Houses/house12/house1/Flicker.play("Flicker")
 	$/root/Node3D/Houses/house42/house4/house1_door1/Sway.play("Sway")
@@ -55,6 +66,7 @@ func _ready():
 	await Globals.gamestart
 	camera_rotation_deg.y = rad_to_deg(self.rotation.y)
 	camera_rotation_deg.x = rad_to_deg(neck.rotation.x)
+	take_control()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Globals.showingcrosshair = true
 	$"../InstViewport/InteractTextWrapper".visible = true
@@ -71,8 +83,10 @@ func _ready():
 	$/root/Node3D/Shadow/AnimationPlayer.play("Sitting")
 	await DialogueManager.dialogue_ended
 	
+	release_control()
 	Globals.playermoveallow = true
 	Globals.cameramoveallow = true
+	
 	
 	Globals.mouse_sensitivity = 0.2
 
@@ -87,6 +101,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		target_velocity += event.relative
 		
 func _process(delta: float) -> void:
+	if internaloverride:
+		return
+		
 	if not Globals.cameramoveallow or Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 		target_velocity = Vector2.ZERO
 		actual_velocity = lerp(actual_velocity, Vector2.ZERO, friction * delta * 2.0)
@@ -204,9 +221,12 @@ func _cancel_follow(body: Node3D) -> void:
 
 func _Village_enter(body: Node3D) -> void:
 	if body is CharacterBody3D and body.name == "CharacterBody3D" and !Globals.scenes["Village"]:
+		take_control()
 		await Globals.sc1corEND
 		DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "InVillage")
 		Globals.scenes["Village"] = true
+		await Globals.sc1corEND
+		release_control()
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _House_Entered(body: Node3D) -> void:

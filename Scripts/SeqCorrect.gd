@@ -43,3 +43,5 @@ func _on_move_head():
 	await tween.finished
 	Globals.playermoveallow = true
 	Globals.cameramoveallow = true
+	
+	Globals.emitend(1)
