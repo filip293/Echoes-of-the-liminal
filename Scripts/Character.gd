@@ -1,5 +1,15 @@
 extends CharacterBody3D
 
+@export_group("Camera Physics")
+@export var acceleration: float = 10.0
+@export var friction: float = 5.0
+@export var rotation_sensitivity: float = 0.1
+
+@export_group("Rotation Clamps")
+@export var clamp_up_deg: float = 70.0
+@export var clamp_down_deg: float = -90.0
+
+
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera
 @onready var left_foot_audio := $LeftFootAudio
@@ -18,6 +28,11 @@ var walking = true
 
 var village_entered = false
 const FOOTSTEP_INTERVAL = 1.8 / SPEED
+
+var mouse_velocity := Vector2.ZERO
+var camera_rotation_deg := Vector2.ZERO
+var actual_velocity := Vector2.ZERO
+var target_velocity := Vector2.ZERO
 
 var dirt_footstep_sounds = [
 	preload("res://Sounds/Steps_dirt-001.ogg"),
@@ -38,6 +53,8 @@ func _ready():
 	$/root/Node3D/Houses/house42/house4/house1_door1/Sway.play("Sway")
 	
 	await Globals.gamestart
+	camera_rotation_deg.y = rad_to_deg(self.rotation.y)
+	camera_rotation_deg.x = rad_to_deg(neck.rotation.x)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Globals.showingcrosshair = true
 	$"../InstViewport/InteractTextWrapper".visible = true
@@ -64,8 +81,27 @@ func dissapearanim1() -> void:
 	await Globals.calltime(1)
 	$"../Shadow".visible = false
 	await Globals.calltime(1)
-	
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and Globals.cameramoveallow == true:
+		target_velocity += event.relative
+		
 func _process(delta: float) -> void:
+	if not Globals.cameramoveallow or Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+		target_velocity = Vector2.ZERO
+		actual_velocity = lerp(actual_velocity, Vector2.ZERO, friction * delta * 2.0)
+	else:
+		actual_velocity = lerp(actual_velocity, target_velocity * Globals.mouse_sensitivity, acceleration * delta)
+		target_velocity = lerp(target_velocity, Vector2.ZERO, friction * delta)
+
+	camera_rotation_deg.y -= actual_velocity.x * rotation_sensitivity * delta
+	camera_rotation_deg.x -= actual_velocity.y * rotation_sensitivity * delta
+	
+	camera_rotation_deg.x = clamp(camera_rotation_deg.x, clamp_down_deg, clamp_up_deg)
+	
+	self.rotation.y = deg_to_rad(camera_rotation_deg.y)
+	neck.rotation.x = deg_to_rad(camera_rotation_deg.x)
+		
 	if monsterfollowing and velocity.x == 0.0 and velocity.z == 0.0:
 		sec_footstep_timer = 0
 		
@@ -100,22 +136,6 @@ func _physics_process(delta: float) -> void:
 		walking = false
 
 	move_and_slide()
-
-	
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and Globals.cameramoveallow == true:
-		self.rotate_y(deg_to_rad(event.relative.x * Globals.mouse_sensitivity * -1))
-		
-		var camera_rot = neck.rotation_degrees
-		var rotation_to_apply_on_x_axis = (-event.relative.y * Globals.mouse_sensitivity);
-		
-		if (camera_rot.x + rotation_to_apply_on_x_axis < -90):
-			camera_rot.x = -90
-		elif (camera_rot.x + rotation_to_apply_on_x_axis > 70):
-			camera_rot.x = 70
-		else:
-			camera_rot.x += rotation_to_apply_on_x_axis;
-			neck.rotation_degrees = camera_rot
 
 func play_monster_following_footsteps():
 	if is_left_foot:
