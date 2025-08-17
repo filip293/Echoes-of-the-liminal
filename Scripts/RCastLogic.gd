@@ -4,6 +4,7 @@ extends RayCast3D
 @onready var SpecialInterAnim = $"../../../../InstViewport/SpecialInteraction/Animations"
 @onready var SpecialItemTitle = $"../../../../InstViewport/SpecialInteraction/ITWrapper/ItemTitle"
 @onready var SpecialItemDesc = $"../../../../InstViewport/SpecialInteraction/IDWrapper/ItemDesc"
+@onready var CharacterBody = $/root/Node3D/CharacterBody3D
 
 var item_original_transforms: Dictionary = {} # path -> {position, rotation}
 var active_item: Node3D = null
@@ -27,6 +28,7 @@ func _physics_process(delta: float) -> void:
 			label.text = "[E] Examine " + collider.whoami()
 			
 			if Input.is_action_just_pressed("Interact"):
+				CharacterBody.take_control()
 				var it = collider.get_title()
 				var id = collider.get_description()
 				SpecialItemTitle.text = it
@@ -191,6 +193,7 @@ func handle_item_interaction(item: Node3D, offset: Vector3) -> void:
 			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 		Globals.in_screen = false
+		CharacterBody.release_control()
 		Globals.playermoveallow = true
 		Globals.cameramoveallow = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

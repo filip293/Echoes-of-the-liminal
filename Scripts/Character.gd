@@ -70,7 +70,6 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Globals.showingcrosshair = true
 	$"../InstViewport/InteractTextWrapper".visible = true
-	Globals.mouse_sensitivity = 0.005
 	Globals.cameramoveallow = false
 	await Globals.calltime(4)
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/Shadow.dialogue"), "Shadow")
@@ -86,9 +85,6 @@ func _ready():
 	release_control()
 	Globals.playermoveallow = true
 	Globals.cameramoveallow = true
-	
-	
-	Globals.mouse_sensitivity = 0.2
 
 func dissapearanim1() -> void:
 	$"../Survival/bonfire/Fire3".play("FireBig")

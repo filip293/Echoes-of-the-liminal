@@ -9,7 +9,7 @@ var defaultsettings = {
 	"PIX_ENABLED" : true,
 	"VSYNC_ENABLED" : true,
 	"BRIGHTNESS" : 1.0,
-	"PLAYER_SENSITIVITY" : 0.6,
+	"PLAYER_SENSITIVITY" : 1.8,
 	"AUDIO_VOLUME" : 40
 }
 
@@ -60,7 +60,7 @@ func loaddefaults():
 	post_effect.configuration.Pixelate = true
 	post_effect.configuration.GrainPower = 60.0
 	player_cam.environment.tonemap_exposure = 1.0
-	Globals.mouse_sensitivity = 0.6
+	Globals.mouse_sensitivity = 1.8
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(40))
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	Globals.settingsloaded.emit()
