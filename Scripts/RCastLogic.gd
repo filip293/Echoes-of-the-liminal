@@ -6,11 +6,12 @@ extends RayCast3D
 @onready var SpecialItemDesc = $"../../../../InstViewport/SpecialInteraction/IDWrapper/ItemDesc"
 @onready var CharacterBody = $/root/Node3D/CharacterBody3D
 
-var item_original_transforms: Dictionary = {} # path -> {position, rotation}
+var item_original_transforms: Dictionary = {} # path -> Transform3D
 var active_item: Node3D = null
 var item_active: bool = false
 var item_tween: Tween = null
 var first = true
+var first2 = true
 
 func _physics_process(delta: float) -> void:
 	if item_active and Globals.in_screen:
@@ -59,6 +60,20 @@ func _physics_process(delta: float) -> void:
 					await Globals.calltime(0.3)
 					$"../../../../Houses/house42/house4/house1_door1/DoorShut".queue_free()
 					first = false
+					
+				if idex == "Locket" and Input.is_action_just_pressed("Interact") and $"../../../../Houses/house32/Locket/Locket2/AnimationPlayer".is_playing() == false:
+					await Globals.calltime(1)
+					$"../../../../Houses/house32/Locket/Locket2/Click".play()
+					$"../../../../Houses/house32/Locket/Locket2/AnimationPlayer".set_speed_scale(2.0)
+					$"../../../../Houses/house32/Locket/Locket2/AnimationPlayer".play("Armature|ArmatureAction")
+					
+					await Globals.calltime(1)
+					if first2:
+						DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Locket")
+						first2 = false
+					await Globals.calltime(1.5)
+					$"../../../../Houses/house32/Locket/Locket2/AnimationPlayer".pause()
+
 
 		elif collider and collider.has_method('whoami') and !collider.special:
 			var idex = collider.whoami()
@@ -79,7 +94,6 @@ func _physics_process(delta: float) -> void:
 				if door_sound:
 					door_sound.play()
 			
-			# Door interaction example
 			if idex == "Open" and Input.is_action_just_pressed("Interact"):
 				var sway_anim = $/root/Node3D/Houses/house42/house4/house1_door1/Sway
 				var door = $"../../../../Houses/house42/house4/house1_door1"
@@ -106,10 +120,6 @@ func _physics_process(delta: float) -> void:
 				var lantern_body = player.get_node("LanternBody")
 
 				Globals.playermoveallow = false
-				#$"../../../../Houses/house12/house1/StaticBody3D2".rotation_degrees = Vector3(0, 0, 0)
-				#$"../../../../Houses/house12/house1/StaticBody3D2/house1_door1/DoorShut".play()
-				#
-				#$"../../../../Lantern/CollisionShape3D".disabled = true
 
 				var offset = Vector3(0, 0.2, 0)
 				var target_transform = Transform3D(
@@ -127,8 +137,6 @@ func _physics_process(delta: float) -> void:
 					$"../../../LanternBody".visible = true
 					$"../../../LanternLight".visible = true
 					Globals.playermoveallow = true
-					#$"../../../../Ground/TreeScatter".visible = false
-					#$"../../../../DirectionalLight3D".visible = false
 				)
 				
 	else:
@@ -137,11 +145,9 @@ func _physics_process(delta: float) -> void:
 func handle_item_interaction(item: Node3D, offset: Vector3) -> void:
 	var path_str := str(item.get_path())
 
+	# Save the full transform instead of separate pos/rot
 	if !item_original_transforms.has(path_str):
-		item_original_transforms[path_str] = {
-			"position": item.global_transform.origin,
-			"rotation": item.rotation_degrees
-		}
+		item_original_transforms[path_str] = item.global_transform
 
 	if !item_active:
 		var player = get_tree().get_root().get_node("Node3D/CharacterBody3D")
@@ -177,16 +183,8 @@ func handle_item_interaction(item: Node3D, offset: Vector3) -> void:
 				item_active = true
 
 	elif item_active and active_item == item:
-		var orig = item_original_transforms[path_str]
-		var orig_rot: Vector3 = orig["rotation"]
-		var orig_pos: Vector3 = orig["position"]
-
-		var original_basis = Basis().rotated(Vector3(1, 0, 0), deg_to_rad(orig_rot.x))
-		original_basis = original_basis.rotated(Vector3(0, 1, 0), deg_to_rad(orig_rot.y))
-		original_basis = original_basis.rotated(Vector3(0, 0, 1), deg_to_rad(orig_rot.z))
-		original_basis = original_basis.scaled(item.global_transform.basis.get_scale())
-
-		var original_transform = Transform3D(original_basis, orig_pos)
+		# Restore the saved original transform directly
+		var original_transform: Transform3D = item_original_transforms[path_str]
 
 		item_tween = create_tween()
 		item_tween.tween_property(item, "global_transform", original_transform, 1.0)\
@@ -202,6 +200,11 @@ func handle_item_interaction(item: Node3D, offset: Vector3) -> void:
 		var collider_shape = item.find_child("CollisionShape3D", true, false)
 		if collider_shape:
 			collider_shape.disabled = false
+			
+		if active_item.get_path() == $"../../../../Houses/house32/Locket".get_path():
+			$"../../../../Houses/house32/Locket/Locket2/AnimationPlayer".set_speed_scale(2.0)
+			$"../../../../Houses/house32/Locket/Locket2/AnimationPlayer".play("Armature|ArmatureAction")
+
 
 		active_item = null
 		item_active = false

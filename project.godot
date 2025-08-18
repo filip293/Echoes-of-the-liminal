@@ -19,7 +19,7 @@ config/icon="uid://ddcmasre7agox"
 [autoload]
 
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-Globals="*res://Scripts/Globals.gd"
+Globals="*res://Globals.gd"
 VoicelineSystem="*res://Scripts/VoicelineSystem.gd"
 SaveSystem="*res://Scripts/SaveSystem.gd"
 

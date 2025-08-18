@@ -19,3 +19,9 @@ do VoicelineSystem.playvoiceline("John")
 if VoicelineSystem.PlayerVoice.is_playing():
 	do VoicelineSystem.PlayerVoice.stop()
 => END
+
+~ Locket
+[center]John: [center]This was her grandmother's. She never took it off. Said it was her lucky charm... 
+[center]John: [center]Where is it, Sarah? Did you throw it away? Or did you just... leave it behind... 
+[center]John: [center]like you left me?
+=> END
