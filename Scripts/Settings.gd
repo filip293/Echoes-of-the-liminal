@@ -20,6 +20,18 @@ var lastinputstate
 var menu_open = false
 
 var fps_steps = [30, 60, 75, 100, 120, 144, 165, 180, 240, 0]
+func find_closest_fps(target_rate):
+	var smallest_difference = INF
+	var closest_value = fps_steps[0]
+	
+	for step_value in fps_steps:
+		var current_difference = abs(step_value - target_rate)
+		if current_difference < smallest_difference:
+			smallest_difference = current_difference
+			closest_value = step_value
+	
+	return closest_value
+	
 var windowmode = {
 	4: 0, #If DisplayServer reports Ex. Fullscreen, select idx 0
 	3: 1, #If DisplayServer reports Fullscreen, select idx 1
@@ -36,14 +48,18 @@ func importsettings() -> void:
 	gamma_slider.value = player_cam.environment.tonemap_exposure
 	sensitivity_slider.value = Globals.mouse_sensitivity
 	volume_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
+	fps_slider.value = fps_steps.find(find_closest_fps(Engine.max_fps))
 	if DisplayServer.window_get_vsync_mode() == DisplayServer.VSYNC_ENABLED:
 		vsync_check.button_pressed = true
 		fps_slider.editable = false
+		$SettingsLayer/Background/FPSLimit/Disclaimer.visible = true
+		fps_current.add_theme_color_override("font_color", String("#a5a5a5"))
 	elif DisplayServer.window_get_vsync_mode() == DisplayServer.VSYNC_DISABLED:
 		vsync_check.button_pressed = false
 		fps_slider.editable = true
+		$SettingsLayer/Background/FPSLimit/Disclaimer.visible = false
+		fps_current.add_theme_color_override("font_color", String("#ffffff"))
 	mode_select.select(windowmode[DisplayServer.window_get_mode()])
-	fps_slider.value = fps_steps.find(Engine.max_fps)
 	
 func _process(delta):
 	if Input.is_action_just_pressed("ESC") and Globals.startedgame and menu_open:
@@ -103,11 +119,13 @@ func _on_save_pressed() -> void:
 func _on_v_sync_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+		fps_slider.value = fps_steps.find(find_closest_fps(DisplayServer.screen_get_refresh_rate()))
 		fps_slider.editable = false
 		fps_current.add_theme_color_override("font_color", String("#a5a5a5"))
 		$SettingsLayer/Background/FPSLimit/Disclaimer.visible = true
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+		Engine.max_fps = fps_steps[fps_slider.value]
 		fps_slider.editable = true
 		fps_current.add_theme_color_override("font_color", String("#ffffff"))
 		$SettingsLayer/Background/FPSLimit/Disclaimer.visible = false
