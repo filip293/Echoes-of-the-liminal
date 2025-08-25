@@ -62,7 +62,7 @@ func release_control():
 func _ready():
 	$/root/Node3D/Houses/house12/house1/Flicker.play("Flicker")
 	$/root/Node3D/Houses/house42/house4/house1_door1/Sway.play("Sway")
-	
+
 	await Globals.gamestart
 	camera_rotation_deg.y = rad_to_deg(self.rotation.y)
 	camera_rotation_deg.x = rad_to_deg(neck.rotation.x)

@@ -10,7 +10,9 @@ var defaultsettings = {
 	"VSYNC_ENABLED" : true,
 	"BRIGHTNESS" : 1.0,
 	"PLAYER_SENSITIVITY" : 1.8,
-	"AUDIO_VOLUME" : 40
+	"AUDIO_VOLUME" : 40,
+	"WINDOW_MODE" : 4,
+	"FPS_LIMIT" : 60
 }
 
 func _ready():
@@ -28,11 +30,14 @@ func _ready():
 		player_cam.environment.tonemap_exposure = data["BRIGHTNESS"]
 		Globals.mouse_sensitivity = data["PLAYER_SENSITIVITY"]
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(data["AUDIO_VOLUME"]))
+		DisplayServer.window_set_mode(data["WINDOW_MODE"])
 		if data["VSYNC_ENABLED"] == true:
 			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+			Engine.max_fps = DisplayServer.screen_get_refresh_rate()
 		elif data["VSYNC_ENABLED"] == false:
 			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-	
+			Engine.max_fps = data["FPS_LIMIT"]
+		
 	elif !FileAccess.file_exists(settingsfile):
 		print("Failed to open settings.cfg")
 		print("Starting game with following settings:")
@@ -62,5 +67,7 @@ func loaddefaults():
 	player_cam.environment.tonemap_exposure = 1.0
 	Globals.mouse_sensitivity = 1.8
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(40))
+	DisplayServer.window_set_mode(4)
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	Engine.max_fps = DisplayServer.screen_get_refresh_rate()
 	Globals.settingsloaded.emit()
