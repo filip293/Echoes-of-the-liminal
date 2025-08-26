@@ -20,6 +20,7 @@ var lastinputstate
 var menu_open = false
 
 var fps_steps = [30, 60, 75, 100, 120, 144, 165, 180, 240, 0]
+var preferredfps
 func find_closest_fps(target_rate):
 	var smallest_difference = INF
 	var closest_value = fps_steps[0]
@@ -48,14 +49,16 @@ func importsettings() -> void:
 	gamma_slider.value = player_cam.environment.tonemap_exposure
 	sensitivity_slider.value = Globals.mouse_sensitivity
 	volume_slider.value = db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
-	fps_slider.value = fps_steps.find(find_closest_fps(Engine.max_fps))
+	preferredfps = SaveSystem.get_user_preferred_fps()
 	if DisplayServer.window_get_vsync_mode() == DisplayServer.VSYNC_ENABLED:
 		vsync_check.button_pressed = true
+		fps_slider.value = fps_steps.find(find_closest_fps(DisplayServer.screen_get_refresh_rate()))
 		fps_slider.editable = false
 		$SettingsLayer/Background/FPSLimit/Disclaimer.visible = true
 		fps_current.add_theme_color_override("font_color", String("#a5a5a5"))
 	elif DisplayServer.window_get_vsync_mode() == DisplayServer.VSYNC_DISABLED:
 		vsync_check.button_pressed = false
+		fps_slider.value = fps_steps.find(preferredfps)
 		fps_slider.editable = true
 		$SettingsLayer/Background/FPSLimit/Disclaimer.visible = false
 		fps_current.add_theme_color_override("font_color", String("#ffffff"))
@@ -80,7 +83,7 @@ func toggle_settings_menu():
 			"PLAYER_SENSITIVITY" : sensitivity_slider.value,
 			"AUDIO_VOLUME" : volume_slider.value,
 			"WINDOW_MODE" : mode_select.get_selected_id(),
-			"FPS_LIMIT": fps_steps[fps_slider.value]
+			"FPS_LIMIT": preferredfps
 		}
 		SaveSystem.savedata(to_save)
 	else:
@@ -111,7 +114,7 @@ func _on_save_pressed() -> void:
 		"PLAYER_SENSITIVITY" : sensitivity_slider.value,
 		"AUDIO_VOLUME" : volume_slider.value,
 		"WINDOW_MODE" : mode_select.get_selected_id(),
-		"FPS_LIMIT" : fps_steps[fps_slider.value],
+		"FPS_LIMIT" : preferredfps
 	}
 	SaveSystem.savedata(to_save)
 	toggle_settings_menu()
@@ -119,14 +122,16 @@ func _on_save_pressed() -> void:
 func _on_v_sync_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
-		fps_slider.value = fps_steps.find(find_closest_fps(DisplayServer.screen_get_refresh_rate()))
+		Engine.max_fps = 0
+		fps_slider.value = 9
 		fps_slider.editable = false
 		fps_current.add_theme_color_override("font_color", String("#a5a5a5"))
 		$SettingsLayer/Background/FPSLimit/Disclaimer.visible = true
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-		Engine.max_fps = fps_steps[fps_slider.value]
+		Engine.max_fps = preferredfps
 		fps_slider.editable = true
+		fps_slider.value = fps_steps.find(preferredfps)
 		fps_current.add_theme_color_override("font_color", String("#ffffff"))
 		$SettingsLayer/Background/FPSLimit/Disclaimer.visible = false
 		
@@ -152,7 +157,8 @@ func _on_option_button_item_selected(index: int) -> void:
 
 func _on_fps_value_changed(value: float) -> void:
 	var selected_fps = fps_steps[int(value)]
-	
+	if DisplayServer.window_get_vsync_mode() == DisplayServer.VSyncMode.VSYNC_DISABLED:
+		preferredfps = selected_fps
 	if selected_fps == 0:
 		fps_current.text = "Unlimited"
 		Engine.max_fps = 0

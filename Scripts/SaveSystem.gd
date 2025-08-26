@@ -3,6 +3,7 @@ extends Node2D
 @onready var post_effect = $/root/Node3D/PostProcess
 @onready var player_cam = $/root/Node3D/CharacterBody3D/Neck/Camera
 
+var userpreferredfps
 var settingsfile = "user://settings.cfg"
 var defaultsettings = {
 	"CA_ENABLED" : true,
@@ -20,7 +21,6 @@ func _ready():
 	if FileAccess.file_exists(settingsfile):
 		var loadedsettings = FileAccess.open(settingsfile, FileAccess.READ)
 		var data = loadedsettings.get_var()
-		print(data)
 		post_effect.configuration.ChromaticAberration = data["CA_ENABLED"]
 		post_effect.configuration.Pixelate = data["PIX_ENABLED"]
 		if data["PIX_ENABLED"]:
@@ -33,15 +33,14 @@ func _ready():
 		DisplayServer.window_set_mode(data["WINDOW_MODE"])
 		if data["VSYNC_ENABLED"] == true:
 			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
-			Engine.max_fps = DisplayServer.screen_get_refresh_rate()
+			userpreferredfps = data["FPS_LIMIT"]
+			Engine.max_fps = 0
 		elif data["VSYNC_ENABLED"] == false:
 			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-			Engine.max_fps = data["FPS_LIMIT"]
+			userpreferredfps = data["FPS_LIMIT"]
+			Engine.max_fps = userpreferredfps
 		
 	elif !FileAccess.file_exists(settingsfile):
-		print("Failed to open settings.cfg")
-		print("Starting game with following settings:")
-		print(defaultsettings)
 		var firstsave = FileAccess.open(settingsfile, FileAccess.WRITE)
 		firstsave.store_var(defaultsettings)
 		loaddefaults()
@@ -56,9 +55,8 @@ func getcurrentsettings():
 
 func savedata(newdata):
 	var settings = FileAccess.open(settingsfile, FileAccess.WRITE)
-	print("Saving settings:")
-	print(newdata)
 	settings.store_var(newdata)
+	userpreferredfps = newdata["FPS_LIMIT"]
 
 func loaddefaults():
 	post_effect.configuration.ChromaticAberration = true
@@ -69,5 +67,10 @@ func loaddefaults():
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(40))
 	DisplayServer.window_set_mode(4)
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
-	Engine.max_fps = DisplayServer.screen_get_refresh_rate()
+	Engine.max_fps = 0
+	userpreferredfps = 60
 	Globals.settingsloaded.emit()
+
+func get_user_preferred_fps():
+	return userpreferredfps
+			
