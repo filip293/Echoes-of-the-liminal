@@ -21,17 +21,6 @@ var menu_open = false
 
 var fps_steps = [30, 60, 75, 100, 120, 144, 165, 180, 240, 0]
 var preferredfps
-func find_closest_fps(target_rate):
-	var smallest_difference = INF
-	var closest_value = fps_steps[0]
-	
-	for step_value in fps_steps:
-		var current_difference = abs(step_value - target_rate)
-		if current_difference < smallest_difference:
-			smallest_difference = current_difference
-			closest_value = step_value
-	
-	return closest_value
 	
 var windowmode = {
 	4: 0, #If DisplayServer reports Ex. Fullscreen, select idx 0
@@ -52,13 +41,13 @@ func importsettings() -> void:
 	preferredfps = SaveSystem.get_user_preferred_fps()
 	if DisplayServer.window_get_vsync_mode() == DisplayServer.VSYNC_ENABLED:
 		vsync_check.button_pressed = true
-		fps_slider.value = fps_steps.find(find_closest_fps(DisplayServer.screen_get_refresh_rate()))
+		fps_slider.value = 9
 		fps_slider.editable = false
 		$SettingsLayer/Background/FPSLimit/Disclaimer.visible = true
 		fps_current.add_theme_color_override("font_color", String("#a5a5a5"))
 	elif DisplayServer.window_get_vsync_mode() == DisplayServer.VSYNC_DISABLED:
 		vsync_check.button_pressed = false
-		fps_slider.value = fps_steps.find(preferredfps)
+		fps_slider.value = fps_steps.find(int(preferredfps))
 		fps_slider.editable = true
 		$SettingsLayer/Background/FPSLimit/Disclaimer.visible = false
 		fps_current.add_theme_color_override("font_color", String("#ffffff"))

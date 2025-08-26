@@ -13,7 +13,7 @@ var defaultsettings = {
 	"PLAYER_SENSITIVITY" : 1.8,
 	"AUDIO_VOLUME" : 40,
 	"WINDOW_MODE" : 4,
-	"FPS_LIMIT" : 60
+	"FPS_LIMIT" : 0
 }
 
 func _ready():
@@ -68,7 +68,7 @@ func loaddefaults():
 	DisplayServer.window_set_mode(4)
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	Engine.max_fps = 0
-	userpreferredfps = 60
+	userpreferredfps = 0
 	Globals.settingsloaded.emit()
 
 func get_user_preferred_fps():
