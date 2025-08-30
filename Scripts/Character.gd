@@ -117,11 +117,12 @@ func dissapearanim1() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and Globals.cameramoveallow == true:
 		target_velocity += event.relative
-		
-func _process(delta: float) -> void:
+
+func _physics_process(delta: float) -> void:
 	if internaloverride:
 		return
-		
+
+	# Camera rotation logic moved here
 	if not Globals.cameramoveallow or Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 		target_velocity = Vector2.ZERO
 		actual_velocity = lerp(actual_velocity, Vector2.ZERO, friction * delta * 2.0)
@@ -129,25 +130,14 @@ func _process(delta: float) -> void:
 		actual_velocity = lerp(actual_velocity, target_velocity * Globals.mouse_sensitivity, acceleration * delta)
 		target_velocity = lerp(target_velocity, Vector2.ZERO, friction * delta)
 
-	camera_rotation_deg.y -= actual_velocity.x * rotation_sensitivity * delta
-	camera_rotation_deg.x -= actual_velocity.y * rotation_sensitivity * delta
+	camera_rotation_deg.y -= actual_velocity.x * rotation_sensitivity
+	camera_rotation_deg.x -= actual_velocity.y * rotation_sensitivity
 	
 	camera_rotation_deg.x = clamp(camera_rotation_deg.x, clamp_down_deg, clamp_up_deg)
 	
 	self.rotation.y = deg_to_rad(camera_rotation_deg.y)
 	neck.rotation.x = deg_to_rad(camera_rotation_deg.x)
 		
-	if monsterfollowing and velocity.x == 0.0 and velocity.z == 0.0:
-		sec_footstep_timer = 0
-		
-	if monsterfollowing and (velocity.x != 0.0 or velocity.z != 0.0):
-		sec_footstep_timer += delta
-		var footstep_inter = 1.8 / walk_speed
-		if sec_footstep_timer >= footstep_inter + 0.78:
-			sec_footstep_timer = 0
-			play_monster_following_footsteps()
-		
-func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= delta * ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -202,6 +192,16 @@ func _physics_process(delta: float) -> void:
 	else:
 		stamina_bar.visible = false
 
+	if monsterfollowing and velocity.x == 0.0 and velocity.z == 0.0:
+		sec_footstep_timer = 0
+		
+	if monsterfollowing and (velocity.x != 0.0 or velocity.z != 0.0):
+		sec_footstep_timer += delta
+		var footstep_inter = 1.8 / walk_speed
+		if sec_footstep_timer >= footstep_inter + 0.78:
+			sec_footstep_timer = 0
+			play_monster_following_footsteps()
+			
 	move_and_slide()
 
 func _headbob(time: float) -> Vector3:
