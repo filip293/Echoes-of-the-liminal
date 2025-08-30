@@ -97,9 +97,9 @@ func _ready():
 	$"../InstViewport/InteractTextWrapper".visible = true
 	Globals.cameramoveallow = false
 	$Animations.play("RESET")
+	await Globals.calltime(4)
 	$"../Nigger/Black".visible = false
 	$"../Nigger".visible = false
-	await Globals.calltime(4)
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/Shadow.dialogue"), "Shadow")
 	await Globals.calltime(1.2)
 	$Animations.play("Look_Up")
