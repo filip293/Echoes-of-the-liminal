@@ -1,9 +1,9 @@
 ~ InVillage
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center]Weird... not even a breeze.
+[center]John: [center][speed=0.3]Weird... not even a breeze.
 do Globals.emit_signal("movehead")
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center]Feels like everyone just... evaporated. Where'd they go?
+[center]John: [center][speed=0.3]Feels like everyone just... evaporated. [wait=0.5]Where'd they go?
 if VoicelineSystem.PlayerVoice.is_playing():
 	do VoicelineSystem.PlayerVoice.stop()
 	
@@ -11,17 +11,17 @@ if VoicelineSystem.PlayerVoice.is_playing():
 
 ~ Beer
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center]Heh. Old friend. I promised her I'd stop...
+[center]John: [center][speed=0.2]Heh. Old friend. [wait=0.3]I promised her I'd stop...
 do VoicelineSystem.playvoiceline("John")
-[center]John: [center]I remember that night... she found my stash. The look on her face... she wasn't angry, she was... broken.
+[center]John: [center][speed=0.3]I remember that night... she found my stash. [wait=0.5]The look on her face... she wasn't angry, [wait=0.5]she was... broken.
 do VoicelineSystem.playvoiceline("John") 
-[center]John: [center]That was the first time I saw her cry because of me.
+[center]John: [center][speed=0.3]That was the first time I saw her cry [wait=0.3]because of me.
 if VoicelineSystem.PlayerVoice.is_playing():
 	do VoicelineSystem.PlayerVoice.stop()
 => END
 
 ~ Locket
-[center]John: [center]This was her grandmother's. She never took it off. Said it was her lucky charm... 
-[center]John: [center]Where is it, Sarah? Did you throw it away? Or did you just... leave it behind... 
-[center]John: [center]like you left me?
+[center]John: [center][speed=0.3]This was her grandmother's. She never took it off. Said it was her lucky charm... 
+[center]John: [center][speed=0.3]Where is it, Sarah? Did you throw it away? Or did you just... leave it behind... 
+[center]John: [center][speed=0.2]like you left me?
 => END

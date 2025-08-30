@@ -120,6 +120,7 @@ func _physics_process(delta: float) -> void:
 				var lantern_body = player.get_node("LanternBody")
 
 				Globals.playermoveallow = false
+				Globals.cameramoveallow = false
 
 				var offset = Vector3(0, 0.2, 0)
 				var target_transform = Transform3D(
@@ -137,6 +138,7 @@ func _physics_process(delta: float) -> void:
 					$"../../../LanternBody".visible = true
 					$"../../../LanternLight".visible = true
 					Globals.playermoveallow = true
+					Globals.cameramoveallow = true
 				)
 				
 	else:
