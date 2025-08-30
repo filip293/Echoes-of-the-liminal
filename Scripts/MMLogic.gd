@@ -26,9 +26,13 @@ func _on_start_new_pressed() -> void:
 	get_tree().paused = false
 	$Music.stop()
 	Globals.startedgame = true
-	Globals.gamestart.emit()
+	$"../Nigger/Black2".play("Black")
 	$MainLayer.visible = false
+	await Globals.calltime(1)
+	$"../Nigger/Black2".play_backwards("Black")
+	Globals.gamestart.emit()
 	PlayerCam.current = true
+	await Globals.calltime(1.1)
 	FireplaceEmitter.volume_db = -17.0
 
 func _on_settings_pressed() -> void:

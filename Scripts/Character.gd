@@ -96,6 +96,9 @@ func _ready():
 	Globals.showingcrosshair = true
 	$"../InstViewport/InteractTextWrapper".visible = true
 	Globals.cameramoveallow = false
+	$Animations.play("RESET")
+	$"../Nigger/Black".visible = false
+	$"../Nigger".visible = false
 	await Globals.calltime(4)
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/Shadow.dialogue"), "Shadow")
 	await Globals.calltime(1.2)
@@ -103,7 +106,6 @@ func _ready():
 	await Globals.calltime(6)
 	$/root/Node3D/Shadow/AnimationPlayer.play("Sitting")
 	await DialogueManager.dialogue_ended
-	
 	release_control()
 	Globals.playermoveallow = true
 	Globals.cameramoveallow = true
