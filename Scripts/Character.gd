@@ -130,8 +130,8 @@ func _physics_process(delta: float) -> void:
 		actual_velocity = lerp(actual_velocity, target_velocity * Globals.mouse_sensitivity, acceleration * delta)
 		target_velocity = lerp(target_velocity, Vector2.ZERO, friction * delta)
 
-	camera_rotation_deg.y -= actual_velocity.x * rotation_sensitivity
-	camera_rotation_deg.x -= actual_velocity.y * rotation_sensitivity
+	camera_rotation_deg.y -= actual_velocity.x * rotation_sensitivity * 0.001667
+	camera_rotation_deg.x -= actual_velocity.y * rotation_sensitivity * 0.001667
 	
 	camera_rotation_deg.x = clamp(camera_rotation_deg.x, clamp_down_deg, clamp_up_deg)
 	
