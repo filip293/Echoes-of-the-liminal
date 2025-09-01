@@ -112,5 +112,6 @@ common/max_physics_steps_per_frame=32
 
 [rendering]
 
+textures/vram_compression/import_etc2_astc=true
 shading/overrides/force_lambert_over_burley.mobile=false
 limits/global_shader_variables/buffer_size=131072
