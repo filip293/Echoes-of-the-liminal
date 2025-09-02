@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://lgelu17ay4ii"
 path.s3tc="res://.godot/imported/Shadow_LightSkin.png-af8539ad48234dd2a398b1f9b00d630d.s3tc.ctex"
+path.etc2="res://.godot/imported/Shadow_LightSkin.png-af8539ad48234dd2a398b1f9b00d630d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Characters/Shadow_LightSkin.png"
-dest_files=["res://.godot/imported/Shadow_LightSkin.png-af8539ad48234dd2a398b1f9b00d630d.s3tc.ctex"]
+dest_files=["res://.godot/imported/Shadow_LightSkin.png-af8539ad48234dd2a398b1f9b00d630d.s3tc.ctex", "res://.godot/imported/Shadow_LightSkin.png-af8539ad48234dd2a398b1f9b00d630d.etc2.ctex"]
 
 [params]
 

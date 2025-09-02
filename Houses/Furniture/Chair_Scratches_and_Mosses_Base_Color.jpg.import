@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0q18cuvrl4a7"
 path.s3tc="res://.godot/imported/Chair_Scratches_and_Mosses_Base_Color.jpg-31dd00471b1aa7745a7486ed9f2c238e.s3tc.ctex"
+path.etc2="res://.godot/imported/Chair_Scratches_and_Mosses_Base_Color.jpg-31dd00471b1aa7745a7486ed9f2c238e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Houses/Furniture/Chair_Scratches_and_Mosses_Base_Color.jpg"
-dest_files=["res://.godot/imported/Chair_Scratches_and_Mosses_Base_Color.jpg-31dd00471b1aa7745a7486ed9f2c238e.s3tc.ctex"]
+dest_files=["res://.godot/imported/Chair_Scratches_and_Mosses_Base_Color.jpg-31dd00471b1aa7745a7486ed9f2c238e.s3tc.ctex", "res://.godot/imported/Chair_Scratches_and_Mosses_Base_Color.jpg-31dd00471b1aa7745a7486ed9f2c238e.etc2.ctex"]
 
 [params]
 

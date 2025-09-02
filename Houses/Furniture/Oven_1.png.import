@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://duf7je1cqg8te"
 path.s3tc="res://.godot/imported/Oven_1.png-2ff0af60448af1b9fed839031f414b6b.s3tc.ctex"
+path.etc2="res://.godot/imported/Oven_1.png-2ff0af60448af1b9fed839031f414b6b.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Houses/Furniture/Oven_1.png"
-dest_files=["res://.godot/imported/Oven_1.png-2ff0af60448af1b9fed839031f414b6b.s3tc.ctex"]
+dest_files=["res://.godot/imported/Oven_1.png-2ff0af60448af1b9fed839031f414b6b.s3tc.ctex", "res://.godot/imported/Oven_1.png-2ff0af60448af1b9fed839031f414b6b.etc2.ctex"]
 
 [params]
 

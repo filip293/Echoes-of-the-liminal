@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cry5akihspaoo"
 path.s3tc="res://.godot/imported/match.png-8f4c96fe2da1b57566e0810dd5e8168f.s3tc.ctex"
+path.etc2="res://.godot/imported/match.png-8f4c96fe2da1b57566e0810dd5e8168f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Survive/match.png"
-dest_files=["res://.godot/imported/match.png-8f4c96fe2da1b57566e0810dd5e8168f.s3tc.ctex"]
+dest_files=["res://.godot/imported/match.png-8f4c96fe2da1b57566e0810dd5e8168f.s3tc.ctex", "res://.godot/imported/match.png-8f4c96fe2da1b57566e0810dd5e8168f.etc2.ctex"]
 
 [params]
 

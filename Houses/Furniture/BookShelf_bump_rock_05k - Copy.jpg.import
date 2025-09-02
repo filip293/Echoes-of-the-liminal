@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bqv8c68t5aerc"
 path.s3tc="res://.godot/imported/BookShelf_bump_rock_05k - Copy.jpg-cc9d6a7fe9dbab2e3fcd76dabcc6b4b4.s3tc.ctex"
+path.etc2="res://.godot/imported/BookShelf_bump_rock_05k - Copy.jpg-cc9d6a7fe9dbab2e3fcd76dabcc6b4b4.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Houses/Furniture/BookShelf_bump_rock_05k - Copy.jpg"
-dest_files=["res://.godot/imported/BookShelf_bump_rock_05k - Copy.jpg-cc9d6a7fe9dbab2e3fcd76dabcc6b4b4.s3tc.ctex"]
+dest_files=["res://.godot/imported/BookShelf_bump_rock_05k - Copy.jpg-cc9d6a7fe9dbab2e3fcd76dabcc6b4b4.s3tc.ctex", "res://.godot/imported/BookShelf_bump_rock_05k - Copy.jpg-cc9d6a7fe9dbab2e3fcd76dabcc6b4b4.etc2.ctex"]
 
 [params]
 

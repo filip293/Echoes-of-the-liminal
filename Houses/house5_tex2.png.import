@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dvtime74tcnou"
 path.s3tc="res://.godot/imported/house5_tex2.png-9d3800c646c37d431515dd47a8ec7cb3.s3tc.ctex"
+path.etc2="res://.godot/imported/house5_tex2.png-9d3800c646c37d431515dd47a8ec7cb3.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Houses/house5_tex2.png"
-dest_files=["res://.godot/imported/house5_tex2.png-9d3800c646c37d431515dd47a8ec7cb3.s3tc.ctex"]
+dest_files=["res://.godot/imported/house5_tex2.png-9d3800c646c37d431515dd47a8ec7cb3.s3tc.ctex", "res://.godot/imported/house5_tex2.png-9d3800c646c37d431515dd47a8ec7cb3.etc2.ctex"]
 
 [params]
 

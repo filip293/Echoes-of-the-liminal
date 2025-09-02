@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dhedq1foi4pvk"
 path.s3tc="res://.godot/imported/Bengal_.png-6d853b9643fde3b5732f039f1a60700f.s3tc.ctex"
+path.etc2="res://.godot/imported/Bengal_.png-6d853b9643fde3b5732f039f1a60700f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Survive/Bengal_.png"
-dest_files=["res://.godot/imported/Bengal_.png-6d853b9643fde3b5732f039f1a60700f.s3tc.ctex"]
+dest_files=["res://.godot/imported/Bengal_.png-6d853b9643fde3b5732f039f1a60700f.s3tc.ctex", "res://.godot/imported/Bengal_.png-6d853b9643fde3b5732f039f1a60700f.etc2.ctex"]
 
 [params]
 

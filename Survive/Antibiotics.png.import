@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dtqpr2s6yxbum"
 path.s3tc="res://.godot/imported/Antibiotics.png-f2750d5156174b1aaefee4bce5a53446.s3tc.ctex"
+path.etc2="res://.godot/imported/Antibiotics.png-f2750d5156174b1aaefee4bce5a53446.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Survive/Antibiotics.png"
-dest_files=["res://.godot/imported/Antibiotics.png-f2750d5156174b1aaefee4bce5a53446.s3tc.ctex"]
+dest_files=["res://.godot/imported/Antibiotics.png-f2750d5156174b1aaefee4bce5a53446.s3tc.ctex", "res://.godot/imported/Antibiotics.png-f2750d5156174b1aaefee4bce5a53446.etc2.ctex"]
 
 [params]
 

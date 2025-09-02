@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dp2x40dd4ldvb"
 path.s3tc="res://.godot/imported/BookShelf_Scratches_and_Mosses_Normal.jpg-f2b9ca2ffe43591f032cf2c0b7dfd9eb.s3tc.ctex"
+path.etc2="res://.godot/imported/BookShelf_Scratches_and_Mosses_Normal.jpg-f2b9ca2ffe43591f032cf2c0b7dfd9eb.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Houses/Furniture/BookShelf_Scratches_and_Mosses_Normal.jpg"
-dest_files=["res://.godot/imported/BookShelf_Scratches_and_Mosses_Normal.jpg-f2b9ca2ffe43591f032cf2c0b7dfd9eb.s3tc.ctex"]
+dest_files=["res://.godot/imported/BookShelf_Scratches_and_Mosses_Normal.jpg-f2b9ca2ffe43591f032cf2c0b7dfd9eb.s3tc.ctex", "res://.godot/imported/BookShelf_Scratches_and_Mosses_Normal.jpg-f2b9ca2ffe43591f032cf2c0b7dfd9eb.etc2.ctex"]
 
 [params]
 

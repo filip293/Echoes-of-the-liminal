@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cvtpblmxvsid1"
 path.s3tc="res://.godot/imported/Plastic_02.jpg-f2c7b586dd45441ea4de77394d7824aa.s3tc.ctex"
+path.etc2="res://.godot/imported/Plastic_02.jpg-f2c7b586dd45441ea4de77394d7824aa.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Models/Plastic_02.jpg"
-dest_files=["res://.godot/imported/Plastic_02.jpg-f2c7b586dd45441ea4de77394d7824aa.s3tc.ctex"]
+dest_files=["res://.godot/imported/Plastic_02.jpg-f2c7b586dd45441ea4de77394d7824aa.s3tc.ctex", "res://.godot/imported/Plastic_02.jpg-f2c7b586dd45441ea4de77394d7824aa.etc2.ctex"]
 
 [params]
 

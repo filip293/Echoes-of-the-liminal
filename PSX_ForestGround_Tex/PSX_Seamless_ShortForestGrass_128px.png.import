@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://gkwhhemyds1v"
 path.s3tc="res://.godot/imported/PSX_Seamless_ShortForestGrass_128px.png-b9c3f6b82d62a296d73043e8a959343f.s3tc.ctex"
+path.etc2="res://.godot/imported/PSX_Seamless_ShortForestGrass_128px.png-b9c3f6b82d62a296d73043e8a959343f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://PSX_ForestGround_Tex/PSX_Seamless_ShortForestGrass_128px.png"
-dest_files=["res://.godot/imported/PSX_Seamless_ShortForestGrass_128px.png-b9c3f6b82d62a296d73043e8a959343f.s3tc.ctex"]
+dest_files=["res://.godot/imported/PSX_Seamless_ShortForestGrass_128px.png-b9c3f6b82d62a296d73043e8a959343f.s3tc.ctex", "res://.godot/imported/PSX_Seamless_ShortForestGrass_128px.png-b9c3f6b82d62a296d73043e8a959343f.etc2.ctex"]
 
 [params]
 

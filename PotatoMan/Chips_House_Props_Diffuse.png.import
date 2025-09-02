@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://tu8ja281wsuq"
 path.s3tc="res://.godot/imported/Chips_House_Props_Diffuse.png-95742dbfd28b336b5fe2ee344c9124cc.s3tc.ctex"
+path.etc2="res://.godot/imported/Chips_House_Props_Diffuse.png-95742dbfd28b336b5fe2ee344c9124cc.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://PotatoMan/Chips_House_Props_Diffuse.png"
-dest_files=["res://.godot/imported/Chips_House_Props_Diffuse.png-95742dbfd28b336b5fe2ee344c9124cc.s3tc.ctex"]
+dest_files=["res://.godot/imported/Chips_House_Props_Diffuse.png-95742dbfd28b336b5fe2ee344c9124cc.s3tc.ctex", "res://.godot/imported/Chips_House_Props_Diffuse.png-95742dbfd28b336b5fe2ee344c9124cc.etc2.ctex"]
 
 [params]
 

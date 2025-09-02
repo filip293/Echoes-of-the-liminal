@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://rcj0sy51hg7n"
 path.s3tc="res://.godot/imported/Trunk_01.png-7337a5a8e0f455d8b56b7a84270ae3f2.s3tc.ctex"
+path.etc2="res://.godot/imported/Trunk_01.png-7337a5a8e0f455d8b56b7a84270ae3f2.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Survive/Trunk_01.png"
-dest_files=["res://.godot/imported/Trunk_01.png-7337a5a8e0f455d8b56b7a84270ae3f2.s3tc.ctex"]
+dest_files=["res://.godot/imported/Trunk_01.png-7337a5a8e0f455d8b56b7a84270ae3f2.s3tc.ctex", "res://.godot/imported/Trunk_01.png-7337a5a8e0f455d8b56b7a84270ae3f2.etc2.ctex"]
 
 [params]
 

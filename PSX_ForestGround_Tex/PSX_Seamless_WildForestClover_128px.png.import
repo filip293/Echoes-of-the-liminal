@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0tmiak8iw5od"
 path.s3tc="res://.godot/imported/PSX_Seamless_WildForestClover_128px.png-557d33cf6700e02cdb372f01d8306288.s3tc.ctex"
+path.etc2="res://.godot/imported/PSX_Seamless_WildForestClover_128px.png-557d33cf6700e02cdb372f01d8306288.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://PSX_ForestGround_Tex/PSX_Seamless_WildForestClover_128px.png"
-dest_files=["res://.godot/imported/PSX_Seamless_WildForestClover_128px.png-557d33cf6700e02cdb372f01d8306288.s3tc.ctex"]
+dest_files=["res://.godot/imported/PSX_Seamless_WildForestClover_128px.png-557d33cf6700e02cdb372f01d8306288.s3tc.ctex", "res://.godot/imported/PSX_Seamless_WildForestClover_128px.png-557d33cf6700e02cdb372f01d8306288.etc2.ctex"]
 
 [params]
 

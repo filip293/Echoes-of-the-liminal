@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dh7l1p2q7j0ya"
 path.s3tc="res://.godot/imported/zippo.png-848fafb558c6df2d53dc3efd0b714f47.s3tc.ctex"
+path.etc2="res://.godot/imported/zippo.png-848fafb558c6df2d53dc3efd0b714f47.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Survive/zippo.png"
-dest_files=["res://.godot/imported/zippo.png-848fafb558c6df2d53dc3efd0b714f47.s3tc.ctex"]
+dest_files=["res://.godot/imported/zippo.png-848fafb558c6df2d53dc3efd0b714f47.s3tc.ctex", "res://.godot/imported/zippo.png-848fafb558c6df2d53dc3efd0b714f47.etc2.ctex"]
 
 [params]
 

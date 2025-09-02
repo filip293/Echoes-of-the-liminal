@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c5udqn1bqapku"
 path.s3tc="res://.godot/imported/Desk_wood_peeling_paint_weathered_diff_8k.jpg-3caeb1863de579e31fc513f4d018af0c.s3tc.ctex"
+path.etc2="res://.godot/imported/Desk_wood_peeling_paint_weathered_diff_8k.jpg-3caeb1863de579e31fc513f4d018af0c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Houses/Furniture/Desk_wood_peeling_paint_weathered_diff_8k.jpg"
-dest_files=["res://.godot/imported/Desk_wood_peeling_paint_weathered_diff_8k.jpg-3caeb1863de579e31fc513f4d018af0c.s3tc.ctex"]
+dest_files=["res://.godot/imported/Desk_wood_peeling_paint_weathered_diff_8k.jpg-3caeb1863de579e31fc513f4d018af0c.s3tc.ctex", "res://.godot/imported/Desk_wood_peeling_paint_weathered_diff_8k.jpg-3caeb1863de579e31fc513f4d018af0c.etc2.ctex"]
 
 [params]
 

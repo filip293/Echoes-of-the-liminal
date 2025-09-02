@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpfyu8vgaybo8"
 path.s3tc="res://.godot/imported/lovers_heartlocket_0.png-d6201c82dd1b2d5b760e1803e17b9c28.s3tc.ctex"
+path.etc2="res://.godot/imported/lovers_heartlocket_0.png-d6201c82dd1b2d5b760e1803e17b9c28.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Interaction/lovers_heartlocket_0.png"
-dest_files=["res://.godot/imported/lovers_heartlocket_0.png-d6201c82dd1b2d5b760e1803e17b9c28.s3tc.ctex"]
+dest_files=["res://.godot/imported/lovers_heartlocket_0.png-d6201c82dd1b2d5b760e1803e17b9c28.s3tc.ctex", "res://.godot/imported/lovers_heartlocket_0.png-d6201c82dd1b2d5b760e1803e17b9c28.etc2.ctex"]
 
 [params]
 

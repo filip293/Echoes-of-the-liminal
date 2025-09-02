@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bou4f4entapjj"
 path.s3tc="res://.godot/imported/sleeping_bag_01.png-6a0b77f630a5374651ada3f0cd5b5871.s3tc.ctex"
+path.etc2="res://.godot/imported/sleeping_bag_01.png-6a0b77f630a5374651ada3f0cd5b5871.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Survive/sleeping_bag_01.png"
-dest_files=["res://.godot/imported/sleeping_bag_01.png-6a0b77f630a5374651ada3f0cd5b5871.s3tc.ctex"]
+dest_files=["res://.godot/imported/sleeping_bag_01.png-6a0b77f630a5374651ada3f0cd5b5871.s3tc.ctex", "res://.godot/imported/sleeping_bag_01.png-6a0b77f630a5374651ada3f0cd5b5871.etc2.ctex"]
 
 [params]
 

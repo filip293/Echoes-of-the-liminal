@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://oxlipxv3ayug"
 path.s3tc="res://.godot/imported/BookShelf_wood_peeling_paint_weathered_rough_8k.png-35763c2497aacafe5897e1da98a177bd.s3tc.ctex"
+path.etc2="res://.godot/imported/BookShelf_wood_peeling_paint_weathered_rough_8k.png-35763c2497aacafe5897e1da98a177bd.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Houses/Furniture/BookShelf_wood_peeling_paint_weathered_rough_8k.png"
-dest_files=["res://.godot/imported/BookShelf_wood_peeling_paint_weathered_rough_8k.png-35763c2497aacafe5897e1da98a177bd.s3tc.ctex"]
+dest_files=["res://.godot/imported/BookShelf_wood_peeling_paint_weathered_rough_8k.png-35763c2497aacafe5897e1da98a177bd.s3tc.ctex", "res://.godot/imported/BookShelf_wood_peeling_paint_weathered_rough_8k.png-35763c2497aacafe5897e1da98a177bd.etc2.ctex"]
 
 [params]
 

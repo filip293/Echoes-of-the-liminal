@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cq1axb7mlt4ck"
 path.s3tc="res://.godot/imported/bonfire.png-b4bb216b4ea857265b041604973311f0.s3tc.ctex"
+path.etc2="res://.godot/imported/bonfire.png-b4bb216b4ea857265b041604973311f0.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Survive/bonfire.png"
-dest_files=["res://.godot/imported/bonfire.png-b4bb216b4ea857265b041604973311f0.s3tc.ctex"]
+dest_files=["res://.godot/imported/bonfire.png-b4bb216b4ea857265b041604973311f0.s3tc.ctex", "res://.godot/imported/bonfire.png-b4bb216b4ea857265b041604973311f0.etc2.ctex"]
 
 [params]
 

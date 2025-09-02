@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bp6p10u58mo7f"
 path.s3tc="res://.godot/imported/Deposits.jpg-e49543dde37b3270b84504e5e2923cec.s3tc.ctex"
+path.etc2="res://.godot/imported/Deposits.jpg-e49543dde37b3270b84504e5e2923cec.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Models/Deposits.jpg"
-dest_files=["res://.godot/imported/Deposits.jpg-e49543dde37b3270b84504e5e2923cec.s3tc.ctex"]
+dest_files=["res://.godot/imported/Deposits.jpg-e49543dde37b3270b84504e5e2923cec.s3tc.ctex", "res://.godot/imported/Deposits.jpg-e49543dde37b3270b84504e5e2923cec.etc2.ctex"]
 
 [params]
 

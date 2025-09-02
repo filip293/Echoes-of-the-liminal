@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dj6ojml31iupm"
 path.s3tc="res://.godot/imported/Beer_Beer_BaseColor.png-5958c60b8e05038d5717c1ce710f2ad6.s3tc.ctex"
+path.etc2="res://.godot/imported/Beer_Beer_BaseColor.png-5958c60b8e05038d5717c1ce710f2ad6.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Interaction/Beer_Beer_BaseColor.png"
-dest_files=["res://.godot/imported/Beer_Beer_BaseColor.png-5958c60b8e05038d5717c1ce710f2ad6.s3tc.ctex"]
+dest_files=["res://.godot/imported/Beer_Beer_BaseColor.png-5958c60b8e05038d5717c1ce710f2ad6.s3tc.ctex", "res://.godot/imported/Beer_Beer_BaseColor.png-5958c60b8e05038d5717c1ce710f2ad6.etc2.ctex"]
 
 [params]
 
