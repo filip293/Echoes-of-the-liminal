@@ -107,11 +107,14 @@ locale/translations_pot_files=PackedStringArray("res://Dialogue/dialogue.dialogu
 
 [physics]
 
-common/physics_ticks_per_second=240
-common/max_physics_steps_per_frame=32
+common/physics_interpolation=true
 
 [rendering]
 
+occlusion_culling/jitter_projection=false
 textures/vram_compression/import_etc2_astc=true
+lights_and_shadows/directional_shadow/size=2048
 shading/overrides/force_lambert_over_burley.mobile=false
+occlusion_culling/occlusion_rays_per_thread=256
 limits/global_shader_variables/buffer_size=131072
+lights_and_shadows/positional_shadow/atlas_size=2048
