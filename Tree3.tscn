@@ -8,6 +8,7 @@ transparency = 2
 alpha_scissor_threshold = 0.5
 alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("2_w1h37")
+metallic_specular = 0.0
 texture_filter = 0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_okuu3"]

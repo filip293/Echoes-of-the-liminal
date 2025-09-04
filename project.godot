@@ -55,7 +55,6 @@ folder_colors={
 "res://Models/": "pink",
 "res://PSX_ForestGround_Tex/": "gray",
 "res://Player/": "pink",
-"res://PotatoMan/": "gray",
 "res://Scripts/": "yellow",
 "res://Sounds/": "orange",
 "res://Survive/": "gray",
@@ -105,12 +104,22 @@ Sprint={
 
 locale/translations_pot_files=PackedStringArray("res://Dialogue/dialogue.dialogue", "res://Dialogue/Shadow.dialogue")
 
+[physics]
+
+common/physics_jitter_fix=0.0
+common/physics_interpolation=true
+
 [rendering]
 
 occlusion_culling/jitter_projection=false
 textures/vram_compression/import_etc2_astc=true
 lights_and_shadows/directional_shadow/size=2048
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=1
 shading/overrides/force_lambert_over_burley.mobile=false
+camera/depth_of_field/depth_of_field_bokeh_shape=0
+camera/depth_of_field/depth_of_field_bokeh_quality=0
+environment/ssao/quality=1
+environment/ssil/quality=1
 occlusion_culling/occlusion_rays_per_thread=256
 limits/global_shader_variables/buffer_size=131072
 lights_and_shadows/positional_shadow/atlas_size=2048

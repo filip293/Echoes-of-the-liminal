@@ -26,10 +26,10 @@ func _on_start_new_pressed() -> void:
 	get_tree().paused = false
 	$Music.stop()
 	Globals.startedgame = true
-	$"../Nigger/Black2".play("Black")
+	$"../Black/Black2".play("Black")
 	$MainLayer.visible = false
 	await Globals.calltime(1)
-	$"../Nigger/Black2".play("FadeOut")
+	$"../Black/Black2".play("FadeOut")
 	Globals.gamestart.emit()
 	PlayerCam.current = true
 

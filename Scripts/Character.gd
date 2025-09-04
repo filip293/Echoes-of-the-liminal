@@ -98,8 +98,8 @@ func _ready():
 	Globals.cameramoveallow = false
 	$Animations.play("RESET")
 	await Globals.calltime(4)
-	$"../Nigger/Black".visible = false
-	$"../Nigger".visible = false
+	$"../Black/Black".visible = false
+	$"../Black".visible = false
 	DialogueManager.show_dialogue_balloon(load("res://Dialogue/Shadow.dialogue"), "Shadow")
 	await Globals.calltime(1.2)
 	$Animations.play("Look_Up")
@@ -109,6 +109,7 @@ func _ready():
 	release_control()
 	Globals.playermoveallow = true
 	Globals.cameramoveallow = true
+	$"../Lantern".visible = true
 
 func dissapearanim1() -> void:
 	$"../Survival/bonfire/Fire3".play("FireBig")
@@ -244,14 +245,16 @@ func _on_static_body_3d_body_entered(body: Node) -> void:
 func _cancel_follow(body: Node3D) -> void:
 	if body is CharacterBody3D and body.name == "CharacterBody3D" and monsterfollowing:
 		monsterfollowing = false
-		$/root/Node3D/Ground/Ambiance.stop()
-		$/root/Node3D/Ground/Ambiance2.stop()
-		$/root/Node3D/Ground/Ambiance3.stop()
+		$"../StaticBody3D/Area3D/Sounds".play("Fade")
 		await Globals.calltime(1)
 		if $"../StaticBody3D" != null:
 			$"../StaticBody3D".queue_free()
 		if $MonsterSteps != null:
 			$MonsterSteps.queue_free()
+		await Globals.calltime(1)
+		$"../Ground/Ambiance".stop()
+		$"../Ground/Ambiance2".stop()
+		$"../Ground/Ambiance3".stop()
 
 
 func _Village_enter(body: Node3D) -> void:
