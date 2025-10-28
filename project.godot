@@ -23,6 +23,10 @@ Globals="*res://Globals.gd"
 VoicelineSystem="*res://Scripts/VoicelineSystem.gd"
 SaveSystem="*res://Scripts/SaveSystem.gd"
 
+[debug]
+
+settings/stdout/print_fps=true
+
 [dialogue_manager]
 
 runtime/balloon_path="res://Dialogue/balloon.tscn"
