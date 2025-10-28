@@ -83,6 +83,7 @@ func release_control():
 func _ready():
 	$/root/Node3D/Houses/house12/house1/Flicker.play("Flicker")
 	$/root/Node3D/Houses/house42/house4/house1_door1/Sway.play("Sway")
+	$/root/Node3D/Houses/Ranger/OmniLight3D/Flicker.play("Flicker")
 	camera_original_pos = camera.position
 	current_stamina = max_stamina
 	if stamina_bar:
