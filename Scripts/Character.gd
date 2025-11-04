@@ -111,6 +111,8 @@ func _ready():
 	Globals.playermoveallow = true
 	Globals.cameramoveallow = true
 	$"../Lantern".visible = true
+	await Globals.calltime(10)
+	$/root/Node3D/Ground/Ambiance4.play()
 
 func dissapearanim1() -> void:
 	$"../Survival/bonfire/Fire3".play("FireBig")
@@ -256,6 +258,7 @@ func _cancel_follow(body: Node3D) -> void:
 		$"../Ground/Ambiance".stop()
 		$"../Ground/Ambiance2".stop()
 		$"../Ground/Ambiance3".stop()
+		$"../Ground/Ambiance4".stop()
 
 
 func _Village_enter(body: Node3D) -> void:
