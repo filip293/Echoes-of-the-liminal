@@ -128,6 +128,7 @@ camera/depth_of_field/depth_of_field_bokeh_shape=0
 camera/depth_of_field/depth_of_field_bokeh_quality=0
 environment/ssao/quality=1
 environment/ssil/quality=1
+scaling_3d/scale=0.9
 occlusion_culling/occlusion_rays_per_thread=256
 limits/global_shader_variables/buffer_size=131072
 lights_and_shadows/positional_shadow/atlas_size=2048

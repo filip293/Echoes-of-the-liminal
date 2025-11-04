@@ -5,11 +5,12 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ix55n"]
 transparency = 2
-alpha_scissor_threshold = 0.5
+alpha_scissor_threshold = 1.0
 alpha_antialiasing_mode = 0
+cull_mode = 2
 albedo_texture = ExtResource("2_w1h37")
-metallic_specular = 0.0
 texture_filter = 0
+grow_amount = 7.356
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_okuu3"]
 height = 2.09326
@@ -18,6 +19,8 @@ radius = 0.572266
 [node name="tree12" instance=ExtResource("1_okuu3")]
 
 [node name="tree12" parent="." index="0"]
+layers = 2
+lod_bias = 0.001
 surface_material_override/0 = SubResource("StandardMaterial3D_ix55n")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
