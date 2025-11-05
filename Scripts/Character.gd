@@ -36,6 +36,9 @@ extends CharacterBody3D
 @onready var mnst_rf_audio := $MonsterSteps/RightFootAudio
 @onready var stamina_bar = $/root/Node3D/InstViewport/Stamina/StaminaBar
 
+
+var post_process = load("res://Scripts/Post.tres")
+
 var current_stamina: float
 var stamina_regen_timer: float = 0.0
 var footstep_timer = 0.0
@@ -193,7 +196,7 @@ func _physics_process(delta: float) -> void:
 		stamina_bar.max_value = max_stamina
 		stamina_bar.value = current_stamina
 
-	if Globals.playermoveallow and can_sprint or current_stamina < max_stamina:
+	if Globals.playermoveallow and can_sprint and !sprintlock or current_stamina < max_stamina:
 		stamina_bar.visible = true
 	else:
 		stamina_bar.visible = false
@@ -236,14 +239,27 @@ func play_footstep_sound():
 		is_left_foot = !is_left_foot
 		
 func _on_static_body_3d_body_entered(body: Node) -> void:
-	if body is CharacterBody3D and body.name == "CharacterBody3D" and $TempBranchBreak != null:
-		$TempBranchBreak.play()
+	if body is CharacterBody3D and body.name == "CharacterBody3D" and $Whisper != null:
+		$"../StaticBody3D/Area3D/Sounds".play("TempFade")
+		await Globals.calltime(1)
+		$"../Ground/Ambiance4".stop()
+		$Whisper.play()
+		Globals.playermoveallow = false
+		Globals.cameramoveallow = false
+		await Globals.calltime(0.5)
+		post_process.set("Glitch", true)
+		await Globals.calltime(0.5)
+		post_process.set("Glitch", false)
+		await Globals.calltime(1)
+		Globals.playermoveallow = true
+		Globals.cameramoveallow = true
 		$"../Survival".queue_free()
-		await $TempBranchBreak.finished
-		$TempBranchBreak.queue_free()
-		await Globals.calltime(2)
-		$"../InstViewport/Stamina/Label".visible = true
+		await Globals.calltime(1)
+		$"../InstViewport/Stamina/Label/LabelFlash".play("Flash")
 		sprintlock=false
+		await $Whisper.finished
+		$Whisper.queue_free()
+		await Globals.calltime(2)
 		monsterfollowing = true
 	
 func _cancel_follow(body: Node3D) -> void:
@@ -259,7 +275,7 @@ func _cancel_follow(body: Node3D) -> void:
 		$"../Ground/Ambiance".stop()
 		$"../Ground/Ambiance2".stop()
 		$"../Ground/Ambiance3".stop()
-		$"../Ground/Ambiance4".stop()
+		$"../Houses/house32/Sink/StaticBody3D/Drop".play("Drip")
 
 
 func _Village_enter(body: Node3D) -> void:

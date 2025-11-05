@@ -5,8 +5,11 @@
 [resource]
 script = ExtResource("1_7kpvp")
 ChromaticAberration = true
+VignetteIntensity = 0.2
 VignetteOpacity = 1.0
-GlitchColorOffset = 5.0
+GlitchIntenity = 0.01
+GlitchOffset = 0.0
+GlitchColorOffset = 0.0
 Grain = true
 GrainPower = 45
 ColorCorrectionTint = Color(1, 1, 1, 1)
