@@ -29,6 +29,9 @@ func _physics_process(delta: float) -> void:
 
 		if collider and collider.specialcheck():
 			SimpleInterText.text = "[E] Examine " + collider.whoami()
+			if !itextvisible:
+				SimpleInterAnim.play("fade")
+				itextvisible = true
 			
 			if Input.is_action_just_pressed("Interact"):
 				CharacterBody.take_control()
@@ -79,7 +82,6 @@ func _physics_process(delta: float) -> void:
 
 		elif collider and collider.has_method('whoami') and !collider.special:
 			var idex = collider.whoami()
-			SimpleInterText.text = "[E] To interact"
 			if !itextvisible:
 				SimpleInterAnim.play("fade")
 				itextvisible = true
@@ -147,10 +149,11 @@ func _physics_process(delta: float) -> void:
 				)
 				
 	else:
-		SimpleInterText.text = ""
 		if itextvisible:
 				SimpleInterAnim.play_backwards("fade")
-				itextvisible = true
+				await SimpleInterAnim.animation_finished
+				SimpleInterText.text = "Press E to interact"
+				itextvisible = false
 
 func handle_item_interaction(item: Node3D, offset: Vector3) -> void:
 	var path_str := str(item.get_path())
