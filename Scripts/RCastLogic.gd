@@ -1,6 +1,7 @@
 extends RayCast3D
 
-@onready var label: RichTextLabel = $"../../../../InstViewport/InteractTextWrapper/InteractText"
+@onready var SimpleInterText: RichTextLabel = $"../../../../InstViewport/InteractTextWrapper/InteractText"
+@onready var SimpleInterAnim: AnimationPlayer = $"../../../../InstViewport/InteractTextWrapper/SimpleAnim"
 @onready var SpecialInterAnim = $"../../../../InstViewport/SpecialInteraction/Animations"
 @onready var SpecialItemTitle = $"../../../../InstViewport/SpecialInteraction/ITWrapper/ItemTitle"
 @onready var SpecialItemDesc = $"../../../../InstViewport/SpecialInteraction/IDWrapper/ItemDesc"
@@ -12,6 +13,7 @@ var item_active: bool = false
 var item_tween: Tween = null
 var first = true
 var first2 = true
+var itextvisible = false
 
 func _physics_process(delta: float) -> void:
 	if item_active and Globals.in_screen:
@@ -26,7 +28,7 @@ func _physics_process(delta: float) -> void:
 		var collider = get_collider()
 
 		if collider and collider.specialcheck():
-			label.text = "[E] Examine " + collider.whoami()
+			SimpleInterText.text = "[E] Examine " + collider.whoami()
 			
 			if Input.is_action_just_pressed("Interact"):
 				CharacterBody.take_control()
@@ -77,7 +79,10 @@ func _physics_process(delta: float) -> void:
 
 		elif collider and collider.has_method('whoami') and !collider.special:
 			var idex = collider.whoami()
-			label.text = "[E] To interact"
+			SimpleInterText.text = "[E] To interact"
+			if !itextvisible:
+				SimpleInterAnim.play("fade")
+				itextvisible = true
 			
 			if idex == "Open Door" and Input.is_action_just_pressed("Interact"):
 				var door = collider
@@ -142,7 +147,10 @@ func _physics_process(delta: float) -> void:
 				)
 				
 	else:
-		label.text = ""
+		SimpleInterText.text = ""
+		if itextvisible:
+				SimpleInterAnim.play_backwards("fade")
+				itextvisible = true
 
 func handle_item_interaction(item: Node3D, offset: Vector3) -> void:
 	var path_str := str(item.get_path())

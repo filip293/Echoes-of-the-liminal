@@ -42,9 +42,9 @@ var footstep_timer = 0.0
 var sec_footstep_timer = 0.0
 var is_left_foot = false
 var Look_Behind = false
-var playerinarea = false
 var monsterfollowing = false
 var walking = true
+var sprintlock := true
 
 var internaloverride = false
 var village_entered = false
@@ -154,7 +154,7 @@ func _physics_process(delta: float) -> void:
 	var can_sprint = Input.is_action_pressed("Sprint") and is_on_floor() and direction != Vector3.ZERO and current_stamina > 0
 	
 	var speed = walk_speed
-	if can_sprint and Globals.playermoveallow:
+	if can_sprint and Globals.playermoveallow and !sprintlock:
 		speed = sprint_speed
 		current_stamina = max(0, current_stamina - stamina_drain_rate * delta)
 		stamina_regen_timer = 0
@@ -237,12 +237,13 @@ func play_footstep_sound():
 		
 func _on_static_body_3d_body_entered(body: Node) -> void:
 	if body is CharacterBody3D and body.name == "CharacterBody3D" and $TempBranchBreak != null:
-		playerinarea = true
 		$TempBranchBreak.play()
 		$"../Survival".queue_free()
 		await $TempBranchBreak.finished
 		$TempBranchBreak.queue_free()
 		await Globals.calltime(2)
+		$"../InstViewport/Stamina/Label".visible = true
+		sprintlock=false
 		monsterfollowing = true
 	
 func _cancel_follow(body: Node3D) -> void:
