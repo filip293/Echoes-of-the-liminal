@@ -10,7 +10,7 @@ extends CharacterBody3D
 @export var clamp_down_deg: float = -90.0
 
 @export_group("Movement")
-@export var walk_speed: float = 3.0
+@export var walk_speed: float = 10.0
 @export var sprint_speed: float = 6.0
 
 @export_group("Headbob")
