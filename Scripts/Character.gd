@@ -116,6 +116,7 @@ func _ready():
 	$"../Lantern".visible = true
 	await Globals.calltime(10)
 	$/root/Node3D/Ground/Ambiance4.play()
+	$"../Houses/Ranger/StaticBody3D13/Blink".play("Blink")
 
 func dissapearanim1() -> void:
 	$"../Survival/bonfire/Fire3".play("FireBig")

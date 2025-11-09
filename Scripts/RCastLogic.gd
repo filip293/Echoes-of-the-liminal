@@ -13,6 +13,7 @@ var item_active: bool = false
 var item_tween: Tween = null
 var first = true
 var first2 = true
+var first3 = true
 var itextvisible = false
 
 func _physics_process(delta: float) -> void:
@@ -65,6 +66,11 @@ func _physics_process(delta: float) -> void:
 					await Globals.calltime(0.3)
 					$"../../../../Houses/house42/house4/house1_door1/DoorShut".queue_free()
 					first = false
+				
+				if idex == "Walkie-Talkie" and Input.is_action_just_pressed("Interact") and first3:
+					await Globals.calltime(0.5)
+					$"../../../../Houses/Ranger/StaticBody3D13/TW".play()
+					first3 = false
 					
 				if idex == "Locket" and Input.is_action_just_pressed("Interact") and $"../../../../Houses/house32/Locket/Locket2/AnimationPlayer".is_playing() == false:
 					await Globals.calltime(1)
