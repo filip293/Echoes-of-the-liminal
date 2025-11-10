@@ -15,6 +15,7 @@ var first = true
 var first2 = true
 var first3 = true
 var itextvisible = false
+var open = false
 
 func _physics_process(delta: float) -> void:
 	if item_active and Globals.in_screen:
@@ -24,6 +25,11 @@ func _physics_process(delta: float) -> void:
 				handle_item_interaction(active_item, Vector3.ZERO)
 			Globals.in_screen = false
 			Globals.showingcrosshair = true
+			
+			if open:
+				await Globals.calltime(0.5)
+				CharacterBody.fall_backwards()
+				open = false
 			
 	if is_colliding():
 		var collider = get_collider()
@@ -41,6 +47,7 @@ func _physics_process(delta: float) -> void:
 				SpecialItemTitle.text = it
 				SpecialItemDesc.text = id
 				SpecialInterAnim.play("fade")
+				
 
 				if collider.has_method("get_interaction_node") and collider.has_method("get_offset"):
 					var item_node: Node3D = collider.get_interaction_node()
@@ -71,6 +78,11 @@ func _physics_process(delta: float) -> void:
 					await Globals.calltime(0.5)
 					$"../../../../Houses/Ranger/StaticBody3D13/TW".play()
 					first3 = false
+				
+				if idex == "Photo" and Input.is_action_just_pressed("Interact"):
+					open = true
+					print("interact")
+				
 					
 				if idex == "Locket" and Input.is_action_just_pressed("Interact") and $"../../../../Houses/house32/Locket/Locket2/AnimationPlayer".is_playing() == false:
 					await Globals.calltime(1)

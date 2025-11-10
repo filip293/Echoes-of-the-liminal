@@ -32,10 +32,8 @@ extends CharacterBody3D
 @onready var camera := $Neck/Camera
 @onready var left_foot_audio := $LeftFootAudio
 @onready var right_foot_audio := $RightFootAudio
-@onready var mnst_lf_audio := $MonsterSteps/LeftFootAudio
-@onready var mnst_rf_audio := $MonsterSteps/RightFootAudio
 @onready var stamina_bar = $/root/Node3D/InstViewport/Stamina/StaminaBar
-
+@onready var collision_shape := $CollisionShape3D
 
 var post_process = load("res://Scripts/Post.tres")
 
@@ -58,6 +56,9 @@ var camera_rotation_deg := Vector2.ZERO
 var actual_velocity := Vector2.ZERO
 var target_velocity := Vector2.ZERO
 var camera_original_pos: Vector3
+
+@onready var lantern_body := $LanternBody
+@onready var lantern_light := $LanternLight
 
 var dirt_footstep_sounds = [
 	preload("res://Sounds/Steps_dirt-001.ogg"),
@@ -132,7 +133,6 @@ func _physics_process(delta: float) -> void:
 	if internaloverride:
 		return
 
-	# Camera rotation logic moved here
 	if not Globals.cameramoveallow or Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 		target_velocity = Vector2.ZERO
 		actual_velocity = lerp(actual_velocity, Vector2.ZERO, friction * delta * 2.0)
@@ -210,7 +210,6 @@ func _physics_process(delta: float) -> void:
 		var footstep_inter = 1.8 / walk_speed
 		if sec_footstep_timer >= footstep_inter + 0.78:
 			sec_footstep_timer = 0
-			play_monster_following_footsteps()
 			
 	move_and_slide()
 
@@ -220,13 +219,6 @@ func _headbob(time: float) -> Vector3:
 	pos.x = cos(time * bob_frequency / 2) * bob_amplitude
 	return pos
 
-func play_monster_following_footsteps():
-	if is_left_foot:
-		mnst_lf_audio.stream = footstep_sounds[randi() % 3]
-		mnst_lf_audio.play()
-	else:
-		mnst_rf_audio.stream = footstep_sounds[randi() % 3]
-		mnst_rf_audio.play()
 		
 func play_footstep_sound():
 	if Globals.playermoveallow:
@@ -278,7 +270,6 @@ func _cancel_follow(body: Node3D) -> void:
 		$"../Ground/Ambiance3".stop()
 		$"../Houses/house32/Sink/StaticBody3D/Drop".play("Drip")
 
-
 func _Village_enter(body: Node3D) -> void:
 	if body is CharacterBody3D and body.name == "CharacterBody3D" and !Globals.scenes["Village"]:
 		take_control()
@@ -296,3 +287,82 @@ func _House_Entered(body: Node3D) -> void:
 func _House_Exited(body: Node3D) -> void:
 	if body is CharacterBody3D and body.name == "CharacterBody3D":
 		footstep_sounds = dirt_footstep_sounds
+
+func fall_backwards() -> void:
+	if internaloverride:
+		return
+		
+	take_control()
+	
+
+	
+	# --- The rest of the player's fall sequence continues as before ---
+	var final_body_position = Vector3(42.146, 2.135, 340.46)
+
+	# PHASE 1: Bolt Look
+	var look_tween = get_tree().create_tween().set_parallel()
+	var look_duration = 0.3
+	var look_left_deg = 25.0
+	var target_body_rotation_y = rotation.y + deg_to_rad(look_left_deg)
+	var look_up_deg = 10.0
+	var target_neck_rotation_x = deg_to_rad(look_up_deg)
+	look_tween.tween_property(self, "rotation:y", target_body_rotation_y, look_duration).set_trans(Tween.TRANS_SINE)
+	look_tween.tween_property(neck, "rotation:x", target_neck_rotation_x, look_duration).set_trans(Tween.TRANS_SINE)
+	look_tween.tween_property(camera, "fov", base_fov + 10, 0.1).set_trans(Tween.TRANS_SINE)
+	look_tween.chain().tween_property(camera, "fov", base_fov, 0.3)
+	await look_tween.finished
+
+	# PHASE 2: Slow Steps Back
+	var walk_tween = get_tree().create_tween()
+	var walk_distance = 1.5
+	var walk_duration = 2.5
+	var walk_target_pos = global_position + global_transform.basis.z * walk_distance
+	walk_tween.tween_property(self, "global_position", walk_target_pos, walk_duration).set_ease(Tween.EASE_OUT)
+	await walk_tween.finished
+	
+	# PHASE 3: The Fall (Faster & More Impactful)
+	var fall_tween = get_tree().create_tween().set_parallel()
+	var fall_duration = 0.5
+	var final_camera_local_pos = Vector3(camera_original_pos.x, -0.65, -0.499)
+	fall_tween.tween_property(camera, "position", final_camera_local_pos, fall_duration).set_ease(Tween.EASE_IN)
+	fall_tween.tween_property(neck, "rotation:x", deg_to_rad(20.0), fall_duration).set_ease(Tween.EASE_IN)
+	if collision_shape.shape is CapsuleShape3D or collision_shape.shape is CylinderShape3D:
+		fall_tween.tween_property(collision_shape.shape, "height", 0.1, fall_duration).set_ease(Tween.EASE_IN)
+		$Fall.play()
+		if lantern_body and lantern_body.visible:
+			# Hide the lantern attached to the player's hand.
+			lantern_body.visible = false
+			lantern_light.visible = false
+		$"../Houses/house12/house1/LanternLight".visible = true
+		$"../Houses/house12/house1/LanternBody".visible = true
+	fall_tween.tween_property(neck, "position:y", 0.3, fall_duration).set_ease(Tween.EASE_IN)
+	fall_tween.tween_property(camera, "rotation:z", deg_to_rad(-8.0), fall_duration).set_ease(Tween.EASE_IN)
+	await fall_tween.finished
+
+	var impact_shake_tween = get_tree().create_tween()
+	var impact_pos = camera.position + Vector3(0, -0.1, 0)
+	impact_shake_tween.tween_property(camera, "position", impact_pos, 0.05)
+	impact_shake_tween.tween_property(camera, "position", final_camera_local_pos, 0.1).set_delay(0.05)
+	await impact_shake_tween.finished
+	
+	# PHASE 4: Stunned & Shuffle to Final Position
+	var breathing_tween = get_tree().create_tween().set_loops()
+	var breath_intensity = 0.02
+	breathing_tween.tween_property(camera, "position:y", camera.position.y + breath_intensity, 0.8).set_trans(Tween.TRANS_SINE)
+	breathing_tween.tween_property(camera, "position:y", camera.position.y, 1.0).set_trans(Tween.TRANS_SINE)
+	await get_tree().create_timer(2.0).timeout
+	
+	var shuffle_1_target = global_position.lerp(final_body_position, 0.5)
+	var shuffle_tween_1 = get_tree().create_tween()
+	shuffle_tween_1.tween_property(self, "global_position", shuffle_1_target, 1.5).set_ease(Tween.EASE_OUT)
+	$Drag.play()
+	await shuffle_tween_1.finished
+
+	await get_tree().create_timer(0.4).timeout
+
+	var shuffle_tween_2 = get_tree().create_tween()
+	shuffle_tween_2.tween_property(self, "global_position", final_body_position, 1.8).set_ease(Tween.EASE_OUT)
+	$Drag.play()
+	await shuffle_tween_2.finished
+	
+	breathing_tween.kill()
