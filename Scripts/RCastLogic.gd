@@ -30,6 +30,14 @@ func _physics_process(delta: float) -> void:
 				await Globals.calltime(0.5)
 				CharacterBody.fall_backwards()
 				open = false
+				await Globals.calltime(15)
+				$"../../../../Black/Black/ColorRect2".visible = true
+				$"../../../../Black/Black".visible = true
+				$"../../../../Ground".queue_free()
+				$"../../../../Ground".queue_free()
+				$"../../../../Houses".queue_free()
+				$"../../../../InstViewport/SpecialInteraction/Crosshair".queue_free()
+				
 			
 	if is_colliding():
 		var collider = get_collider()
@@ -82,7 +90,6 @@ func _physics_process(delta: float) -> void:
 				if idex == "Photo" and Input.is_action_just_pressed("Interact"):
 					open = true
 					print("interact")
-				
 					
 				if idex == "Locket" and Input.is_action_just_pressed("Interact") and $"../../../../Houses/house32/Locket/Locket2/AnimationPlayer".is_playing() == false:
 					await Globals.calltime(1)
@@ -143,7 +150,7 @@ func _physics_process(delta: float) -> void:
 				var lantern: Node3D = $"../../../../Lantern"
 				var player = get_tree().get_root().get_node("Node3D/CharacterBody3D")
 				var lantern_body = player.get_node("LanternBody")
-
+				
 				Globals.playermoveallow = false
 				Globals.cameramoveallow = false
 

@@ -74,6 +74,11 @@ var wood_footstep_sounds = [
 
 var footstep_sounds = dirt_footstep_sounds
 
+# --- NEW ---
+# A variable to hold the container for our spawned "eyes"
+var eyes_container: Node3D
+# --- END NEW ---
+
 func take_control():
 	internaloverride = true
 	actual_velocity = Vector2.ZERO
@@ -85,6 +90,14 @@ func release_control():
 	internaloverride = false
 	
 func _ready():
+	# --- NEW ---
+	# Create a container for the spawned eyes so we can manage them easily.
+	# This node will hold all the duplicated balls.
+	eyes_container = Node3D.new()
+	eyes_container.name = "EyesContainer"
+	add_child(eyes_container)
+	# --- END NEW ---
+
 	$/root/Node3D/Houses/house12/house1/Flicker.play("Flicker")
 	$/root/Node3D/Houses/house42/house4/house1_door1/Sway.play("Sway")
 	$/root/Node3D/Houses/Ranger/OmniLight3D/Flicker.play("Flicker")
@@ -218,7 +231,6 @@ func _headbob(time: float) -> Vector3:
 	pos.y = sin(time * bob_frequency) * bob_amplitude
 	pos.x = cos(time * bob_frequency / 2) * bob_amplitude
 	return pos
-
 		
 func play_footstep_sound():
 	if Globals.playermoveallow:
@@ -240,16 +252,19 @@ func _on_static_body_3d_body_entered(body: Node) -> void:
 		Globals.playermoveallow = false
 		Globals.cameramoveallow = false
 		await Globals.calltime(0.5)
+		spawn_glowing_balls(1000, 2.0, 25.0, 50.0, 3.0)
 		post_process.set("Glitch", true)
-		await Globals.calltime(0.5)
+		post_process.set("StrenghtCA", 5)
+		await Globals.calltime(5.5)
 		post_process.set("Glitch", false)
-		await Globals.calltime(1)
+		post_process.set("StrenghtCA", 1)
+		clear_glowing_balls()
 		Globals.playermoveallow = true
 		Globals.cameramoveallow = true
-		$"../Survival".queue_free()
-		await Globals.calltime(1)
 		$"../InstViewport/Stamina/Label/LabelFlash".play("Flash")
 		sprintlock=false
+		$"../Survival".queue_free()
+		await Globals.calltime(1)
 		await $Whisper.finished
 		$Whisper.queue_free()
 		await Globals.calltime(2)
@@ -293,8 +308,6 @@ func fall_backwards() -> void:
 		return
 		
 	take_control()
-	
-
 	
 	# --- The rest of the player's fall sequence continues as before ---
 	var final_body_position = Vector3(42.146, 2.135, 340.46)
@@ -366,3 +379,70 @@ func fall_backwards() -> void:
 	await shuffle_tween_2.finished
 	
 	breathing_tween.kill()
+
+
+func spawn_glowing_balls(amount: int, time_up: float, min_distance: float, max_distance: float, vertical_scatter: float = 1.5):
+	# Ensure the template node exists before trying to use it
+	if not has_node("Eyes"):
+		push_error("The '$Eyes' node is missing and is required for spawn_glowing_balls().")
+		return
+		
+	# Prevent division by zero if amount is 0 or 1.
+	if amount <= 1:
+		time_up = 0.0 # If only one, spawn instantly.
+	
+	# --- TIMER CORRECTION LOGIC ---
+	var spawn_delay = time_up / float(amount)
+	var start_time_msec = Time.get_ticks_msec()
+	# --- END TIMER CORRECTION LOGIC ---
+	
+	var eye_level_height = neck.position.y
+
+	for i in range(amount):
+		# Get a random distance between the min and max values
+		var random_distance = randf_range(min_distance, max_distance)
+		
+		# Get a random angle to position the ball anywhere around the player
+		var random_angle = randf() * TAU # TAU is a full circle (2 * PI)
+		
+		# Calculate the X and Z position on that circle
+		var x = cos(random_angle) * random_distance
+		var z = sin(random_angle) * random_distance
+		
+		# Calculate the Y position based on eye level plus random scatter
+		var y = eye_level_height + randf_range(-vertical_scatter, vertical_scatter)
+		
+		# Combine into the final spawn position (relative to the player)
+		var spawn_position = Vector3(x, y, z)
+		
+		# Duplicate the template node.
+		var new_eye = $Eyes.duplicate(DUPLICATE_USE_INSTANTIATION)
+		
+		# Set its properties
+		new_eye.position = spawn_position
+		new_eye.visible = true # Make the duplicated node visible
+		
+		# Add it to our container
+		eyes_container.add_child(new_eye)
+		
+		# --- TIMER CORRECTION LOGIC ---
+		if time_up > 0:
+			# Calculate the absolute target time for the *next* spawn.
+			var target_next_spawn_msec = start_time_msec + (i + 1) * spawn_delay * 1000.0
+			
+			# Get the current time *after* doing all the work above.
+			var current_time_msec = Time.get_ticks_msec()
+			
+			# Calculate how long we actually need to wait to hit our target.
+			var time_to_wait_sec = (target_next_spawn_msec - current_time_msec) / 1000.0
+			
+			# Only wait if we are not already behind schedule.
+			if time_to_wait_sec > 0:
+				await get_tree().create_timer(time_to_wait_sec).timeout
+
+
+## Immediately removes all glowing balls that were previously spawned.
+func clear_glowing_balls():
+	if is_instance_valid(eyes_container):
+		for child in eyes_container.get_children():
+			child.queue_free()
