@@ -244,11 +244,10 @@ func play_footstep_sound():
 		is_left_foot = !is_left_foot
 		
 func _on_static_body_3d_body_entered(body: Node) -> void:
-	if body is CharacterBody3D and body.name == "CharacterBody3D" and $Whisper != null:
+	if body is CharacterBody3D and body.name == "CharacterBody3D":
 		$"../StaticBody3D/Area3D/Sounds".play("TempFade")
 		await Globals.calltime(1)
 		$"../Ground/Ambiance4".stop()
-		$Whisper.play()
 		Globals.playermoveallow = false
 		Globals.cameramoveallow = false
 		await Globals.calltime(0.5)
@@ -265,8 +264,6 @@ func _on_static_body_3d_body_entered(body: Node) -> void:
 		sprintlock=false
 		$"../Survival".queue_free()
 		await Globals.calltime(1)
-		await $Whisper.finished
-		$Whisper.queue_free()
 		await Globals.calltime(2)
 		monsterfollowing = true
 	
