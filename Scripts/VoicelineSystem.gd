@@ -30,6 +30,14 @@ var shadow_voicelines = [
 func _ready() -> void:
 	ShadowVoice.volume_db = -32
 	PlayerVoice.volume_db = -67
+
+func setidx(idx, chara):
+	if chara == "John": 
+		john_current_voiceline = idx
+	elif chara == "Shadow":
+		shadow_current_voiceline = idx
+	else:
+		print("INCORRECT CHARA ON IDX SETTING")
 	
 func playvoiceline(chara):
 	if ShadowVoice.is_playing() or PlayerVoice.is_playing():
