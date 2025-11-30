@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cu2b1rtqjw56k"
+path="res://.godot/imported/JS-FINAL_1 Part3.mp3-960dbbc5c481cd3f302c06c9e2beab03.mp3str"
+
+[deps]
+
+source_file="res://Voicelines/John/JS-FINAL_1 Part3.mp3"
+dest_files=["res://.godot/imported/JS-FINAL_1 Part3.mp3-960dbbc5c481cd3f302c06c9e2beab03.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

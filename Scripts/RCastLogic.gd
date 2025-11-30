@@ -73,7 +73,9 @@ func _physics_process(delta: float) -> void:
 				if idex == "Beer" and Input.is_action_just_pressed("Interact") and first:
 					await Globals.calltime(0.5)
 					DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Beer")
+					Globals.playermoveallow = false
 					await DialogueManager.dialogue_ended
+					Globals.playermoveallow = true
 					await Globals.calltime(1.5)
 					$"../../../../Houses/house42/house4/house1_door1/Sway".play("Slam")
 					await Globals.calltime(0.5)

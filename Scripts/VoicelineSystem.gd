@@ -17,14 +17,21 @@ var john_voicelines = [
 	preload("res://Voicelines/John/JMONO1_3.mp3"),
 	preload("res://Voicelines/John/JMONO-AMULET_1.mp3"),
 	preload("res://Voicelines/John/JMONO-AMULET_2.mp3"),
-	preload("res://Voicelines/John/JMONO-AMULET_3.mp3")
+	preload("res://Voicelines/John/JMONO-AMULET_3.mp3"),
+	preload("res://Voicelines/John/JS-FINAL_1 Part1.mp3"),
+	preload("res://Voicelines/John/JS-FINAL_1 Part2.mp3"),
+	preload("res://Voicelines/John/JS-FINAL_1 Part3.mp3"),
+	preload("res://Voicelines/John/JS-FINAL_1 Part4.mp3")
 ]
 
 var shadow_voicelines = [
 	preload("res://Voicelines/Shadow/SH1.mp3"),
 	preload("res://Voicelines/Shadow/SH2.mp3"),
 	preload("res://Voicelines/Shadow/SH3.mp3"),
-	preload("res://Voicelines/Shadow/SH4.mp3")
+	preload("res://Voicelines/Shadow/SH4.mp3"),
+	preload("res://Voicelines/Shadow/SDW-FINAL_1 Part1.mp3"),
+	preload("res://Voicelines/Shadow/SDW-FINAL_1 Part2.mp3"),
+	preload("res://Voicelines/Shadow/SDW-FINAL_1 Part3.mp3")
 ]
 
 func _ready() -> void:

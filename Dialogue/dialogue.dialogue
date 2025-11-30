@@ -32,3 +32,33 @@ do VoicelineSystem.playvoiceline("John")
 if VoicelineSystem.PlayerVoice.is_playing():
 	do VoicelineSystem.PlayerVoice.stop()
 => END
+
+~ END
+do VoicelineSystem.setidx(13, "John")
+do VoicelineSystem.playvoiceline("John")
+[center]John: [center][speed=0.3]This was it... the whole damn journey. I told myself if I could just get here,[wait=0.3] I'd find something.[wait=0.3] An answer.[wait=0.3] Forgiveness.[wait=0.4] You.
+
+do VoicelineSystem.playvoiceline("John")
+[center]John: [center][speed=0.3]But it's just a picture. In a broken house,[wait=0.3] at the end of nothing...
+[center]John: [center][speed=0.3]You're not here Sarah.[wait=0.3] You were never going to be.
+
+do VoicelineSystem.playvoiceline("Shadow")
+[center]Shadow: [center][speed=0.3]She is closer than you think.
+
+do VoicelineSystem.playvoiceline("John")
+[center]John: [center][speed=0.3]WHAT...[wait=0.4] DO YOU WANT FROM ME!?
+
+do VoicelineSystem.playvoiceline("Shadow")
+[center]Shadow: [center][speed=0.3]You came looking for an echo.[wait=0.3] Did you really think it would sing you a happy song?
+[wait=0.3]You fed this place your sorrow, your guilt, your rage...[wait=0.2][speed=0.2]and now it's stronger than you are.
+
+do VoicelineSystem.playvoiceline("John")
+[center]John: [center][speed=0.25]I just wanted to see her one last time. To tell her I'm sorry for not being there for her.[wait=0.3] For not listening.
+
+do VoicelineSystem.playvoiceline("Shadow")
+[center]Shadow: [center][speed=0.3]You want to see her one last time?[wait=0.6][speed=0.25] Very well...
+
+if VoicelineSystem.PlayerVoice.is_playing():
+	do VoicelineSystem.PlayerVoice.stop()
+
+=> END
