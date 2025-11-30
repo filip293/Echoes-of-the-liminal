@@ -90,6 +90,7 @@ func _physics_process(delta: float) -> void:
 					first3 = false
 				
 				if idex == "Photo" and Input.is_action_just_pressed("Interact"):
+					DialogueManager.show_dialogue_balloon(load("res://Dialogue/dialogue.dialogue"), "Ending")
 					open = true
 					print("interact")
 					
