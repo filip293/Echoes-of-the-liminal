@@ -27,9 +27,9 @@ if VoicelineSystem.ShadowVoice.is_playing():
 do Globals.campanim()
 
 do wait(6.0)
-
-do VoicelineSystem.playvoiceline("John")
-[center]John: [center][speed=0.3]My mind's playing tricks on me...
-if VoicelineSystem.PlayerVoice.is_playing():
-	do VoicelineSystem.PlayerVoice.stop()
+#
+#do VoicelineSystem.playvoiceline("John")
+#[center]John: [center][speed=0.3]My mind's playing tricks on me...
+#if VoicelineSystem.PlayerVoice.is_playing():
+#	do VoicelineSystem.PlayerVoice.stop()
 => END

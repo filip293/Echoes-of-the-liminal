@@ -131,4 +131,4 @@ environment/ssil/quality=1
 occlusion_culling/occlusion_rays_per_thread=256
 limits/global_shader_variables/buffer_size=131072
 anti_aliasing/quality/screen_space_aa=2
-lights_and_shadows/positional_shadow/atlas_size=2048
+lights_and_shadows/positional_shadow/atlas_quadrant_0_subdiv=1
