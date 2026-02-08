@@ -4,6 +4,7 @@ extends Node2D
 @onready var PlayerCam = $"../CharacterBody3D/Neck/Camera"
 @onready var FireplaceEmitter = $"../Survival/bonfire/Fire2"
 @onready var SettingsPanel = $"../Settings"
+@onready var ShadowAnim = $"../Shadow/AnimationPlayer"
 
 func returntomainmenu():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
