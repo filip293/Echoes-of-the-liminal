@@ -25,6 +25,6 @@ volumetric_fog_density = 0.1652
 volumetric_fog_albedo = Color(0.78352374, 0.7835233, 0.7835234, 1)
 volumetric_fog_emission = Color(0.06879827, 0.06879828, 0.06879828, 1)
 volumetric_fog_emission_energy = 1.1
-volumetric_fog_anisotropy = 0.9
+volumetric_fog_anisotropy = 0.7
 volumetric_fog_length = 100.0
 volumetric_fog_temporal_reprojection_enabled = false
